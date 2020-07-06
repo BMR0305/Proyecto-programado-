@@ -18,9 +18,9 @@ titulo = pygame.image.load("Imagenes/Titulo.png").convert()
 titulo.set_colorkey([0,0,0])
 creditos = pygame.image.load("Imagenes/Creditos.png").convert()
 creditos.set_colorkey([0,0,0])
-
-
-
+image_usuario = pygame.image.load("Imagenes/Usuario.png").convert()
+image_usuario.set_colorkey([0,0,0])
+usuario = pygame.transform.scale(image_usuario[100,100,])
 while True:
 	for event in pygame.event.get():
 		 if event.type == pygame.QUIT:
@@ -43,6 +43,7 @@ while True:
 	screen.blit(ajustes, [230,400])
 	screen.blit(ayuda, [620,680])
 	screen.blit(creditos, [10,680])
+	screen.blit(usuario,[50,150])
 	#Titulo
 	screen.blit(titulo, [90,10])
 
