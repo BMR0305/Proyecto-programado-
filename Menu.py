@@ -20,8 +20,16 @@ creditos = pygame.image.load("Imagenes/Creditos.png").convert()
 creditos.set_colorkey([0,0,0])
 usuario = pygame.image.load("Imagenes/Usuario2.png").convert()
 usuario.set_colorkey([0,0,0])
-
+#Variables del entry
+active = False
+text = ""
+font = pygame.font.Font(None, 40)
+color_inactive = pygame.Color(255,255,255)
+color_active = pygame.Color(155,155,155)
+color = color_inactive
+input_box = pygame.Rect(320, 185, 230, 40)
 while True:
+
 	for event in pygame.event.get():
 		 if event.type == pygame.QUIT:
 		 	sys.exit()
@@ -35,6 +43,29 @@ while True:
 		 		print("ayuda")
 		 	if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
 		 		print("creditos")
+		 	if input_box.collidepoint(event.pos):
+		 		active = not active
+		 	else:
+		 		active = False
+		 	color = color_active if active else color_inactive
+
+		 if event.type == pygame.KEYDOWN:
+		 	if active:
+		 		if event.key == pygame.K_RETURN:
+		 			print(text)
+		 			text = ""
+		 		elif event.key == pygame.K_BACKSPACE:
+		 			text = text [:len(text)-1]
+		 		elif len(text)>10:
+		 			if event.key == pygame.K_BACKSPACE:
+		 				text = text [:len(text)-1]
+		 			else:
+		 				None
+		 		else:
+		 			text += event.unicode
+
+
+
 	#Fondo
 	screen.blit(background,[0,0])
 	#Botones
@@ -45,6 +76,12 @@ while True:
 	screen.blit(usuario,[175,175])
 	#Titulo
 	screen.blit(titulo, [90,10])
+	#Input box
+	pygame.draw.rect(screen, color, input_box, 4)
+	#Renderiza el texto
+	txt_surface = font.render(text, True, color_inactive)
+	screen.blit(txt_surface, (input_box.x+5, input_box.y+7))
+	
 
 	pygame.display.flip()
 	clock.tick(60)
