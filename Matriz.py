@@ -1,4 +1,4 @@
-import pygame, sys, random 
+import pygame, sys, random ,time
 pygame.init()
 #Pantalla
 size = (720,800)
@@ -120,7 +120,15 @@ dañom = pygame.image.load("Imagenes/Maza/Daño.png").convert()
 dañom.set_colorkey([0,0,0])
 muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
-
+#Clase Arquero
+#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+#Funciones
+#get_frame(): obtiene el valor de self.frame
+	#E:lista de imagenes #S:imagen segun el frame #R:-
+#change_image(): cambia la imagen que se observa en pantalla
+	#E:lista de imaganes #S:- #R-:
+#update():actualiza la posicion del sprite
+	#E:instancia #S:- #R:-
 class Arquero(pygame.sprite.Sprite):
     def __init__(self, position):
             super().__init__()
@@ -140,27 +148,153 @@ class Arquero(pygame.sprite.Sprite):
     	return lista[self.frame]
     
     def change_image(self, lista):
-            if isinstance (lista, list):
-                self.image = self.get_frame(lista)
-            else:
-            	None
+        self.image = self.get_frame(lista)
 
     def update(self):
-    	if arquero.rect.y > 20:
+    	if self.rect.y > 20:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
+#Clase Escudero
+#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+#Funciones
+#get_frame(): obtiene el valor de self.frame
+	#E:lista de imagenes #S:imagen segun el frame #R:-
+#change_image(): cambia la imagen que se observa en pantalla
+	#E:lista de imaganes #S:- #R-:
+#update():actualiza la posicion del sprite
+	#E:instancia #S:- #R:-
+class Escudero(pygame.sprite.Sprite):
+    def __init__(self, position):
+            super().__init__()
+            self.image = caminar1e
+            self.rect = self.image.get_rect()
+            self.rect.topleft = position
+            self.frame = 0
+            self.caminar = [caminar1e, caminar2e, caminar3e, caminar4e, caminar5e, caminar6e, caminar7e]
+            self.ataque = [ataque1e, ataque2e, ataque3e, ataque4e] 
+            self.muerte = muertee
+            self.daño = dañoe
 
-coor_x = random.choice([185,270,355,435,520])
-arquero = Arquero((coor_x,800))
+    def get_frame(self, lista):
+    	self.frame += 1
+    	if self.frame > (len(lista) - 1):
+        	self.frame = 0
+    	return lista[self.frame]
+    
+    def change_image(self, lista):
+        self.image = self.get_frame(lista)
+
+    def update(self):
+    	if self.rect.y > 20:
+        	self.change_image(self.caminar)
+        	self.rect.y -= 5
+#Clase Hacha
+#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+#Funciones
+#get_frame(): obtiene el valor de self.frame
+	#E:lista de imagenes #S:imagen segun el frame #R:-
+#change_image(): cambia la imagen que se observa en pantalla
+	#E:lista de imaganes #S:- #R-:
+#update():actualiza la posicion del sprite
+	#E:instancia #S:- #R:-
+class Hacha(pygame.sprite.Sprite):
+    def __init__(self, position):
+            super().__init__()
+            self.image = caminar1h
+            self.rect = self.image.get_rect()
+            self.rect.topleft = position
+            self.frame = 0
+            self.caminar = [caminar1h, caminar2h, caminar3h, caminar4h, caminar5h, caminar6h, caminar7h]
+            self.ataque = [ataque1h, ataque2h, ataque3h, ataque4h] 
+            self.muerte = muerteh
+            self.daño = dañoh
+
+    def get_frame(self, lista):
+    	self.frame += 1
+    	if self.frame > (len(lista) - 1):
+        	self.frame = 0
+    	return lista[self.frame]
+    
+    def change_image(self, lista):
+        self.image = self.get_frame(lista)
+
+    def update(self):
+    	if self.rect.y > 20:
+        	self.change_image(self.caminar)
+        	self.rect.y -= 5
+#Clase Maza
+#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+#Funciones
+#get_frame(): obtiene el valor de self.frame
+	#E:lista de imagenes #S:imagen segun el frame #R:-
+#change_image(): cambia la imagen que se observa en pantalla
+	#E:lista de imaganes #S:- #R-:
+#update():actualiza la posicion del sprite
+	#E:instancia #S:- #R:-
+class Maza(pygame.sprite.Sprite):
+    def __init__(self, position):
+            super().__init__()
+            self.image = caminar1m
+            self.rect = self.image.get_rect()
+            self.rect.topleft = position
+            self.frame = 0
+            self.caminar = [caminar1m, caminar2m, caminar3m, caminar4m, caminar5m, caminar6m, caminar7m]
+            self.ataque = [ataque1m, ataque2m, ataque3m, ataque4m] 
+            self.muerte = muertem
+            self.daño = dañom
+
+    def get_frame(self, lista):
+    	self.frame += 1
+    	if self.frame > (len(lista) - 1):
+        	self.frame = 0
+    	return lista[self.frame]
+    
+    def change_image(self, lista):
+        self.image = self.get_frame(lista)
+
+    def update(self):
+    	if self.rect.y > 20:
+        	self.change_image(self.caminar)
+        	self.rect.y -= 5
+arquero_list = pygame.sprite.Group()
+all_sprite_list = pygame.sprite.Group()
+coordy = 800
+
+for i in range(50):
+	x = random.choice(["arquero","escudero","hacha","maza"])
+	if x == "arquero":
+		arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
+		coordy += 50
+		arquero_list.add(arquero)
+		all_sprite_list.add(arquero)
+		print(all_sprite_list)
+	if x == "escudero":
+		escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
+		coordy += 50
+		arquero_list.add(escudero)
+		all_sprite_list.add(escudero)
+		print(all_sprite_list)
+	if x == "hacha":
+		hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
+		coordy += 50
+		arquero_list.add(hacha)
+		all_sprite_list.add(hacha)
+		print(all_sprite_list)
+	if x == "maza":
+		maza = Maza((random.choice([185,270,355,435,520]),coordy))
+		coordy += 50
+		arquero_list.add(maza)
+		all_sprite_list.add(maza)
+		print(all_sprite_list)
 
 
 while True:
         for event in pygame.event.get():
                  if event.type == pygame.QUIT:
                         sys.exit()
-
-        arquero.update()
         screen.blit(matriz,[0,0])
-        screen.blit(arquero.image, arquero.rect)
+        all_sprite_list.draw(screen)
+        for arquero in arquero_list:
+        	arquero.update()
         pygame.display.flip()
         clock.tick(15) 
