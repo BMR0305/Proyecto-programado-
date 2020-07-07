@@ -19,7 +19,7 @@ titulo = pygame.image.load("Imagenes/Titulo.png").convert()
 titulo.set_colorkey([0,0,0])
 creditos = pygame.image.load("Imagenes/Creditos.png").convert()
 creditos.set_colorkey([0,0,0])
-usuario = pygame.image.load("Imagenes/Usuario2.png").convert()
+usuario = pygame.image.load("Imagenes/Usuario.png").convert()
 usuario.set_colorkey([0,0,0])
 #Variables del entry
 active = False
