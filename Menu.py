@@ -3,6 +3,7 @@ pygame.init()
 #Crear vnetana
 size = (720,800)
 screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Avatar vs Rooks")
 
 clock=pygame.time.Clock()
 
