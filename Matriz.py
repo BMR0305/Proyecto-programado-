@@ -10,7 +10,7 @@ clock=pygame.time.Clock()
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
 #Imagenes del arquero
-ataque1a = pygame.image.load("Imagenes/Arquero/ataque1.png").convert()
+ataque1a = pygame.image.load("Imagenes/Arquero/Ataque1.png").convert()
 ataque1a.set_colorkey([0,0,0])
 ataque2a = pygame.image.load("Imagenes/Arquero/Ataque2.png").convert()
 ataque2a.set_colorkey([0,0,0])
@@ -38,7 +38,7 @@ muertea = pygame.image.load("Imagenes/Arquero/Muerte.png").convert()
 muertea.set_colorkey([0,0,0])
 
 #Imagenes del escudero
-ataque1e = pygame.image.load("Imagenes/Escudero/ataque1.png").convert()
+ataque1e = pygame.image.load("Imagenes/Escudero/Ataque1.png").convert()
 ataque1e.set_colorkey([0,0,0])
 ataque2e = pygame.image.load("Imagenes/Escudero/Ataque2.png").convert()
 ataque2e.set_colorkey([0,0,0])
@@ -66,7 +66,7 @@ muertee = pygame.image.load("Imagenes/Escudero/Muerte.png").convert()
 muertee.set_colorkey([0,0,0])
 
 #Imagenes del hachero
-ataque1h = pygame.image.load("Imagenes/Hacha/ataque1.png").convert()
+ataque1h = pygame.image.load("Imagenes/Hacha/Ataque1.png").convert()
 ataque1h.set_colorkey([0,0,0])
 ataque2h = pygame.image.load("Imagenes/Hacha/Ataque2.png").convert()
 ataque2h.set_colorkey([0,0,0])
@@ -94,7 +94,7 @@ muerteh = pygame.image.load("Imagenes/Hacha/Muerte.png").convert()
 muerteh.set_colorkey([0,0,0])
 
 #Imagenes del avatar con maza
-ataque1m = pygame.image.load("Imagenes/Maza/ataque1.png").convert()
+ataque1m = pygame.image.load("Imagenes/Maza/Ataque1.png").convert()
 ataque1m.set_colorkey([0,0,0])
 ataque2m = pygame.image.load("Imagenes/Maza/Ataque2.png").convert()
 ataque2m.set_colorkey([0,0,0])
