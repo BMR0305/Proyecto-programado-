@@ -127,5 +127,6 @@ while True:
 		 if event.type == pygame.QUIT:
 		 	sys.exit()
 	screen.blit(matriz,[0,0])
+
 	pygame.display.flip()
 	clock.tick(60) 
