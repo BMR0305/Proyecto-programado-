@@ -121,12 +121,49 @@ dañom.set_colorkey([0,0,0])
 muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
 
+class Arquero(pygame.sprite.Sprite):
+    def __init__(self, position):
+            super().__init__()
+            self.image = caminar1a
+            self.rect = self.image.get_rect()
+            self.rect.topleft = position
+            self.frame = 0
+            self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
+            self.ataque = [ataque1a, ataque2a, ataque3a, ataque4a] 
+            self.muerte = muertea
+            self.daño = dañoa
+
+    def get_frame(self, frame_set):
+    	self.frame += 1
+    	if self.frame > (len(frame_set) - 1):
+        	self.frame = 0
+    	return frame_set[self.frame]
+    
+    def change_image(self, lista):
+            if isinstance (lista, list):
+                self.image = self.get_frame(lista)
+            else:
+            	None
+
+    def update(self, direction):
+        if direction == 'up':
+            self.change_image(self.caminar)
+            self.rect.y -= 5
+
+    def handle_event(self, event):
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.update('up')
+
+
+arquero = Arquero((185,800))
 
 while True:
-	for event in pygame.event.get():
-		 if event.type == pygame.QUIT:
-		 	sys.exit()
-	screen.blit(matriz,[0,0])
-
-	pygame.display.flip()
-	clock.tick(60) 
+        for event in pygame.event.get():
+                 if event.type == pygame.QUIT:
+                        sys.exit()
+        arquero.handle_event(event)
+        screen.blit(matriz,[0,0])
+        screen.blit(arquero.image, arquero.rect)
+        pygame.display.flip()
+        clock.tick(20) 
