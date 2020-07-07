@@ -1,1 +1,2 @@
-11 a 7 trabajo en estética de menú y configuración básica y estética de zona de juego, break 12-30 a 1 
+Día(6/7) de 11 a 7 trabajo en estética de menú y configuración básica y estética de zona de juego, break 12-30 a 1 
+Día(7/7) de 11 a x obtención de sprites y edición del tamaño de los mismos
