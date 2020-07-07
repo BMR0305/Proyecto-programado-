@@ -33,7 +33,7 @@ while True:
 	for event in pygame.event.get():
 		 if event.type == pygame.QUIT:
 		 	sys.exit()
-		 if event.type == pygame.MOUSEBUTTONDOWN:
+		 if event.type == pygame.MOUSEBUTTONDOWN: 
 		 	mouse = event.pos
 		 	if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370: #boton jugar
 		 		print("jugar")
@@ -43,14 +43,15 @@ while True:
 		 		print("ayuda")
 		 	if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
 		 		print("creditos")
-		 	if input_box.collidepoint(event.pos):
-		 		active = not active
+		 	if input_box.collidepoint(event.pos): #revisa si se da click en el entry
+		 		active = True
+		 		color = color_active
 		 	else:
 		 		active = False
-		 	color = color_active if active else color_inactive
+		 		color = color_inactive 
 
 		 if event.type == pygame.KEYDOWN:
-		 	if active:
+		 	if active: 
 		 		if event.key == pygame.K_RETURN:
 		 			print(text)
 		 			text = ""
