@@ -1,4 +1,4 @@
-import pygame, sys 
+import pygame, sys, random 
 pygame.init()
 #Pantalla
 size = (720,800)
@@ -133,11 +133,11 @@ class Arquero(pygame.sprite.Sprite):
             self.muerte = muertea
             self.daño = dañoa
 
-    def get_frame(self, frame_set):
+    def get_frame(self, lista):
     	self.frame += 1
-    	if self.frame > (len(frame_set) - 1):
+    	if self.frame > (len(lista) - 1):
         	self.frame = 0
-    	return frame_set[self.frame]
+    	return lista[self.frame]
     
     def change_image(self, lista):
             if isinstance (lista, list):
@@ -145,25 +145,22 @@ class Arquero(pygame.sprite.Sprite):
             else:
             	None
 
-    def update(self, direction):
-        if direction == 'up':
-            self.change_image(self.caminar)
-            self.rect.y -= 5
+    def update(self):
+    	if arquero.rect.y > 20:
+        	self.change_image(self.caminar)
+        	self.rect.y -= 5
 
-    def handle_event(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                self.update('up')
+coor_x = random.choice([185,270,355,435,520])
+arquero = Arquero((coor_x,800))
 
-
-arquero = Arquero((185,800))
 
 while True:
         for event in pygame.event.get():
                  if event.type == pygame.QUIT:
                         sys.exit()
-        arquero.handle_event(event)
+
+        arquero.update()
         screen.blit(matriz,[0,0])
         screen.blit(arquero.image, arquero.rect)
         pygame.display.flip()
-        clock.tick(20) 
+        clock.tick(15) 
