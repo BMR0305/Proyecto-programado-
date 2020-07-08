@@ -440,7 +440,8 @@ resto = 0
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo ==10 :
+	if tiempo == 10 :
+		tiempo=0
 		segundo2 += 1
 		resto += 10
 	if segundo2 >= 6:
@@ -465,7 +466,10 @@ while True:
 	        avatar.attack()
 	    else:
 	    	avatar.update()
-	    		
+	for proyectil in proyectil_list:
+	    if proyectil.rect.y < -10:
+	    	all_sprite_list.remove(proyectil)
+	    	proyectil_list.remove(proyectil)		
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
