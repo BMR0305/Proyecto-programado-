@@ -1,5 +1,5 @@
 import pygame, sys, os
-os.environ['SDL_VIDEO_CENTERED'] = '1' 
+os.environ['SDL_VIDEO_CENTERED'] = '50' 
 pygame.init()
 #Crear vnetana
 size = (720,800)
@@ -30,6 +30,7 @@ color_inactive = pygame.Color(255,255,255)
 color_active = pygame.Color(155,155,155)
 color = color_inactive
 input_box = pygame.Rect(320, 185, 230, 40)
+
 game_over = True
 while game_over:
 
@@ -43,7 +44,6 @@ while game_over:
 		 		game_over= False
 		 		pygame.quit()
 		 		os.system("Matriz.py")
-
 		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
 		 		print("ajustes")
 		 	if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
@@ -95,6 +95,7 @@ while game_over:
 	
 	except:
 		pass
+
 
 	
 sys.exit()
