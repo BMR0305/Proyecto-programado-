@@ -183,7 +183,7 @@ class Arquero(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
-            self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a, flecha] 
+            self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
             self.muerte = muertea
             self.daño = dañoa
             self.proyectil = flecha
@@ -346,6 +346,15 @@ class Maza(pygame.sprite.Sprite):
     
     def attack(self):
     	self.change_image(self.ataque, "ataque")
+
+
+class Proyectil(pygame.sprite.Sprite):
+	def __init__(self):
+	 	super().__init__()
+	 	self.image = flecha
+	 	self.rect = self.image.get_rect()
+	def update(self):
+		self.rect.y -= 5 
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -353,6 +362,8 @@ arquero_list = pygame.sprite.Group()
 escudero_list = pygame.sprite.Group()
 hacha_list = pygame.sprite.Group()
 maza_list = pygame.sprite.Group()
+proyectil_list = pygame.sprite.Group()
+#Variables para la creacion de las oleadas
 coordy = 800
 oleada=1
 enemigos = 0
@@ -434,11 +445,15 @@ while True:
 	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
 	all_sprite_list.draw(screen)
+	all_sprite_list.update()
 	for avatar in avatar_list:
 	    if avatar.rect.y == 500:
 	        avatar.attack()
-	    else:
-	    	avatar.update()
+	        proyectil = Proyectil()
+	        proyectil.rect.x = avatar.rect.x+100
+	        proyectil.rect.y = avatar.rect.y-20
+	        all_sprite_list.add(proyectil)
+	        proyectil_list.add(proyectil)
 		
 	pygame.display.flip()
 	clock.tick(15) 
