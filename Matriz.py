@@ -384,7 +384,7 @@ hacha_list = pygame.sprite.Group()
 maza_list = pygame.sprite.Group()
 proyectil_list = pygame.sprite.Group()
 #Variables para la creacion de las oleadas
-coordy = 800
+coordy = 1200
 oleada=1
 enemigos = 0
 
@@ -413,19 +413,19 @@ for i in range(60):
 		all_sprite_list.add(maza)
 	#Revision de numero de oleada y de enemigos
 	if oleada < 5:
-		coordy += 400
+		coordy += 300
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
 			enemigos =0
 	elif oleada < 9:
-		coordy += 280
+		coordy += 210
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
 			enemigos =0
 	elif oleada < 13:
-		coordy += 160
+		coordy += 120
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
@@ -471,6 +471,7 @@ while True:
 	    if proyectil.rect.y < -10:
 	    	all_sprite_list.remove(proyectil)
 	    	proyectil_list.remove(proyectil)		
+	
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
