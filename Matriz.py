@@ -467,11 +467,7 @@ while True:
 	    	avatar.update()
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
-	if tiempo <= 0:
-		relojseg1 = font.render("0",0,(255,255,255))
-		screen.blit(relojseg1,[140,710])
-	else:
-		screen.blit(relojseg1,[140,710])
+	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
