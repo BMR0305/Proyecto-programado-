@@ -39,6 +39,8 @@ muertea.set_colorkey([0,0,0])
 #Proyectil arquero
 flecha = pygame.image.load("Imagenes/Arquero/Flecha.png").convert()
 flecha.set_colorkey([0,0,0])
+#Sonido de proyectil
+sonidoFlecha = pygame.mixer.Sound("Sonidos/Impacto flecha.wav")
 
 #Imagenes del escudero
 ataque1e = pygame.image.load("Imagenes/Escudero/Ataque1.png").convert()
@@ -70,6 +72,8 @@ muertee.set_colorkey([0,0,0])
 #Proyectil escudero
 espada = pygame.image.load("Imagenes/Escudero/Espada.png").convert()
 espada.set_colorkey([0,0,0])
+#Sonido de proyectil
+sonidoEspada = pygame.mixer.Sound("Sonidos/Impacto espada.wav")
 
 #Imagenes del hachero
 ataque1h = pygame.image.load("Imagenes/Hacha/Ataque1.png").convert()
