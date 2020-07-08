@@ -53,8 +53,8 @@ flecha.set_colorkey([0,0,0])
 sonidoFlecha = pygame.mixer.Sound("Sonidos/Impacto flecha.wav")
 
 #Imagenes del escudero
-#ataque0e = pygame.image.load("Imagenes/Escudero/Ataque0.png").convert()
-#ataque0e.set_colorkey([0,0,0])
+ataque0e = pygame.image.load("Imagenes/Escudero/Ataque0.png").convert()
+ataque0e.set_colorkey([0,0,0])
 ataque1e = pygame.image.load("Imagenes/Escudero/Ataque1.png").convert()
 ataque1e.set_colorkey([0,0,0])
 ataque2e = pygame.image.load("Imagenes/Escudero/Ataque2.png").convert()
@@ -63,12 +63,12 @@ ataque3e = pygame.image.load("Imagenes/Escudero/Ataque3.png").convert()
 ataque3e.set_colorkey([0,0,0])
 ataque4e = pygame.image.load("Imagenes/Escudero/Ataque4.png").convert()
 ataque4e.set_colorkey([0,0,0])
-#ataque5e = pygame.image.load("Imagenes/Escudero/Ataque5.png").convert()
-#ataque5e.set_colorkey([0,0,0])
-#ataque6e = pygame.image.load("Imagenes/Escudero/Ataque6.png").convert()
-#ataque6e.set_colorkey([0,0,0])
-#ataque7e = pygame.image.load("Imagenes/Escudero/Ataque7.png").convert()
-#ataque7e.set_colorkey([0,0,0])
+ataque5e = pygame.image.load("Imagenes/Escudero/Ataque5.png").convert()
+ataque5e.set_colorkey([0,0,0])
+ataque6e = pygame.image.load("Imagenes/Escudero/Ataque6.png").convert()
+ataque6e.set_colorkey([0,0,0])
+ataque7e = pygame.image.load("Imagenes/Escudero/Ataque7.png").convert()
+ataque7e.set_colorkey([0,0,0])
 caminar1e = pygame.image.load("Imagenes/Escudero/Caminar1.png").convert()
 caminar1e.set_colorkey([0,0,0])
 caminar2e = pygame.image.load("Imagenes/Escudero/Caminar2.png").convert()
@@ -94,8 +94,8 @@ espada.set_colorkey([0,0,0])
 sonidoEspada = pygame.mixer.Sound("Sonidos/Impacto espada.wav")
 
 #Imagenes del hachero
-#ataque0h = pygame.image.load("Imagenes/Hacha/Ataque0.png").convert()
-#ataque0h.set_colorkey([0,0,0])
+ataque0h = pygame.image.load("Imagenes/Hacha/Ataque0.png").convert()
+ataque0h.set_colorkey([0,0,0])
 ataque1h = pygame.image.load("Imagenes/Hacha/Ataque1.png").convert()
 ataque1h.set_colorkey([0,0,0])
 ataque2h = pygame.image.load("Imagenes/Hacha/Ataque2.png").convert()
@@ -104,12 +104,12 @@ ataque3h = pygame.image.load("Imagenes/Hacha/Ataque3.png").convert()
 ataque3h.set_colorkey([0,0,0])
 ataque4h = pygame.image.load("Imagenes/Hacha/Ataque4.png").convert()
 ataque4h.set_colorkey([0,0,0])
-#ataque5h = pygame.image.load("Imagenes/Hacha/Ataque5.png").convert()
-#ataque5h.set_colorkey([0,0,0])
-#ataque6h = pygame.image.load("Imagenes/Hacha/Ataque6.png").convert()
-#ataque6h.set_colorkey([0,0,0])
-#ataque7h = pygame.image.load("Imagenes/Hacha/Ataque7.png").convert()
-#ataque7h.set_colorkey([0,0,0])
+ataque5h = pygame.image.load("Imagenes/Hacha/Ataque5.png").convert()
+ataque5h.set_colorkey([0,0,0])
+ataque6h = pygame.image.load("Imagenes/Hacha/Ataque6.png").convert()
+ataque6h.set_colorkey([0,0,0])
+ataque7h = pygame.image.load("Imagenes/Hacha/Ataque7.png").convert()
+ataque7h.set_colorkey([0,0,0])
 caminar1h = pygame.image.load("Imagenes/Hacha/Caminar1.png").convert()
 caminar1h.set_colorkey([0,0,0])
 caminar2h = pygame.image.load("Imagenes/Hacha/Caminar2.png").convert()
@@ -130,6 +130,8 @@ muerteh = pygame.image.load("Imagenes/Hacha/Muerte.png").convert()
 muerteh.set_colorkey([0,0,0])
 
 #Imagenes del avatar con maza
+ataque0m = pygame.image.load("Imagenes/Maza/Ataque0.png").convert()
+ataque0m.set_colorkey([0,0,0])
 ataque1m = pygame.image.load("Imagenes/Maza/Ataque1.png").convert()
 ataque1m.set_colorkey([0,0,0])
 ataque2m = pygame.image.load("Imagenes/Maza/Ataque2.png").convert()
@@ -138,6 +140,12 @@ ataque3m = pygame.image.load("Imagenes/Maza/Ataque3.png").convert()
 ataque3m.set_colorkey([0,0,0])
 ataque4m = pygame.image.load("Imagenes/Maza/Ataque4.png").convert()
 ataque4m.set_colorkey([0,0,0])
+ataque5m = pygame.image.load("Imagenes/Maza/Ataque5.png").convert()
+ataque5m.set_colorkey([0,0,0])
+ataque6m = pygame.image.load("Imagenes/Maza/Ataque6.png").convert()
+ataque6m.set_colorkey([0,0,0])
+ataque7m = pygame.image.load("Imagenes/Maza/Ataque7.png").convert()
+ataque7m.set_colorkey([0,0,0])
 caminar1m = pygame.image.load("Imagenes/Maza/Caminar1.png").convert()
 caminar1m.set_colorkey([0,0,0])
 caminar2m = pygame.image.load("Imagenes/Maza/Caminar2.png").convert()
@@ -165,6 +173,8 @@ muertem.set_colorkey([0,0,0])
 	#E:lista de imaganes #S:- #R-:
 #update():actualiza la posicion del sprite
 	#E:instancia #S:- #R:-
+#attack(): inicia la secuencia de ataaque
+	#E: instancia #S:- #R:-
 class Arquero(pygame.sprite.Sprite):
     def __init__(self, position):
             super().__init__()
@@ -173,9 +183,10 @@ class Arquero(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
-            self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
+            self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a, flecha] 
             self.muerte = muertea
             self.daño = dañoa
+            self.proyectil = flecha
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -199,6 +210,7 @@ class Arquero(pygame.sprite.Sprite):
         
     def attack(self):
     	self.change_image(self.ataque, "ataque")
+
 #Clase Escudero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -208,6 +220,8 @@ class Arquero(pygame.sprite.Sprite):
 	#E:lista de imaganes #S:- #R-:
 #update():actualiza la posicion del sprite
 	#E:instancia #S:- #R:-
+#attack(): inicia la secuencia de ataaque
+	#E: instancia #S:- #R:-
 class Escudero(pygame.sprite.Sprite):
     def __init__(self, position):
             super().__init__()
@@ -216,7 +230,7 @@ class Escudero(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1e, caminar2e, caminar3e, caminar4e, caminar5e, caminar6e, caminar7e]
-            self.ataque = [ataque1e, ataque2e, ataque3e, ataque4e] 
+            self.ataque = [ataque0e, ataque1e, ataque2e, ataque3e, ataque4e, ataque5e, ataque6e, ataque7e] 
             self.muerte = muertee
             self.daño = dañoe
 
@@ -251,6 +265,8 @@ class Escudero(pygame.sprite.Sprite):
 	#E:lista de imaganes #S:- #R-:
 #update():actualiza la posicion del sprite
 	#E:instancia #S:- #R:-
+#attack(): inicia la secuencia de ataaque
+	#E: instancia #S:- #R:-
 class Hacha(pygame.sprite.Sprite):
     def __init__(self, position):
             super().__init__()
@@ -259,7 +275,7 @@ class Hacha(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1h, caminar2h, caminar3h, caminar4h, caminar5h, caminar6h, caminar7h]
-            self.ataque = [ataque1h, ataque2h, ataque3h, ataque4h] 
+            self.ataque = [ataque0h, ataque1h, ataque2h, ataque3h, ataque4h, ataque5h, ataque6h, ataque7h]
             self.muerte = muerteh
             self.daño = dañoh
 
@@ -294,6 +310,8 @@ class Hacha(pygame.sprite.Sprite):
 	#E:lista de imaganes #S:- #R-:
 #update():actualiza la posicion del sprite
 	#E:instancia #S:- #R:-
+#attack(): inicia la secuencia de ataaque
+	#E: instancia #S:- #R:-
 class Maza(pygame.sprite.Sprite):
     def __init__(self, position):
             super().__init__()
@@ -302,7 +320,7 @@ class Maza(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1m, caminar2m, caminar3m, caminar4m, caminar5m, caminar6m, caminar7m]
-            self.ataque = [ataque1m, ataque2m, ataque3m, ataque4m] 
+            self.ataque = [ataque0m, ataque1m, ataque2m, ataque3m, ataque4m, ataque5m, ataque6m, ataque7m] 
             self.muerte = muertem
             self.daño = dañom
 
