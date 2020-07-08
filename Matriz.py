@@ -199,8 +199,8 @@ class Arquero(pygame.sprite.Sprite):
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame =0
 	        	proyectil = Proyectil("flecha")
-	        	proyectil.rect.x = avatar.rect.x+100
-	        	proyectil.rect.y = avatar.rect.y-20
+	        	proyectil.rect.x = self.rect.x+100
+	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
 	        	proyectil_list.add(proyectil)
 	        	self.rect.y -=1
@@ -251,8 +251,8 @@ class Escudero(pygame.sprite.Sprite):
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame= 0
 	        	proyectil = Proyectil("espada")
-	        	proyectil.rect.x = avatar.rect.x+100
-	        	proyectil.rect.y = avatar.rect.y-20
+	        	proyectil.rect.x = self.rect.x+100
+	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
 	        	proyectil_list.add(proyectil)
 	        	self.rect.y -=1
@@ -410,7 +410,7 @@ for i in range(60):
 		maza_list.add(maza)
 		avatar_list.add(maza)
 		all_sprite_list.add(maza)
-	#Revision de nuemro de oleada y de enemigos
+	#Revision de numero de oleada y de enemigos
 	if oleada < 5:
 		coordy += 400
 		enemigos += 1
@@ -466,6 +466,7 @@ while True:
 	        avatar.attack()
 	    else:
 	    	avatar.update()
+	    		
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
