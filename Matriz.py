@@ -278,104 +278,44 @@ for i in range(60):
 	x = random.choice(["arquero","escudero","hacha","maza"])
 	if x == "arquero":
 		arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
-		if oleada < 5:
-			coordy += 400
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 9:
-			coordy += 280
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 13:
-			coordy += 160
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		else:
-			break
 		arquero_list.add(arquero)
 		avatar_list.add(arquero)
 		all_sprite_list.add(arquero)
 	if x == "escudero":
 		escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
-		if oleada < 5:
-			coordy += 400
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 9:
-			coordy += 280
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 13:
-			coordy += 160
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		else:
-			break
 		escudero_list.add(escudero)
 		avatar_list.add(escudero)
 		all_sprite_list.add(escudero)
 	if x == "hacha":
 		hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
-		if oleada < 5:
-			coordy += 400
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 9:
-			coordy += 280
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 13:
-			coordy += 160
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		else:
-			break
 		hacha_list.add(hacha)
 		avatar_list.add(hacha)
 		all_sprite_list.add(hacha)
 	if x == "maza":
 		maza = Maza((random.choice([185,270,355,435,520]),coordy))
-		if oleada < 5:
-			coordy += 400
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 9:
-			coordy += 280
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		elif oleada < 13:
-			coordy += 160
-			enemigos += 1
-			if enemigos==5:
-				oleada += 1
-				enemigos =0
-		else:
-			break
 		maza_list.add(maza)
 		avatar_list.add(maza)
 		all_sprite_list.add(maza)
+	if oleada < 5:
+		coordy += 400
+		enemigos += 1
+		if enemigos==5:
+			oleada += 1
+			enemigos =0
+	elif oleada < 9:
+		coordy += 280
+		enemigos += 1
+		if enemigos==5:
+			oleada += 1
+			enemigos =0
+	elif oleada < 13:
+		coordy += 160
+		enemigos += 1
+		if enemigos==5:
+			oleada += 1
+			enemigos =0
+	else:
+		break
 while True:
         for event in pygame.event.get():
                  if event.type == pygame.QUIT:
@@ -385,4 +325,4 @@ while True:
         for avatar in avatar_list:
         	avatar.update()
         pygame.display.flip()
-        clock.tick(20) 
+        clock.tick(120) 
