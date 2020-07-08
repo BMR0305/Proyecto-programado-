@@ -164,6 +164,9 @@ class Arquero(pygame.sprite.Sprite):
     	if self.rect.y > 20:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
+    def attack(self):
+    	if self.rect.y == 500:
+    		self.change_image(self.ataque)
 #Clase Escudero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -198,6 +201,9 @@ class Escudero(pygame.sprite.Sprite):
     	if self.rect.y > 20:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
+    def attack(self):
+    	if self.rect.y == 500:
+    		self.change_image(self.ataque)
 #Clase Hacha
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -232,6 +238,9 @@ class Hacha(pygame.sprite.Sprite):
     	if self.rect.y > 20:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
+    def attack(self):
+    	if self.rect.y == 500:
+    		self.change_image(self.ataque)
 #Clase Maza
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -266,6 +275,9 @@ class Maza(pygame.sprite.Sprite):
     	if self.rect.y > 0:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
+    def attack(self):
+    	if self.rect.y == 500:
+    		self.change_image(self.ataque)
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -277,7 +289,7 @@ coordy = 800
 oleada=1
 enemigos = 0
 
-
+#Creacion de avatars
 for i in range(60):
 	x = random.choice(["arquero","escudero","hacha","maza"])
 	if x == "arquero":
@@ -300,6 +312,7 @@ for i in range(60):
 		maza_list.add(maza)
 		avatar_list.add(maza)
 		all_sprite_list.add(maza)
+	#Revision de nuemro de oleada y de enemigos
 	if oleada < 5:
 		coordy += 400
 		enemigos += 1
@@ -320,6 +333,7 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
+
 while True:
         for event in pygame.event.get():
                  if event.type == pygame.QUIT:
@@ -327,6 +341,10 @@ while True:
         screen.blit(matriz,[0,0])
         all_sprite_list.draw(screen)
         for avatar in avatar_list:
-        	avatar.update()
+        	if avatar.rect.y == 500:
+        		avatar.attack()
+        	else:
+        		avatar.update()
+        	
         pygame.display.flip()
-        clock.tick(120) 
+        clock.tick(20) 
