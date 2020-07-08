@@ -412,19 +412,19 @@ for i in range(60):
 		all_sprite_list.add(maza)
 	#Revision de numero de oleada y de enemigos
 	if oleada < 5:
-		coordy += 400
+		coordy += 300
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
 			enemigos =0
 	elif oleada < 9:
-		coordy += 280
+		coordy += 210
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
 			enemigos =0
 	elif oleada < 13:
-		coordy += 160
+		coordy += 120
 		enemigos += 1
 		if enemigos==5:
 			oleada += 1
