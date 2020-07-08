@@ -412,14 +412,14 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
-
 segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
+resto2 = 0
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo > 9:
+	if tiempo > 9 :
 		segundo2 += 1
 		resto += 10
 	if segundo2 >= 6:
