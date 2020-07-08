@@ -260,6 +260,9 @@ arquero_list = pygame.sprite.Group()
 all_sprite_list = pygame.sprite.Group()
 coordy = 800
 
+D = pygame.image.load("Imagenes/D.png").convert()
+D.set_colorkey([0,0,0])
+
 for i in range(50):
 	x = random.choice(["arquero","escudero","hacha","maza"])
 	if x == "arquero":
@@ -293,6 +296,7 @@ while True:
                  if event.type == pygame.QUIT:
                         sys.exit()
         screen.blit(matriz,[0,0])
+        screen.blit(D,[300,300])
         all_sprite_list.draw(screen)
         for arquero in arquero_list:
         	arquero.update()
