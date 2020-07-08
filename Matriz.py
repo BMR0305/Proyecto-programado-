@@ -468,6 +468,7 @@ while True:
 	    		
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
+	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
