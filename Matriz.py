@@ -36,6 +36,9 @@ dañoa = pygame.image.load("Imagenes/Arquero/Daño.png").convert()
 dañoa.set_colorkey([0,0,0])
 muertea = pygame.image.load("Imagenes/Arquero/Muerte.png").convert()
 muertea.set_colorkey([0,0,0])
+#Proyectil arquero
+flecha = pygame.image.load("Imagenes/Arquero/Flecha.png").convert()
+flecha.set_colorkey([0,0,0])
 
 #Imagenes del escudero
 ataque1e = pygame.image.load("Imagenes/Escudero/Ataque1.png").convert()
@@ -64,6 +67,9 @@ dañoe = pygame.image.load("Imagenes/Escudero/Daño.png").convert()
 dañoe.set_colorkey([0,0,0])
 muertee = pygame.image.load("Imagenes/Escudero/Muerte.png").convert()
 muertee.set_colorkey([0,0,0])
+#Proyectil escudero
+espada = pygame.image.load("Imagenes/Escudero/Espada.png").convert()
+espada.set_colorkey([0,0,0])
 
 #Imagenes del hachero
 ataque1h = pygame.image.load("Imagenes/Hacha/Ataque1.png").convert()
@@ -260,8 +266,6 @@ arquero_list = pygame.sprite.Group()
 all_sprite_list = pygame.sprite.Group()
 coordy = 800
 
-D = pygame.image.load("Imagenes/D.png").convert()
-D.set_colorkey([0,0,0])
 
 for i in range(50):
 	x = random.choice(["arquero","escudero","hacha","maza"])
@@ -296,7 +300,6 @@ while True:
                  if event.type == pygame.QUIT:
                         sys.exit()
         screen.blit(matriz,[0,0])
-        screen.blit(D,[300,300])
         all_sprite_list.draw(screen)
         for arquero in arquero_list:
         	arquero.update()
