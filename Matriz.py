@@ -153,22 +153,28 @@ class Arquero(pygame.sprite.Sprite):
             self.muerte = muertea
             self.daño = dañoa
 
-    def get_frame(self, lista):
-    	self.frame += 1
-    	if self.frame > (len(lista) - 1):
-        	self.frame = 0
-    	return lista[self.frame]
-    
-    def change_image(self, lista):
-        self.image = self.get_frame(lista)
+    def get_frame(self, lista, accion):
+    	if accion == "caminar":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame = 0
+	    	return lista[self.frame]
+    	if accion == "ataque":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame =0
+	        	self.rect.y -=1 
+	    	return lista[self.frame]
+    def change_image(self, lista,accion):
+        self.image = self.get_frame(lista,accion)
 
     def update(self):
     	if self.rect.y > 20:
-        	self.change_image(self.caminar)
+        	self.change_image(self.caminar, "caminar")
         	self.rect.y -= 5
+        
     def attack(self):
-    	if self.rect.y == 500:
-    		self.change_image(self.ataque)
+    	self.change_image(self.ataque, "ataque")
 #Clase Escudero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -190,22 +196,28 @@ class Escudero(pygame.sprite.Sprite):
             self.muerte = muertee
             self.daño = dañoe
 
-    def get_frame(self, lista):
-    	self.frame += 1
-    	if self.frame > (len(lista) - 1):
-        	self.frame = 0
-    	return lista[self.frame]
-    
-    def change_image(self, lista):
-        self.image = self.get_frame(lista)
+    def get_frame(self, lista, accion):
+    	if accion == "caminar":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame = 0
+	    	return lista[self.frame]
+    	if accion == "ataque":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame= 0
+	        	self.rect.y -=1 
+	    	return lista[self.frame]
+    def change_image(self, lista,accion):
+        self.image = self.get_frame(lista,accion)
 
     def update(self):
     	if self.rect.y > 20:
-        	self.change_image(self.caminar)
+        	self.change_image(self.caminar, "caminar")
         	self.rect.y -= 5
+    
     def attack(self):
-    	if self.rect.y == 500:
-    		self.change_image(self.ataque)
+    	self.change_image(self.ataque, "ataque")
 #Clase Hacha
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -227,22 +239,28 @@ class Hacha(pygame.sprite.Sprite):
             self.muerte = muerteh
             self.daño = dañoh
 
-    def get_frame(self, lista):
-    	self.frame += 1
-    	if self.frame > (len(lista) - 1):
-        	self.frame = 0
-    	return lista[self.frame]
-    
-    def change_image(self, lista):
-        self.image = self.get_frame(lista)
+    def get_frame(self, lista, accion):
+    	if accion == "caminar":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame = 0
+	    	return lista[self.frame]
+    	if accion == "ataque":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame = 0
+	        	self.rect.y -=1 
+	    	return lista[self.frame]
+    def change_image(self, lista,accion):
+        self.image = self.get_frame(lista,accion)
 
     def update(self):
     	if self.rect.y > 20:
-        	self.change_image(self.caminar)
+        	self.change_image(self.caminar, "caminar")
         	self.rect.y -= 5
+    
     def attack(self):
-    	if self.rect.y == 500:
-    		self.change_image(self.ataque)
+    	self.change_image(self.ataque, "ataque")
 #Clase Maza
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -264,22 +282,28 @@ class Maza(pygame.sprite.Sprite):
             self.muerte = muertem
             self.daño = dañom
 
-    def get_frame(self, lista):
-    	self.frame += 1
-    	if self.frame > (len(lista) - 1):
-        	self.frame = 0
-    	return lista[self.frame]
-    
-    def change_image(self, lista):
-        self.image = self.get_frame(lista)
+    def get_frame(self, lista, accion):
+    	if accion == "caminar":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame = 0
+	    	return lista[self.frame]
+    	if accion == "ataque":
+	    	self.frame += 1
+	    	if self.frame > (len(lista) - 1):
+	        	self.frame =0
+	        	self.rect.y -=1 
+	    	return lista[self.frame]
+    def change_image(self, lista,accion):
+        self.image = self.get_frame(lista,accion)
 
     def update(self):
     	if self.rect.y > 0:
-        	self.change_image(self.caminar)
+        	self.change_image(self.caminar, "caminar")
         	self.rect.y -= 5
+    
     def attack(self):
-    	if self.rect.y == 500:
-    		self.change_image(self.ataque)
+    	self.change_image(self.ataque, "ataque")
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -374,4 +398,4 @@ while True:
 			avatar.update()
 		
 	pygame.display.flip()
-	clock.tick(20) 
+	clock.tick(15) 
