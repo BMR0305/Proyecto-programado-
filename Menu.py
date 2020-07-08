@@ -1,4 +1,5 @@
-import pygame, sys, os 
+import pygame, sys, os
+os.environ['SDL_VIDEO_CENTERED'] = '1' 
 pygame.init()
 #Crear vnetana
 size = (720,800)
