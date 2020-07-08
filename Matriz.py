@@ -436,13 +436,13 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
+
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo > 9:
-		tiempo -= 2
+	if tiempo > 9 :
 		segundo2 += 1
-		resto += 9
+		resto += 10
 	if segundo2 >= 6:
 	    segundo2 = 0
 	    minuto1 +=1
@@ -467,7 +467,11 @@ while True:
 	    	avatar.update()
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
-	screen.blit(relojseg1,[140,710])
+	if tiempo <= 0:
+		relojseg1 = font.render("0",0,(255,255,255))
+		screen.blit(relojseg1,[140,710])
+	else:
+		screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
