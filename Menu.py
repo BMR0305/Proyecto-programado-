@@ -92,9 +92,9 @@ while game_over:
 		
 		pygame.display.flip()
 		clock.tick(60)
+	
 	except:
 		pass
 
 	
-
 sys.exit()

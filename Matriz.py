@@ -454,6 +454,13 @@ while True:
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
+
+	if event.type == pygame.MOUSEBUTTONDOWN: 
+		mouse = event.pos
+		if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370: #Boton volver
+			print("hola")
+	
+
 	#Renderizado del reloj
 	relojseg1 = font.render(str(tiempo),0,(255,255,255))
 	relojseg2 = font.render(str(segundo2),0,(255,255,255))
