@@ -198,7 +198,7 @@ class Arquero(pygame.sprite.Sprite):
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame =0
-	        	proyectil = Proyectil()
+	        	proyectil = Proyectil("flecha")
 	        	proyectil.rect.x = avatar.rect.x+100
 	        	proyectil.rect.y = avatar.rect.y-20
 	        	all_sprite_list.add(proyectil)
@@ -250,6 +250,12 @@ class Escudero(pygame.sprite.Sprite):
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame= 0
+	        	proyectil = Proyectil("espada")
+	        	proyectil.rect.x = avatar.rect.x+100
+	        	proyectil.rect.y = avatar.rect.y-20
+	        	all_sprite_list.add(proyectil)
+	        	proyectil_list.add(proyectil)
+	        	self.rect.y -=1
 	        	self.rect.y -=1 
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
@@ -353,11 +359,18 @@ class Maza(pygame.sprite.Sprite):
     def attack(self):
     	self.change_image(self.ataque, "ataque")
 
-#Clase proyectil
+#Clase Proyectil
+#Atributos: self.image, self.rect
+#Funciones
+#update(): actualiza la posicion del sprite
+	#E: instancia #S: - #R: -
 class Proyectil(pygame.sprite.Sprite):
-	def __init__(self):
+	def __init__(self,tipo):
 	 	super().__init__()
-	 	self.image = flecha
+	 	if tipo == "flecha":
+	 		self.image = flecha
+	 	if tipo == "espada":
+	 		self.image = espada
 	 	self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y -= 10 
@@ -418,11 +431,12 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
+#Variables del reloj
 segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
-c= 0
+#Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
 	if tiempo > 9:
@@ -444,21 +458,22 @@ while True:
 	separacion = font.render(":",0,(255,255,255))
 	relojmin1 = font.render(str(minuto1),0,(255,255,255))
 	relojmin2 = font.render(str(minuto2),0,(255,255,255))
-	try:
-		proyectil_list.update()
-	except:
-		pass
+
+	#Ataque de avatars
 	for avatar in avatar_list:
 	    if avatar.rect.y == 500:
 	        avatar.attack()
 	    else:
 	    	avatar.update()
+	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
+	proyectil_list.update()
 	all_sprite_list.draw(screen)
+	#Default
 	pygame.display.flip()
 	clock.tick(15) 
