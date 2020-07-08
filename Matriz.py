@@ -198,7 +198,13 @@ class Arquero(pygame.sprite.Sprite):
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame =0
-	        	self.rect.y -=1 
+	        	proyectil = Proyectil()
+	        	proyectil.rect.x = avatar.rect.x+100
+	        	proyectil.rect.y = avatar.rect.y-20
+	        	all_sprite_list.add(proyectil)
+	        	proyectil_list.add(proyectil)
+	        	self.rect.y -=1
+
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
         self.image = self.get_frame(lista,accion)
@@ -347,14 +353,14 @@ class Maza(pygame.sprite.Sprite):
     def attack(self):
     	self.change_image(self.ataque, "ataque")
 
-
+#Clase proyectil
 class Proyectil(pygame.sprite.Sprite):
 	def __init__(self):
 	 	super().__init__()
 	 	self.image = flecha
 	 	self.rect = self.image.get_rect()
 	def update(self):
-		self.rect.y -= 5 
+		self.rect.y -= 10 
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -416,6 +422,7 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
+c= 0
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
 	if tiempo > 9:
@@ -437,7 +444,15 @@ while True:
 	separacion = font.render(":",0,(255,255,255))
 	relojmin1 = font.render(str(minuto1),0,(255,255,255))
 	relojmin2 = font.render(str(minuto2),0,(255,255,255))
-
+	try:
+		proyectil_list.update()
+	except:
+		pass
+	for avatar in avatar_list:
+	    if avatar.rect.y == 500:
+	        avatar.attack()
+	    else:
+	    	avatar.update()
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
@@ -445,15 +460,5 @@ while True:
 	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
 	all_sprite_list.draw(screen)
-	all_sprite_list.update()
-	for avatar in avatar_list:
-	    if avatar.rect.y == 500:
-	        avatar.attack()
-	        proyectil = Proyectil()
-	        proyectil.rect.x = avatar.rect.x+100
-	        proyectil.rect.y = avatar.rect.y-20
-	        all_sprite_list.add(proyectil)
-	        proyectil_list.add(proyectil)
-		
 	pygame.display.flip()
 	clock.tick(15) 
