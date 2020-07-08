@@ -407,9 +407,10 @@ minuto2 = 0
 resto = 0
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo > 9:
-	    segundo2 += 1
-	    resto += 9
+	if tiempo >= 10:
+		tiempo = 0
+		segundo2 += 1
+		resto += 9
 	if segundo2 > 6:
 	    segundo2 = 0
 	    minuto1 +=1
