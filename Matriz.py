@@ -12,6 +12,9 @@ font = pygame.font.Font(None, 60)
 
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
+#Boton
+volver = pygame.image.load("Imagenes/Volver.png")
+volver.set_colorkey([0,0,0])
 #Imagenes del arquero
 ataque0a = pygame.image.load("Imagenes/Arquero/Ataque0.png").convert()
 ataque0a.set_colorkey([0,0,0])
@@ -457,8 +460,10 @@ while True:
 
 	if event.type == pygame.MOUSEBUTTONDOWN: 
 		mouse = event.pos
-		if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370: #Boton volver
-			print("hola")
+		print(mouse)
+		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
+			pygame.quit()
+			os.system("Menu.py")
 	
 
 	#Renderizado del reloj
@@ -486,6 +491,7 @@ while True:
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
+	screen.blit(volver, [630,0])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
 	#Default
