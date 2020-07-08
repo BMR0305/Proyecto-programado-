@@ -1,4 +1,5 @@
-import pygame, sys, random ,time
+import pygame, sys, random ,time, os 
+os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
 #Pantalla
 size = (720,800)
