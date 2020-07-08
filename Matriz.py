@@ -335,24 +335,36 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
-minutos = 0
+segundo2 = 0
+minuto1 = 0
+minuto2 = 0
 resto = 0
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo > 10:
-		minutos += 1
-		resto += 10
+	if tiempo > 9:
+		segundo2 += 1
+		resto += 9
+	if segundo2 > 6:
+		segundo2 = 0
+		minuto1 +=1
+	if minuto1 > 9:
+		minuto1 = 0
+		minuto2 += 1
 	for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 	#Renderizado del reloj
-	relojseg = font.render(str(tiempo),0,(255,255,255))
+	relojseg1 = font.render(str(tiempo),0,(255,255,255))
+	relojseg2 = font.render(str(segundo2),0,(255,255,255))
 	separacion = font.render(":",0,(255,255,255))
-	relojmin = font.render(str(minutos),0,(255,255,255))
+	relojmin1 = font.render(str(minuto1),0,(255,255,255))
+	relojmin2 = font.render(str(minuto2),0,(255,255,255))
 
 	screen.blit(matriz,[0,0])
-	screen.blit(relojseg,[120,710])
-	screen.blit(relojmin,[80,710])
+	screen.blit(relojseg1,[140,710])
+	screen.blit(relojseg2,[120,710])
+	screen.blit(relojmin1,[80,710])
+	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
 	all_sprite_list.draw(screen)
 	for avatar in avatar_list:
