@@ -12,6 +12,8 @@ font = pygame.font.Font(None, 60)
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
 #Imagenes del arquero
+ataque0a = pygame.image.load("Imagenes/Arquero/Ataque0.png").convert()
+ataque0a.set_colorkey([0,0,0])
 ataque1a = pygame.image.load("Imagenes/Arquero/Ataque1.png").convert()
 ataque1a.set_colorkey([0,0,0])
 ataque2a = pygame.image.load("Imagenes/Arquero/Ataque2.png").convert()
@@ -20,6 +22,12 @@ ataque3a = pygame.image.load("Imagenes/Arquero/Ataque3.png").convert()
 ataque3a.set_colorkey([0,0,0])
 ataque4a = pygame.image.load("Imagenes/Arquero/Ataque4.png").convert()
 ataque4a.set_colorkey([0,0,0])
+ataque5a = pygame.image.load("Imagenes/Arquero/Ataque5.png").convert()
+ataque5a.set_colorkey([0,0,0])
+ataque6a = pygame.image.load("Imagenes/Arquero/Ataque6.png").convert()
+ataque6a.set_colorkey([0,0,0])
+ataque7a = pygame.image.load("Imagenes/Arquero/Ataque7.png").convert()
+ataque7a.set_colorkey([0,0,0])
 caminar1a = pygame.image.load("Imagenes/Arquero/Caminar1.png").convert()
 caminar1a.set_colorkey([0,0,0])
 caminar2a = pygame.image.load("Imagenes/Arquero/Caminar2.png").convert()
@@ -45,6 +53,8 @@ flecha.set_colorkey([0,0,0])
 sonidoFlecha = pygame.mixer.Sound("Sonidos/Impacto flecha.wav")
 
 #Imagenes del escudero
+#ataque0e = pygame.image.load("Imagenes/Escudero/Ataque0.png").convert()
+#ataque0e.set_colorkey([0,0,0])
 ataque1e = pygame.image.load("Imagenes/Escudero/Ataque1.png").convert()
 ataque1e.set_colorkey([0,0,0])
 ataque2e = pygame.image.load("Imagenes/Escudero/Ataque2.png").convert()
@@ -53,6 +63,12 @@ ataque3e = pygame.image.load("Imagenes/Escudero/Ataque3.png").convert()
 ataque3e.set_colorkey([0,0,0])
 ataque4e = pygame.image.load("Imagenes/Escudero/Ataque4.png").convert()
 ataque4e.set_colorkey([0,0,0])
+#ataque5e = pygame.image.load("Imagenes/Escudero/Ataque5.png").convert()
+#ataque5e.set_colorkey([0,0,0])
+#ataque6e = pygame.image.load("Imagenes/Escudero/Ataque6.png").convert()
+#ataque6e.set_colorkey([0,0,0])
+#ataque7e = pygame.image.load("Imagenes/Escudero/Ataque7.png").convert()
+#ataque7e.set_colorkey([0,0,0])
 caminar1e = pygame.image.load("Imagenes/Escudero/Caminar1.png").convert()
 caminar1e.set_colorkey([0,0,0])
 caminar2e = pygame.image.load("Imagenes/Escudero/Caminar2.png").convert()
@@ -78,6 +94,8 @@ espada.set_colorkey([0,0,0])
 sonidoEspada = pygame.mixer.Sound("Sonidos/Impacto espada.wav")
 
 #Imagenes del hachero
+#ataque0h = pygame.image.load("Imagenes/Hacha/Ataque0.png").convert()
+#ataque0h.set_colorkey([0,0,0])
 ataque1h = pygame.image.load("Imagenes/Hacha/Ataque1.png").convert()
 ataque1h.set_colorkey([0,0,0])
 ataque2h = pygame.image.load("Imagenes/Hacha/Ataque2.png").convert()
@@ -86,6 +104,12 @@ ataque3h = pygame.image.load("Imagenes/Hacha/Ataque3.png").convert()
 ataque3h.set_colorkey([0,0,0])
 ataque4h = pygame.image.load("Imagenes/Hacha/Ataque4.png").convert()
 ataque4h.set_colorkey([0,0,0])
+#ataque5h = pygame.image.load("Imagenes/Hacha/Ataque5.png").convert()
+#ataque5h.set_colorkey([0,0,0])
+#ataque6h = pygame.image.load("Imagenes/Hacha/Ataque6.png").convert()
+#ataque6h.set_colorkey([0,0,0])
+#ataque7h = pygame.image.load("Imagenes/Hacha/Ataque7.png").convert()
+#ataque7h.set_colorkey([0,0,0])
 caminar1h = pygame.image.load("Imagenes/Hacha/Caminar1.png").convert()
 caminar1h.set_colorkey([0,0,0])
 caminar2h = pygame.image.load("Imagenes/Hacha/Caminar2.png").convert()
@@ -149,7 +173,7 @@ class Arquero(pygame.sprite.Sprite):
             self.rect.topleft = position
             self.frame = 0
             self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
-            self.ataque = [ataque1a, ataque2a, ataque3a, ataque4a] 
+            self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
             self.muerte = muertea
             self.daño = dañoa
 
@@ -359,36 +383,24 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
-segundo2 = 0
-minuto1 = 0
-minuto2 = 0
+minutos = 0
 resto = 0
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
-	if tiempo > 9:
-		segundo2 += 1
-		resto += 9
-	if segundo2 > 6:
-		segundo2 = 0
-		minuto1 +=1
-	if minuto1 > 9:
-		minuto1 = 0
-		minuto2 += 1
+	if tiempo > 10:
+		minutos += 1
+		resto += 10
 	for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
 	#Renderizado del reloj
-	relojseg1 = font.render(str(tiempo),0,(255,255,255))
-	relojseg2 = font.render(str(segundo2),0,(255,255,255))
+	relojseg = font.render(str(tiempo),0,(255,255,255))
 	separacion = font.render(":",0,(255,255,255))
-	relojmin1 = font.render(str(minuto1),0,(255,255,255))
-	relojmin2 = font.render(str(minuto2),0,(255,255,255))
+	relojmin = font.render(str(minutos),0,(255,255,255))
 
 	screen.blit(matriz,[0,0])
-	screen.blit(relojseg1,[140,710])
-	screen.blit(relojseg2,[120,710])
-	screen.blit(relojmin1,[80,710])
-	screen.blit(relojmin2,[60,710])
+	screen.blit(relojseg,[120,710])
+	screen.blit(relojmin,[80,710])
 	screen.blit(separacion,[105,706])
 	all_sprite_list.draw(screen)
 	for avatar in avatar_list:
