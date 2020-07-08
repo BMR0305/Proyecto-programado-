@@ -263,49 +263,130 @@ class Maza(pygame.sprite.Sprite):
         self.image = self.get_frame(lista)
 
     def update(self):
-    	if self.rect.y > 20:
+    	if self.rect.y > 0:
         	self.change_image(self.caminar)
         	self.rect.y -= 5
-arquero_list = pygame.sprite.Group()
+#Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
+avatar_list = pygame.sprite.Group()
+arquero_list = pygame.sprite.Group()
+escudero_list = pygame.sprite.Group()
+hacha_list = pygame.sprite.Group()
+maza_list = pygame.sprite.Group()
 coordy = 800
+oleada=1
+enemigos = 0
 
 
-for i in range(50):
+for i in range(60):
 	x = random.choice(["arquero","escudero","hacha","maza"])
 	if x == "arquero":
 		arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
-		coordy += 50
+		if oleada < 5:
+			coordy += 400
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 9:
+			coordy += 280
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 13:
+			coordy += 160
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		else:
+			break
 		arquero_list.add(arquero)
+		avatar_list.add(arquero)
 		all_sprite_list.add(arquero)
-		print(all_sprite_list)
 	if x == "escudero":
 		escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
-		coordy += 50
-		arquero_list.add(escudero)
+		if oleada < 5:
+			coordy += 400
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 9:
+			coordy += 280
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 13:
+			coordy += 160
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		else:
+			break
+		escudero_list.add(escudero)
+		avatar_list.add(escudero)
 		all_sprite_list.add(escudero)
-		print(all_sprite_list)
 	if x == "hacha":
 		hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
-		coordy += 50
-		arquero_list.add(hacha)
+		if oleada < 5:
+			coordy += 400
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 9:
+			coordy += 280
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 13:
+			coordy += 160
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		else:
+			break
+		hacha_list.add(hacha)
+		avatar_list.add(hacha)
 		all_sprite_list.add(hacha)
-		print(all_sprite_list)
 	if x == "maza":
 		maza = Maza((random.choice([185,270,355,435,520]),coordy))
-		coordy += 50
-		arquero_list.add(maza)
+		if oleada < 5:
+			coordy += 400
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 9:
+			coordy += 280
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		elif oleada < 13:
+			coordy += 160
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+		else:
+			break
+		maza_list.add(maza)
+		avatar_list.add(maza)
 		all_sprite_list.add(maza)
-		print(all_sprite_list)
-
-
 while True:
         for event in pygame.event.get():
                  if event.type == pygame.QUIT:
                         sys.exit()
         screen.blit(matriz,[0,0])
         all_sprite_list.draw(screen)
-        for arquero in arquero_list:
-        	arquero.update()
+        for avatar in avatar_list:
+        	avatar.update()
         pygame.display.flip()
-        clock.tick(15) 
+        clock.tick(20) 
