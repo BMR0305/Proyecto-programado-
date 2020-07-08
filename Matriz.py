@@ -6,6 +6,8 @@ pygame.display.set_caption("Avatars vs Rooks")
 screen = pygame.display.set_mode(size)
 #Reloj
 clock=pygame.time.Clock()
+#Fuente
+font = pygame.font.Font(None, 60)
 
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
@@ -333,18 +335,31 @@ for i in range(60):
 			enemigos =0
 	else:
 		break
-
+minutos = 0
+resto = 0
 while True:
-        for event in pygame.event.get():
-                 if event.type == pygame.QUIT:
-                        sys.exit()
-        screen.blit(matriz,[0,0])
-        all_sprite_list.draw(screen)
-        for avatar in avatar_list:
-        	if avatar.rect.y == 500:
-        		avatar.attack()
-        	else:
-        		avatar.update()
-        	
-        pygame.display.flip()
-        clock.tick(20) 
+	tiempo = pygame.time.get_ticks()//1000-resto
+	if tiempo > 10:
+		minutos += 1
+		resto += 10
+	for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				sys.exit()
+	#Renderizado del reloj
+	relojseg = font.render(str(tiempo),0,(255,255,255))
+	separacion = font.render(":",0,(255,255,255))
+	relojmin = font.render(str(minutos),0,(255,255,255))
+
+	screen.blit(matriz,[0,0])
+	screen.blit(relojseg,[120,710])
+	screen.blit(relojmin,[80,710])
+	screen.blit(separacion,[105,706])
+	all_sprite_list.draw(screen)
+	for avatar in avatar_list:
+		if avatar.rect.y == 500:
+			avatar.attack()
+		else:
+			avatar.update()
+		
+	pygame.display.flip()
+	clock.tick(20) 
