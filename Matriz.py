@@ -274,7 +274,7 @@ oleada=1
 enemigos = 0
 
 
-for i in range(50):
+for i in range(60):
 	x = random.choice(["arquero","escudero","hacha","maza"])
 	if x == "arquero":
 		arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
