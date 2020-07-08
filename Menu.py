@@ -1,4 +1,4 @@
-import pygame, sys 
+import pygame, sys, os 
 pygame.init()
 #Crear vnetana
 size = (720,800)
@@ -37,7 +37,7 @@ while True:
 		 if event.type == pygame.MOUSEBUTTONDOWN: 
 		 	mouse = event.pos
 		 	if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370: #boton jugar
-		 		print("jugar")
+		 		os.system("Matriz.py")
 		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
 		 		print("ajustes")
 		 	if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
