@@ -168,6 +168,9 @@ dañom = pygame.image.load("Imagenes/Maza/Daño.png").convert()
 dañom.set_colorkey([0,0,0])
 muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
+#Cargar las imagenes de los rooks
+sand_rook = pygame.image.load("Imagenes/Base.png")
+sand_rook.set_colorkey([0,0,0])
 #Clase Arquero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -390,7 +393,6 @@ proyectil_list = pygame.sprite.Group()
 coordy = 1200
 oleada=1
 enemigos = 0
-
 #Creacion de avatars
 for i in range(60):
 	x = random.choice(["arquero","escudero","hacha","maza"])
@@ -440,7 +442,50 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
-
+#Variables de compra
+sand_rook_hitbox = pygame.Rect(25,35,135,125)
+#Cuadrados de la matriz
+Cuadro_1 = pygame.Rect(255,160, 75, 62)
+Cuadro_2 = pygame.Rect(331,160, 75, 62) 
+Cuadro_3 = pygame.Rect(407,160, 75, 62)
+Cuadro_4 = pygame.Rect(483,160, 75, 62)
+Cuadro_5 = pygame.Rect(558,160, 75, 62)
+Cuadro_6 = pygame.Rect(255,179, 75, 62)
+Cuadro_7 = pygame.Rect(331,179, 75, 62)
+Cuadro_8 = pygame.Rect(407,179, 75, 62)
+Cuadro_9 = pygame.Rect(483,179, 75, 62)
+Cuadro_10 = pygame.Rect(558,179, 75, 62)
+Cuadro_11 = pygame.Rect(255,242, 75, 62)
+Cuadro_12 = pygame.Rect(331,242, 75, 62)
+Cuadro_13 = pygame.Rect(407,242, 75, 62)
+Cuadro_14 = pygame.Rect(483,242, 75, 62)
+Cuadro_15 = pygame.Rect(558,242, 75, 62)
+Cuadro_16 = pygame.Rect(255,305, 75, 62)
+Cuadro_17 = pygame.Rect(331,305, 75, 62)
+Cuadro_18 = pygame.Rect(407,305, 75, 62)
+Cuadro_19 = pygame.Rect(483,305, 75, 62)
+Cuadro_20 = pygame.Rect(558,305, 75, 62)
+Cuadro_21 = pygame.Rect(255,368, 75, 62)
+Cuadro_22 = pygame.Rect(331,368, 75, 62)
+Cuadro_23 = pygame.Rect(407,368, 75, 62)
+Cuadro_24 = pygame.Rect(483,368, 75, 62)
+Cuadro_25 = pygame.Rect(558,368, 75, 62)
+Cuadro_26 = pygame.Rect(255,431, 75, 62)
+Cuadro_27 = pygame.Rect(331,431, 75, 62)
+Cuadro_28 = pygame.Rect(407,431, 75, 62)
+Cuadro_29 = pygame.Rect(483,431, 75, 62)
+Cuadro_30 = pygame.Rect(558,431, 75, 62)
+Cuadro_31 = pygame.Rect(255,493, 75, 62)
+Cuadro_32 = pygame.Rect(331,493, 75, 62)
+Cuadro_33 = pygame.Rect(407,493, 75, 62)
+Cuadro_34 = pygame.Rect(483,493, 75, 62)
+Cuadro_35 = pygame.Rect(558,493, 75, 62)
+Cuadro_36 = pygame.Rect(255,556, 75, 62)
+Cuadro_37 = pygame.Rect(331,556, 75, 62)
+Cuadro_38 = pygame.Rect(407,556, 75, 62)
+Cuadro_39 = pygame.Rect(483,556, 75, 62)
+Cuadro_40 = pygame.Rect(558,556, 75, 62)
+Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -464,6 +509,11 @@ while True:
 		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
 			pygame.quit()
 			os.system("Menu.py")
+		if sand_rook_hitbox.collidepoint(mouse):
+			print("hola")
+		for cuadro in Cuadros:
+			if cuadro.collidepoint(mouse):
+				print(cuadro) 
 	
 
 	#Renderizado del reloj
@@ -492,6 +542,7 @@ while True:
 	screen.blit(relojmin2,[60,710])
 	screen.blit(separacion,[105,706])
 	screen.blit(volver, [630,0])
+	screen.blit(sand_rook, [40,0])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
 	#Default
