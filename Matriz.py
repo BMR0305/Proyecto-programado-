@@ -9,7 +9,8 @@ screen = pygame.display.set_mode(size)
 clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
-
+#Variables de monedas
+monedas = 100
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
 #Boton
@@ -168,6 +169,10 @@ dañom = pygame.image.load("Imagenes/Maza/Daño.png").convert()
 dañom.set_colorkey([0,0,0])
 muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
+#Imagen moneda
+moneda = pygame.image.load("Imagenes/Moneda.png").convert()
+moneda.set_colorkey([0,0,0])
+
 #Clase Arquero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -378,6 +383,12 @@ class Proyectil(pygame.sprite.Sprite):
 	 	self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y -= 10 
+
+'''class Moneda(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__():
+	def update(self):'''
+
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -440,8 +451,6 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
-#Variables de monedas
-monedas = 100
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -498,6 +507,8 @@ while True:
 	screen.blit(volver, [630,0])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
+
+	screen.blit(moneda ,[500,500])
 	#Default
 	pygame.display.flip()
 	clock.tick(15) 
