@@ -176,9 +176,13 @@ sand_rook_icon.set_colorkey([0,0,0])
 sand_rook = pygame.image.load("Imagenes/Sand.png")
 sand_rook.set_colorkey([0,0,0])
 
-#Imagen moneda
-moneda = pygame.image.load("Imagenes/Moneda.png").convert()
-moneda.set_colorkey([0,0,0])
+#Imagenes de monedas
+oro = pygame.image.load("Imagenes/Oro.png").convert()
+oro.set_colorkey([0,0,0])
+plata = pygame.image.load("Imagenes/Plata.png").convert()
+plata.set_colorkey([0,0,0])
+cobre = pygame.image.load("Imagenes/Cobre.png").convert()
+cobre.set_colorkey([0,0,0])
 
 #Clase Arquero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
@@ -390,11 +394,23 @@ class Proyectil(pygame.sprite.Sprite):
 	 	self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y -= 10 
+#Clase Moneda
+#Atributos:
+#Funciones
+class Moneda(pygame.sprite.Sprite):
+	def __init__(self,tipo):
+		super().__init__()
+		self.tipo = tipo
+		if tipo =="oro":
+			self.image = oro
+			self.rect = self.image.get_rect()
+		if tipo =="plata":
+			self.image = plata
+			self.rect = self.image.get_rect()
+		if tipo =="cobre":
+			self.image = cobre
+			self.rect = self.image.get_rect()
 
-'''class Moneda(pygame.sprite.Sprite):
-	def __init__(self):
-		super().__init__():
-	def update(self):'''
 
 class Sand(pygame.sprite.Sprite):
 	def __init__(self):
@@ -410,6 +426,7 @@ hacha_list = pygame.sprite.Group()
 maza_list = pygame.sprite.Group()
 proyectil_list = pygame.sprite.Group()
 rook_list = pygame.sprite.Group()
+monedas_list = pygame.sprite.Group()
 #Variables para la creacion de las oleadas
 coordy = 1200
 oleada=1
@@ -518,6 +535,12 @@ while True:
 		tiempo=0
 		segundo2 += 1
 		resto += 10
+		#Creacion de monedas
+		coin = Moneda(random.choice(["cobre","oro","plata"]))
+		coin.rect.x = random.randint(260,635)
+		coin.rect.y = random.randint(130,750)
+		monedas_list.add(coin)
+		all_sprite_list.add(coin)
 	if segundo2 >= 6:
 	    segundo2 = 0
 	    minuto1 +=1
@@ -546,6 +569,23 @@ while True:
 				rook_list.add(sand)
 				cuadro[1] = sand
 				clase == ""
+
+	if event.type == pygame.MOUSEMOTION:
+		mouse_pos = pygame.mouse.get_pos()
+		for coin in monedas_list:
+			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
+				if coin.tipo == "oro":
+					monedas += 100
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
+				if coin.tipo == "plata":
+					monedas += 50
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
+				if coin.tipo == "cobre":
+					monedas += 25
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
 	
 	if pygame.mouse.get_pressed()[2]==1:
 		mouse = event.pos
@@ -575,8 +615,8 @@ while True:
 	for proyectil in proyectil_list:
 	    if proyectil.rect.y < -10:
 	    	all_sprite_list.remove(proyectil)
-	    	proyectil_list.remove(proyectil)		
-	
+	    	proyectil_list.remove(proyectil)	
+
 	#Mostrar en pantala
 	screen.blit(matriz,[0,0])
 	screen.blit(relojseg1,[140,710])
@@ -592,7 +632,6 @@ while True:
 	mouse_pos = pygame.mouse.get_pos()
 	if agarrar==True and clase == "Sand":
 		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-	#print(Cuadro_2)
 	#Default
 	pygame.display.flip()
-	clock.tick(15) 
+	clock.tick(15)
