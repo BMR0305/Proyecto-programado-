@@ -604,8 +604,20 @@ while True:
 			os.system("Menu.py")
 		for hitbox in hitboxes:
 			if hitbox[0].collidepoint(mouse) and not agarrar:
-				if hitbox[1]=="Sand" #and monedas>50:
-					#monedas-=50
+				if hitbox[1]=="Sand" and monedas >= 50:
+					monedas -=50
+					agarrar = True
+					clase = hitbox[1]
+				if hitbox[1]=="Rock" and monedas >= 100:
+					monedas -=100
+					agarrar = True
+					clase = hitbox[1]
+				if hitbox[1]=="Fire" and monedas >= 150:
+					monedas -=150
+					agarrar = True
+					clase = hitbox[1]
+				if hitbox[1]=="Water" and monedas >= 150:
+					monedas -=150
 					agarrar = True
 					clase = hitbox[1]
 		for cuadro in Cuadros:
