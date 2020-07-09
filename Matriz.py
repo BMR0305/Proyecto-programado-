@@ -171,7 +171,9 @@ muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
 
 #Cargar las imagenes de los rooks
-sand_rook = pygame.image.load("Imagenes/Base.png")
+sand_rook_icon = pygame.image.load("Imagenes/Base.png")
+sand_rook_icon.set_colorkey([0,0,0])
+sand_rook = pygame.image.load("Imagenes/Sand.png")
 sand_rook.set_colorkey([0,0,0])
 
 #Imagen moneda
@@ -394,6 +396,11 @@ class Proyectil(pygame.sprite.Sprite):
 		super().__init__():
 	def update(self):'''
 
+class Sand(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = sand_rook
+		self.rect = self.image.get_rect()
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -402,6 +409,7 @@ escudero_list = pygame.sprite.Group()
 hacha_list = pygame.sprite.Group()
 maza_list = pygame.sprite.Group()
 proyectil_list = pygame.sprite.Group()
+rook_list = pygame.sprite.Group()
 #Variables para la creacion de las oleadas
 coordy = 1200
 oleada=1
@@ -458,47 +466,49 @@ resto = 0
 
 #Variables de compra
 sand_rook_hitbox = pygame.Rect(25,35,135,125)
+agarrar = False
+clase = ""
 #Cuadrados de la matriz
-Cuadro_1 = pygame.Rect(255,160, 75, 62)
-Cuadro_2 = pygame.Rect(331,160, 75, 62) 
-Cuadro_3 = pygame.Rect(407,160, 75, 62)
-Cuadro_4 = pygame.Rect(483,160, 75, 62)
-Cuadro_5 = pygame.Rect(558,160, 75, 62)
-Cuadro_6 = pygame.Rect(255,179, 75, 62)
-Cuadro_7 = pygame.Rect(331,179, 75, 62)
-Cuadro_8 = pygame.Rect(407,179, 75, 62)
-Cuadro_9 = pygame.Rect(483,179, 75, 62)
-Cuadro_10 = pygame.Rect(558,179, 75, 62)
-Cuadro_11 = pygame.Rect(255,242, 75, 62)
-Cuadro_12 = pygame.Rect(331,242, 75, 62)
-Cuadro_13 = pygame.Rect(407,242, 75, 62)
-Cuadro_14 = pygame.Rect(483,242, 75, 62)
-Cuadro_15 = pygame.Rect(558,242, 75, 62)
-Cuadro_16 = pygame.Rect(255,305, 75, 62)
-Cuadro_17 = pygame.Rect(331,305, 75, 62)
-Cuadro_18 = pygame.Rect(407,305, 75, 62)
-Cuadro_19 = pygame.Rect(483,305, 75, 62)
-Cuadro_20 = pygame.Rect(558,305, 75, 62)
-Cuadro_21 = pygame.Rect(255,368, 75, 62)
-Cuadro_22 = pygame.Rect(331,368, 75, 62)
-Cuadro_23 = pygame.Rect(407,368, 75, 62)
-Cuadro_24 = pygame.Rect(483,368, 75, 62)
-Cuadro_25 = pygame.Rect(558,368, 75, 62)
-Cuadro_26 = pygame.Rect(255,431, 75, 62)
-Cuadro_27 = pygame.Rect(331,431, 75, 62)
-Cuadro_28 = pygame.Rect(407,431, 75, 62)
-Cuadro_29 = pygame.Rect(483,431, 75, 62)
-Cuadro_30 = pygame.Rect(558,431, 75, 62)
-Cuadro_31 = pygame.Rect(255,493, 75, 62)
-Cuadro_32 = pygame.Rect(331,493, 75, 62)
-Cuadro_33 = pygame.Rect(407,493, 75, 62)
-Cuadro_34 = pygame.Rect(483,493, 75, 62)
-Cuadro_35 = pygame.Rect(558,493, 75, 62)
-Cuadro_36 = pygame.Rect(255,556, 75, 62)
-Cuadro_37 = pygame.Rect(331,556, 75, 62)
-Cuadro_38 = pygame.Rect(407,556, 75, 62)
-Cuadro_39 = pygame.Rect(483,556, 75, 62)
-Cuadro_40 = pygame.Rect(558,556, 75, 62)
+Cuadro_1 = [pygame.Rect(255,112, 75, 62), 0]
+Cuadro_2 = [pygame.Rect(336,112, 75, 62),0] 
+Cuadro_3 = [pygame.Rect(419,112, 75, 62),0]
+Cuadro_4 = [pygame.Rect(501,112, 75, 62),0]
+Cuadro_5 = [pygame.Rect(586,112, 75, 62),0]
+Cuadro_6 = [pygame.Rect(255,186, 75, 62),0]
+Cuadro_7 = [pygame.Rect(336,186, 75, 62),0]
+Cuadro_8 = [pygame.Rect(419,186, 75, 62),0]
+Cuadro_9 = [pygame.Rect(501,186, 75, 62),0]
+Cuadro_10 = [pygame.Rect(586,186, 75, 62),0]
+Cuadro_11 = [pygame.Rect(255,259, 75, 62),0]
+Cuadro_12 = [pygame.Rect(336,259, 75, 62),0]
+Cuadro_13 = [pygame.Rect(419,259, 75, 62),0]
+Cuadro_14 = [pygame.Rect(501,259, 75, 62),0]
+Cuadro_15 = [pygame.Rect(586,259, 75, 62),0]
+Cuadro_16 = [pygame.Rect(255,339, 75, 62),0]
+Cuadro_17 = [pygame.Rect(336,339, 75, 62),0]
+Cuadro_18 = [pygame.Rect(419,339, 75, 62),0]
+Cuadro_19 = [pygame.Rect(501,339, 75, 62),0]
+Cuadro_20 = [pygame.Rect(586,339, 75, 62),0]
+Cuadro_21 = [pygame.Rect(255,417, 75, 62),0]
+Cuadro_22 = [pygame.Rect(336,417, 75, 62),0]
+Cuadro_23 = [pygame.Rect(419,417, 75, 62),0]
+Cuadro_24 = [pygame.Rect(501,417, 75, 62),0]
+Cuadro_25 = [pygame.Rect(586,417, 75, 62),0]
+Cuadro_26 = [pygame.Rect(255,494, 75, 62),0]
+Cuadro_27 = [pygame.Rect(336,494, 75, 62),0]
+Cuadro_28 = [pygame.Rect(419,494, 75, 62),0]
+Cuadro_29 = [pygame.Rect(501,494, 75, 62),0]
+Cuadro_30 = [pygame.Rect(586,494, 75, 62),0]
+Cuadro_31 = [pygame.Rect(255,569, 75, 62),0]
+Cuadro_32 = [pygame.Rect(336,569, 75, 62),0]
+Cuadro_33 = [pygame.Rect(419,569, 75, 62),0]
+Cuadro_34 = [pygame.Rect(501,569, 75, 62),0]
+Cuadro_35 = [pygame.Rect(586,569, 75, 62),0]
+Cuadro_36 = [pygame.Rect(255,649, 75, 62),0]
+Cuadro_37 = [pygame.Rect(336,649, 75, 62),0]
+Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
+Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
+Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
 
 #Main loop
@@ -518,19 +528,35 @@ while True:
 	        if event.type == pygame.QUIT:
 	            sys.exit()
 
-	if event.type == pygame.MOUSEBUTTONDOWN: 
+	if pygame.mouse.get_pressed()[0]==1:
 		mouse = event.pos
-		print(mouse)
 		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
 			pygame.quit()
 			os.system("Menu.py")
-		if sand_rook_hitbox.collidepoint(mouse):
-			print("hola")
+		if sand_rook_hitbox.collidepoint(mouse) and not agarrar:
+			agarrar = True
+			clase = "Sand" 
 		for cuadro in Cuadros:
-			if cuadro.collidepoint(mouse):
-				print(cuadro) 
+			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Sand" and cuadro[1]==0:
+				agarrar = False
+				sand = Sand()
+				sand.rect.x = cuadro[0].x-3
+				sand.rect.y = cuadro[0].y-37
+				all_sprite_list.add(sand)
+				rook_list.add(sand)
+				cuadro[1] = sand
+				clase == ""
 	
+	if pygame.mouse.get_pressed()[2]==1:
+		mouse = event.pos
+		for cuadro in Cuadros:
+			if cuadro[0].collidepoint(mouse) and not agarrar and cuadro[1]!=0:
+				all_sprite_list.remove(cuadro[1])
+				rook_list.remove(cuadro[1])
+				cuadro[1]=0
 
+
+	
 	#Renderizado del reloj
 	relojseg1 = font.render(str(tiempo),0,(255,255,255))
 	relojseg2 = font.render(str(segundo2),0,(255,255,255))
@@ -560,10 +586,13 @@ while True:
 	screen.blit(cant_monedas,[70,635])
 	screen.blit(separacion,[105,706])
 	screen.blit(volver, [630,0])
-	screen.blit(sand_rook, [40,0])
+	screen.blit(sand_rook_icon, [40,0])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
-
+	mouse_pos = pygame.mouse.get_pos()
+	if agarrar==True and clase == "Sand":
+		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+	#print(Cuadro_2)
 	screen.blit(moneda ,[500,500])
 	#Default
 	pygame.display.flip()
