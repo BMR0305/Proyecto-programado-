@@ -582,7 +582,6 @@ while True:
 	        if event.type == pygame.QUIT:
 	            sys.exit()
 	if event.type == pygame.MOUSEMOTION:
-		mouse_pos = pygame.mouse.get_pos()
 		for coin in monedas_list:
 			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
 				if coin.tipo == "oro":
@@ -609,8 +608,6 @@ while True:
 					#monedas-=50
 					agarrar = True
 					clase = hitbox[1]
-
-		
 		for cuadro in Cuadros:
 			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Sand" and cuadro[1]==0:
 				agarrar = False
@@ -621,6 +618,7 @@ while True:
 				rook_list.add(sand)
 				cuadro[1] = sand
 				clase == ""
+
 			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Rock" and cuadro[1]==0:
 				agarrar = False
 				rock = Rock()
@@ -648,7 +646,7 @@ while True:
 				rook_list.add(water)
 				cuadro[1] = water
 				clase == ""
-	
+
 	if pygame.mouse.get_pressed()[2]==1:
 		mouse = event.pos
 		for cuadro in Cuadros:
