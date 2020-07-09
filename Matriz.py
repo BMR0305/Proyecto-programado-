@@ -440,7 +440,8 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
-
+#Variables de monedas
+monedas = 100
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -472,6 +473,8 @@ while True:
 	separacion = font.render(":",0,(255,255,255))
 	relojmin1 = font.render(str(minuto1),0,(255,255,255))
 	relojmin2 = font.render(str(minuto2),0,(255,255,255))
+	#Renderizado de cantidad de monedas
+	cant_monedas = font.render(str(monedas),0,(239,184,16))
 
 	#Ataque de avatars
 	for avatar in avatar_list:
@@ -490,6 +493,7 @@ while True:
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
+	screen.blit(cant_monedas,[70,635])
 	screen.blit(separacion,[105,706])
 	screen.blit(volver, [630,0])
 	proyectil_list.update()
