@@ -9,7 +9,8 @@ screen = pygame.display.set_mode(size)
 clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
-
+#Variables de monedas
+monedas = 100
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
 #Boton
@@ -168,9 +169,15 @@ dañom = pygame.image.load("Imagenes/Maza/Daño.png").convert()
 dañom.set_colorkey([0,0,0])
 muertem = pygame.image.load("Imagenes/Maza/Muerte.png").convert()
 muertem.set_colorkey([0,0,0])
+
 #Cargar las imagenes de los rooks
 sand_rook = pygame.image.load("Imagenes/Base.png")
 sand_rook.set_colorkey([0,0,0])
+
+#Imagen moneda
+moneda = pygame.image.load("Imagenes/Moneda.png").convert()
+moneda.set_colorkey([0,0,0])
+
 #Clase Arquero
 #Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
 #Funciones
@@ -381,6 +388,12 @@ class Proyectil(pygame.sprite.Sprite):
 	 	self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y -= 10 
+
+'''class Moneda(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__():
+	def update(self):'''
+
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -442,6 +455,7 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
+
 #Variables de compra
 sand_rook_hitbox = pygame.Rect(25,35,135,125)
 #Cuadrados de la matriz
@@ -486,6 +500,7 @@ Cuadro_38 = pygame.Rect(407,556, 75, 62)
 Cuadro_39 = pygame.Rect(483,556, 75, 62)
 Cuadro_40 = pygame.Rect(558,556, 75, 62)
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
+
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -522,6 +537,8 @@ while True:
 	separacion = font.render(":",0,(255,255,255))
 	relojmin1 = font.render(str(minuto1),0,(255,255,255))
 	relojmin2 = font.render(str(minuto2),0,(255,255,255))
+	#Renderizado de cantidad de monedas
+	cant_monedas = font.render(str(monedas),0,(239,184,16))
 
 	#Ataque de avatars
 	for avatar in avatar_list:
@@ -540,11 +557,14 @@ while True:
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
 	screen.blit(relojmin2,[60,710])
+	screen.blit(cant_monedas,[70,635])
 	screen.blit(separacion,[105,706])
 	screen.blit(volver, [630,0])
 	screen.blit(sand_rook, [40,0])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
+
+	screen.blit(moneda ,[500,500])
 	#Default
 	pygame.display.flip()
 	clock.tick(15) 
