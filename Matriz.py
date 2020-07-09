@@ -550,9 +550,25 @@ while True:
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
+	if event.type == pygame.MOUSEMOTION:
+		for coin in monedas_list:
+			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
+				if coin.tipo == "oro":
+					monedas += 100
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
+				if coin.tipo == "plata":
+					monedas += 50
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
+				if coin.tipo == "cobre":
+					monedas += 25
+					monedas_list.remove(coin)
+					all_sprite_list.remove(coin)
 
 	if pygame.mouse.get_pressed()[0]==1:
 		mouse = event.pos
+		print(mouse)
 		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
 			pygame.quit()
 			os.system("Menu.py")
@@ -570,23 +586,6 @@ while True:
 				cuadro[1] = sand
 				clase == ""
 
-	if event.type == pygame.MOUSEMOTION:
-		mouse_pos = pygame.mouse.get_pos()
-		for coin in monedas_list:
-			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
-				if coin.tipo == "oro":
-					monedas += 100
-					monedas_list.remove(coin)
-					all_sprite_list.remove(coin)
-				if coin.tipo == "plata":
-					monedas += 50
-					monedas_list.remove(coin)
-					all_sprite_list.remove(coin)
-				if coin.tipo == "cobre":
-					monedas += 25
-					monedas_list.remove(coin)
-					all_sprite_list.remove(coin)
-	
 	if pygame.mouse.get_pressed()[2]==1:
 		mouse = event.pos
 		for cuadro in Cuadros:
