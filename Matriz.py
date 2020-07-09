@@ -407,8 +407,8 @@ class Proyectil(pygame.sprite.Sprite):
 	def update(self):
 		self.rect.y -= 10 
 #Clase Moneda
-#Atributos:
-#Funciones
+#Atributos:self.tipo,self.image,self.rect
+#Funciones -
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self,tipo):
 		super().__init__()
