@@ -175,6 +175,18 @@ sand_rook_icon = pygame.image.load("Imagenes/Base.png")
 sand_rook_icon.set_colorkey([0,0,0])
 sand_rook = pygame.image.load("Imagenes/Sand.png")
 sand_rook.set_colorkey([0,0,0])
+rock_rook_icon = pygame.image.load("Imagenes/Base.png")
+rock_rook_icon.set_colorkey([0,0,0])
+rock_rook = pygame.image.load("Imagenes/Sand.png")
+rock_rook.set_colorkey([0,0,0])
+fire_rook_icon = pygame.image.load("Imagenes/Base.png")
+fire_rook_icon.set_colorkey([0,0,0])
+fire_rook = pygame.image.load("Imagenes/Sand.png")
+fire_rook.set_colorkey([0,0,0])
+water_rook_icon = pygame.image.load("Imagenes/Base.png")
+water_rook_icon.set_colorkey([0,0,0])
+water_rook = pygame.image.load("Imagenes/Sand.png")
+water_rook.set_colorkey([0,0,0])
 
 #Imagenes de monedas
 oro = pygame.image.load("Imagenes/Oro.png").convert()
@@ -417,6 +429,21 @@ class Sand(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = sand_rook
 		self.rect = self.image.get_rect()
+class Rock(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = rock_rook
+		self.rect = self.image.get_rect()
+class Fire(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = fire_rook
+		self.rect = self.image.get_rect()
+class Water(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = water_rook
+		self.rect = self.image.get_rect()
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -482,7 +509,11 @@ minuto2 = 0
 resto = 0
 
 #Variables de compra
-sand_rook_hitbox = pygame.Rect(25,35,135,125)
+sand_rook_hitbox = [pygame.Rect(25,35,135,125), "Sand"]
+rock_rook_hitbox = [pygame.Rect(25,187,135,125), "Rock"]
+fire_rook_hitbox = [pygame.Rect(25,329,135,125), "Water"]
+water_rook_hitbox = [pygame.Rect(25,470,135,125), "Fire"]
+hitboxes = [sand_rook_hitbox,rock_rook_hitbox,fire_rook_hitbox,water_rook_hitbox]
 agarrar = False
 clase = ""
 #Cuadrados de la matriz
@@ -550,26 +581,6 @@ while True:
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
-
-	if pygame.mouse.get_pressed()[0]==1:
-		mouse = event.pos
-		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
-			pygame.quit()
-			os.system("Menu.py")
-		if sand_rook_hitbox.collidepoint(mouse) and not agarrar:
-			agarrar = True
-			clase = "Sand" 
-		for cuadro in Cuadros:
-			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Sand" and cuadro[1]==0:
-				agarrar = False
-				sand = Sand()
-				sand.rect.x = cuadro[0].x-3
-				sand.rect.y = cuadro[0].y-37
-				all_sprite_list.add(sand)
-				rook_list.add(sand)
-				cuadro[1] = sand
-				clase == ""
-
 	if event.type == pygame.MOUSEMOTION:
 		mouse_pos = pygame.mouse.get_pos()
 		for coin in monedas_list:
@@ -586,6 +597,55 @@ while True:
 					monedas += 25
 					monedas_list.remove(coin)
 					all_sprite_list.remove(coin)
+
+	if pygame.mouse.get_pressed()[0]==1:
+		mouse = event.pos
+		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
+			pygame.quit()
+			os.system("Menu.py")
+		for hitbox in hitboxes:
+			if hitbox[0].collidepoint(mouse) and not agarrar:
+				agarrar = True
+				clase = hitbox[1]
+
+		
+		for cuadro in Cuadros:
+			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Sand" and cuadro[1]==0:
+				agarrar = False
+				sand = Sand()
+				sand.rect.x = cuadro[0].x-3
+				sand.rect.y = cuadro[0].y-37
+				all_sprite_list.add(sand)
+				rook_list.add(sand)
+				cuadro[1] = sand
+				clase == ""
+			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Rock" and cuadro[1]==0:
+				agarrar = False
+				rock = Rock()
+				rock.rect.x = cuadro[0].x-3
+				rock.rect.y = cuadro[0].y-37
+				all_sprite_list.add(rock)
+				rook_list.add(rock)
+				cuadro[1] = rock
+				clase == ""
+			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Fire" and cuadro[1]==0:
+				agarrar = False
+				fire = Fire()
+				fire.rect.x = cuadro[0].x-3
+				fire.rect.y = cuadro[0].y-37
+				all_sprite_list.add(fire)
+				rook_list.add(fire)
+				cuadro[1] = fire
+				clase == ""
+			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Water" and cuadro[1]==0:
+				agarrar = False
+				water = Water()
+				water.rect.x = cuadro[0].x-3
+				water.rect.y = cuadro[0].y-37
+				all_sprite_list.add(water)
+				rook_list.add(water)
+				cuadro[1] = water
+				clase == ""
 	
 	if pygame.mouse.get_pressed()[2]==1:
 		mouse = event.pos
@@ -627,11 +687,20 @@ while True:
 	screen.blit(separacion,[105,706])
 	screen.blit(volver, [630,0])
 	screen.blit(sand_rook_icon, [40,0])
+	screen.blit(rock_rook_icon, [40,147])
+	screen.blit(fire_rook_icon, [40,287])
+	screen.blit(water_rook_icon, [40,430])
 	proyectil_list.update()
 	all_sprite_list.draw(screen)
 	mouse_pos = pygame.mouse.get_pos()
 	if agarrar==True and clase == "Sand":
 		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+	if agarrar==True and clase == "Rock":
+		screen.blit(rock_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+	if agarrar==True and clase == "Fire":
+		screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+	if agarrar==True and clase == "Water":
+		screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
