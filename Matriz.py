@@ -10,7 +10,7 @@ clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
 #Variables de monedas
-monedas = 100
+monedas = 50
 #Fondo
 matriz = pygame.image.load("Imagenes/Matriz.jpg").convert()
 #Boton
