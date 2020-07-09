@@ -593,7 +593,6 @@ while True:
 	if agarrar==True and clase == "Sand":
 		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 	#print(Cuadro_2)
-	screen.blit(moneda ,[500,500])
 	#Default
 	pygame.display.flip()
 	clock.tick(15) 
