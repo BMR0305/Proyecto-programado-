@@ -511,60 +511,64 @@ proyectil_list = pygame.sprite.Group()
 rook_list = pygame.sprite.Group()
 monedas_list = pygame.sprite.Group()
 elemental_list = pygame.sprite.Group()
-#Variables para la creacion de las oleadas
-coordy = 1200
-oleada=1
+#Valores para la creacion de oleadas
+coordy =1200
+oleada = 1
 enemigos = 0
 #Creacion de avatars
-for i in range(60):
-	x = random.choice(["arquero","escudero","hacha","maza"])
-	if x == "arquero":
-		arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
-		arquero_list.add(arquero)
-		avatar_list.add(arquero)
-		all_sprite_list.add(arquero)
-	if x == "escudero":
-		escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
-		escudero_list.add(escudero)
-		avatar_list.add(escudero)
-		all_sprite_list.add(escudero)
-	if x == "hacha":
-		hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
-		hacha_list.add(hacha)
-		avatar_list.add(hacha)
-		all_sprite_list.add(hacha)
-	if x == "maza":
-		maza = Maza((random.choice([185,270,355,435,520]),coordy))
-		maza_list.add(maza)
-		avatar_list.add(maza)
-		all_sprite_list.add(maza)
-	#Revision de numero de oleada y de enemigos
-	if oleada < 5:
-		coordy += 300
-		enemigos += 1
-		if enemigos==5:
-			oleada += 1
-			enemigos =0
-			if oleada == 4:
-				break
-	elif oleada < 9:
-		coordy += 210
-		enemigos += 1
-		if enemigos==5:
-			oleada += 1
-			enemigos =0
-			if oleada == 8:
-				break
-	elif oleada < 13:
-		coordy += 120
-		enemigos += 1
-		if enemigos==5:
-			oleada += 1
-			enemigos =0
-			if oleada == 12:
-				break
-	else:
-		break
+def invocar():
+	global coordy
+	global oleada
+	global enemigos
+	for i in range(60):
+		x = random.choice(["arquero","escudero","hacha","maza"])
+		if x == "arquero":
+			arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
+			arquero_list.add(arquero)
+			avatar_list.add(arquero)
+			all_sprite_list.add(arquero)
+		if x == "escudero":
+			escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
+			escudero_list.add(escudero)
+			avatar_list.add(escudero)
+			all_sprite_list.add(escudero)
+		if x == "hacha":
+			hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
+			hacha_list.add(hacha)
+			avatar_list.add(hacha)
+			all_sprite_list.add(hacha)
+		if x == "maza":
+			maza = Maza((random.choice([185,270,355,435,520]),coordy))
+			maza_list.add(maza)
+			avatar_list.add(maza)
+			all_sprite_list.add(maza)
+		#Revision de numero de oleada y de enemigos
+		if oleada < 5:
+			coordy += 300
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+				if oleada == 4:
+					break
+		elif oleada < 9:
+			coordy += 210
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+				if oleada == 8:
+					break
+		elif oleada < 13:
+			coordy += 120
+			enemigos += 1
+			if enemigos==5:
+				oleada += 1
+				enemigos =0
+				if oleada == 12:
+					break
+		else:
+			break
 #Variables del reloj
 segundo2 = 0
 minuto1 = 0
@@ -622,6 +626,8 @@ Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
 escenario = 1
+reset = 1
+invocar()
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -764,16 +770,34 @@ while True:
 	    	proyectil_list.remove(proyectil)	
 	
 	for elemental in elemental_list:
-		if elemental.rect.y > 500:
+		if elemental.rect.y > 800:
 			all_sprite_list.remove(elemental)
 			elemental_list.remove(elemental)
 	#Mostrar en pantala
 	if escenario ==1:
 		screen.blit(matriz1,[0,0])
-	elif escenario == 2:
+
+	if escenario == 2:
 		screen.blit(matriz2,[0,0])
-	else:
+		if reset == 1:
+			for rook in rook_list:
+				rook_list.remove(rook)
+				all_sprite_list.remove(rook)
+			for elemental in elemental_list:
+				elemental_list.remove(elemental)
+				all_sprite_list.remove(elemental)
+			reset +=1
+
+	if escenario >= 3:
 		screen.blit(matriz3,[0,0])
+		if reset == 2:
+			for rook in rook_list:
+				rook_list.remove(rook)
+				all_sprite_list.remove(rook)
+			for elemental in elemental_list:
+				elemental_list.remove(elemental)
+				all_sprite_list.remove(elemental)
+			reset +=1
 	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
 	screen.blit(relojmin1,[80,710])
