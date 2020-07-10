@@ -436,21 +436,67 @@ class Sand(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = sand_rook
 		self.rect = self.image.get_rect()
+	def attack(self):
+		elemental = Elemental("Sand")
+		elemental.rect.x = self.rect.x+15
+		elemental.rect.y = self.rect.y+30
+		all_sprite_list.add(elemental)
+		proyectil_list.add(elemental)
+
+
 class Rock(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
 		self.image = rock_rook
 		self.rect = self.image.get_rect()
+	def attack(self):
+		elemental = Elemental("Rock")
+		elemental.rect.x = self.rect.x+15
+		elemental.rect.y = self.rect.y+30
+		all_sprite_list.add(elemental)
+		proyectil_list.add(elemental)
+
 class Fire(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
 		self.image = fire_rook
 		self.rect = self.image.get_rect()
+	def attack(self):
+		elemental = Elemental("Fire")
+		elemental.rect.x = self.rect.x+15
+		elemental.rect.y = self.rect.y+30
+		all_sprite_list.add(elemental)
+		proyectil_list.add(elemental)
+
 class Water(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
 		self.image = water_rook
 		self.rect = self.image.get_rect()
+	def attack(self):
+		elemental = Elemental("Water")
+		elemental.rect.x = self.rect.x+15
+		elemental.rect.y = self.rect.y+30
+		all_sprite_list.add(elemental)
+		proyectil_list.add(elemental)
+
+class Elemental(pygame.sprite.Sprite):
+	def __init__(self, tipo):
+		super().__init__()
+		if tipo == "Sand":
+			self.image = arena
+		if tipo == "Rock":
+			self.image = piedra
+		if tipo == "Water":
+			self.image = agua
+		if tipo == "Fire":
+			self.image = fuego
+		self.rect = self.image.get_rect()
+	def update(self):
+		self.rect.y += 10 
+
+
+
 #Agrupaciones de sprites
 all_sprite_list = pygame.sprite.Group()
 avatar_list = pygame.sprite.Group()
@@ -461,6 +507,7 @@ maza_list = pygame.sprite.Group()
 proyectil_list = pygame.sprite.Group()
 rook_list = pygame.sprite.Group()
 monedas_list = pygame.sprite.Group()
+elemental_list = pygame.sprite.Group()
 #Variables para la creacion de las oleadas
 coordy = 1200
 oleada=1
@@ -565,7 +612,7 @@ Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
 Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
-
+x=5
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
@@ -579,6 +626,12 @@ while True:
 		coin.rect.y = random.randint(130,750)
 		monedas_list.add(coin)
 		all_sprite_list.add(coin)
+		x+=1
+	if tiempo == x:
+		x-=1
+		for rook in rook_list:
+			rook.attack()
+
 	if segundo2 >= 6:
 	    segundo2 = 0
 	    minuto1 +=1
@@ -710,6 +763,7 @@ while True:
 	screen.blit(fire_rook_icon, [40,287])
 	screen.blit(water_rook_icon, [40,430])
 	proyectil_list.update()
+	elemental_list.update()
 	all_sprite_list.draw(screen)
 	mouse_pos = pygame.mouse.get_pos()
 	if agarrar==True and clase == "Sand":
