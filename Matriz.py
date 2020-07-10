@@ -11,6 +11,7 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 60)
 #Variables de monedas
 monedas = 100
+cadencia = 5
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
