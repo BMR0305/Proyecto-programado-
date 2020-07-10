@@ -433,7 +433,11 @@ class Moneda(pygame.sprite.Sprite):
 			self.image = cobre
 			self.rect = self.image.get_rect()
 
-
+#Clase Sand
+#Atributos: self.image, self.rect
+#Funciones:
+#attack(): crea la instancia elemental (ataque de los rooks)
+	#E: instancia #S: - #R: -  
 class Sand(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -447,6 +451,11 @@ class Sand(pygame.sprite.Sprite):
 		elemental_list.add(elemental)
 
 
+#Clase Rock
+#Atributos: self.image, self.rect
+#Funciones:
+#attack(): crea la instancia elemental (ataque de los rooks)
+	#E: instancia #S: - #R: - 
 class Rock(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -459,6 +468,11 @@ class Rock(pygame.sprite.Sprite):
 		all_sprite_list.add(elemental)
 		elemental_list.add(elemental)
 
+#Clase Fire
+#Atributos: self.image, self.rect
+#Funciones:
+#attack(): crea la instancia elemental (ataque de los rooks)
+	#E: instancia #S: - #R: - 
 class Fire(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -471,6 +485,11 @@ class Fire(pygame.sprite.Sprite):
 		all_sprite_list.add(elemental)
 		elemental_list.add(elemental)
 
+#Clase Water
+#Atributos: self.image, self.rect
+#Funciones:
+#attack(): crea la instancia elemental (ataque de los rooks)
+	#E: instancia #S: - #R: - 
 class Water(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -483,6 +502,12 @@ class Water(pygame.sprite.Sprite):
 		all_sprite_list.add(elemental)
 		elemental_list.add(elemental)
 
+
+#Clase Elemental
+#Atributos: self.image, self.rect
+#Funciones
+#update(): actualiza la posicion del sprite
+	#E: instancia #S: - #R: -
 class Elemental(pygame.sprite.Sprite):
 	def __init__(self, tipo):
 		super().__init__()
@@ -786,6 +811,9 @@ while True:
 			for elemental in elemental_list:
 				elemental_list.remove(elemental)
 				all_sprite_list.remove(elemental)
+			for cuadro in Cuadros:
+				if cuadro[1]!=0:
+					cuadro[1] = 0
 			reset +=1
 
 	if escenario >= 3:
@@ -797,6 +825,9 @@ while True:
 			for elemental in elemental_list:
 				elemental_list.remove(elemental)
 				all_sprite_list.remove(elemental)
+			for cuadro in Cuadros:
+				if cuadro[1]!=0:
+					cuadro[1] = 0
 			reset +=1
 	screen.blit(relojseg1,[140,710])
 	screen.blit(relojseg2,[120,710])
