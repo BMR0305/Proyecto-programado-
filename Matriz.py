@@ -11,6 +11,7 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 60)
 #Variables de monedas
 monedas = 100
+cadencia = 5
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
@@ -620,11 +621,10 @@ Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
 Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
-x=5
 escenario = 1
+x=10//cadencia
 #Main loop
 while True:
-	print(cadencia)
 	tiempo = pygame.time.get_ticks()//1000-resto
 	if tiempo == 10 :
 		escenario +=1
@@ -646,11 +646,12 @@ while True:
 	    minuto2 += 1
 	
 	tiempo_2 = pygame.time.get_ticks()//1000
-	if tiempo_2 % cadencia==0:
+	if tiempo_2 % 10==0 and x==0:
+		x=10//cadencia
+	if tiempo_2 % cadencia==0 and x>0:
+		x-=1
 		for rook in rook_list:
-			rook.attack()
-			cadencia+=1
-			cadencia-=1 
+			rook.attack() 
 	
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
