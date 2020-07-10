@@ -444,7 +444,7 @@ class Sand(pygame.sprite.Sprite):
 		elemental.rect.x = self.rect.x+15
 		elemental.rect.y = self.rect.y+30
 		all_sprite_list.add(elemental)
-		proyectil_list.add(elemental)
+		elemental_list.add(elemental)
 
 
 class Rock(pygame.sprite.Sprite):
@@ -457,7 +457,7 @@ class Rock(pygame.sprite.Sprite):
 		elemental.rect.x = self.rect.x+15
 		elemental.rect.y = self.rect.y+30
 		all_sprite_list.add(elemental)
-		proyectil_list.add(elemental)
+		elemental_list.add(elemental)
 
 class Fire(pygame.sprite.Sprite):
 	def __init__(self):
@@ -469,7 +469,7 @@ class Fire(pygame.sprite.Sprite):
 		elemental.rect.x = self.rect.x+15
 		elemental.rect.y = self.rect.y+30
 		all_sprite_list.add(elemental)
-		proyectil_list.add(elemental)
+		elemental_list.add(elemental)
 
 class Water(pygame.sprite.Sprite):
 	def __init__(self):
@@ -481,7 +481,7 @@ class Water(pygame.sprite.Sprite):
 		elemental.rect.x = self.rect.x+15
 		elemental.rect.y = self.rect.y+30
 		all_sprite_list.add(elemental)
-		proyectil_list.add(elemental)
+		elemental_list.add(elemental)
 
 class Elemental(pygame.sprite.Sprite):
 	def __init__(self, tipo):
@@ -762,7 +762,11 @@ while True:
 	    if proyectil.rect.y < -10:
 	    	all_sprite_list.remove(proyectil)
 	    	proyectil_list.remove(proyectil)	
-
+	
+	for elemental in elemental_list:
+		if elemental.rect.y > 500:
+			all_sprite_list.remove(elemental)
+			elemental_list.remove(elemental)
 	#Mostrar en pantala
 	if escenario ==1:
 		screen.blit(matriz1,[0,0])
