@@ -11,7 +11,7 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 60)
 #Variables de monedas
 monedas = 100
-cadencia = 5
+cadencia = 2
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
@@ -229,6 +229,7 @@ class Arquero(pygame.sprite.Sprite):
             self.muerte = muertea
             self.daño = dañoa
             self.proyectil = flecha
+            self.vida = 5
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -281,6 +282,7 @@ class Escudero(pygame.sprite.Sprite):
             self.ataque = [ataque0e, ataque1e, ataque2e, ataque3e, ataque4e, ataque5e, ataque6e, ataque7e] 
             self.muerte = muertee
             self.daño = dañoe
+            self.vida = 10
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -332,6 +334,8 @@ class Hacha(pygame.sprite.Sprite):
             self.ataque = [ataque0h, ataque1h, ataque2h, ataque3h, ataque4h, ataque5h, ataque6h, ataque7h]
             self.muerte = muerteh
             self.daño = dañoh
+            self.vida = 20
+            self.potencia = 9
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -377,6 +381,8 @@ class Maza(pygame.sprite.Sprite):
             self.ataque = [ataque0m, ataque1m, ataque2m, ataque3m, ataque4m, ataque5m, ataque6m, ataque7m] 
             self.muerte = muertem
             self.daño = dañom
+            self.vida = 25
+            self.potencia = 12
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -411,8 +417,10 @@ class Proyectil(pygame.sprite.Sprite):
 	 	super().__init__()
 	 	if tipo == "flecha":
 	 		self.image = flecha
+	 		self.potencia = 2
 	 	if tipo == "espada":
 	 		self.image = espada
+	 		self.potencia = 3
 	 	self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y -= 10 
@@ -443,6 +451,8 @@ class Sand(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = sand_rook
 		self.rect = self.image.get_rect()
+		self.vida = 7
+		self.potencia = 2
 	def attack(self):
 		elemental = Elemental("Sand")
 		elemental.rect.x = self.rect.x+15
@@ -461,6 +471,8 @@ class Rock(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = rock_rook
 		self.rect = self.image.get_rect()
+		self.vida = 14
+		self.potencia = 4
 	def attack(self):
 		elemental = Elemental("Rock")
 		elemental.rect.x = self.rect.x+15
@@ -478,6 +490,8 @@ class Fire(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = fire_rook
 		self.rect = self.image.get_rect()
+		self.vida = 16
+		self.potencia = 8
 	def attack(self):
 		elemental = Elemental("Fire")
 		elemental.rect.x = self.rect.x+15
@@ -495,6 +509,8 @@ class Water(pygame.sprite.Sprite):
 		super().__init__()
 		self.image = water_rook
 		self.rect = self.image.get_rect()
+		self.vida = 16
+		self.potencia = 8
 	def attack(self):
 		elemental = Elemental("Water")
 		elemental.rect.x = self.rect.x+15
@@ -680,7 +696,9 @@ while True:
 		tiempo_2 = 0
 		resto_2 += cadencia
 		for rook in rook_list:
-			rook.attack()
+			for avatar in avatar_list:
+				if rook.rect.x == 252 and avatar.rect.x == 185 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+					rook.attack()
 			
 	
 	for event in pygame.event.get():
