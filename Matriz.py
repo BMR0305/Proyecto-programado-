@@ -10,7 +10,7 @@ clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
 #Variables de monedas
-monedas = 100
+monedas = 1000
 cadencia = 2
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
@@ -698,6 +698,14 @@ while True:
 		for rook in rook_list:
 			for avatar in avatar_list:
 				if rook.rect.x == 252 and avatar.rect.x == 185 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+					rook.attack()
+				if rook.rect.x == 333 and avatar.rect.x == 270 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+					rook.attack()
+				if rook.rect.x == 416 and avatar.rect.x == 355 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+					rook.attack()
+				if rook.rect.x == 498 and avatar.rect.x == 435 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+					rook.attack()
+				if rook.rect.x == 583 and avatar.rect.x == 520 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
 			
 	
