@@ -11,7 +11,6 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 60)
 #Variables de monedas
 monedas = 1000
-cadencia = 2
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
@@ -230,6 +229,7 @@ class Arquero(pygame.sprite.Sprite):
             self.daño = dañoa
             self.proyectil = flecha
             self.vida = 5
+            self.atacando = False
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -283,6 +283,7 @@ class Escudero(pygame.sprite.Sprite):
             self.muerte = muertee
             self.daño = dañoe
             self.vida = 10
+            self.atacando = False
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -336,6 +337,7 @@ class Hacha(pygame.sprite.Sprite):
             self.daño = dañoh
             self.vida = 20
             self.potencia = 9
+            self.atacando = False
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -383,6 +385,7 @@ class Maza(pygame.sprite.Sprite):
             self.daño = dañom
             self.vida = 25
             self.potencia = 12
+            self.atacando = False
 
     def get_frame(self, lista, accion):
     	if accion == "caminar":
@@ -452,7 +455,6 @@ class Sand(pygame.sprite.Sprite):
 		self.image = sand_rook
 		self.rect = self.image.get_rect()
 		self.vida = 7
-		self.potencia = 2
 	def attack(self):
 		elemental = Elemental("Sand")
 		elemental.rect.x = self.rect.x+15
@@ -472,7 +474,6 @@ class Rock(pygame.sprite.Sprite):
 		self.image = rock_rook
 		self.rect = self.image.get_rect()
 		self.vida = 14
-		self.potencia = 4
 	def attack(self):
 		elemental = Elemental("Rock")
 		elemental.rect.x = self.rect.x+15
@@ -491,7 +492,6 @@ class Fire(pygame.sprite.Sprite):
 		self.image = fire_rook
 		self.rect = self.image.get_rect()
 		self.vida = 16
-		self.potencia = 8
 	def attack(self):
 		elemental = Elemental("Fire")
 		elemental.rect.x = self.rect.x+15
@@ -510,7 +510,6 @@ class Water(pygame.sprite.Sprite):
 		self.image = water_rook
 		self.rect = self.image.get_rect()
 		self.vida = 16
-		self.potencia = 8
 	def attack(self):
 		elemental = Elemental("Water")
 		elemental.rect.x = self.rect.x+15
@@ -529,12 +528,16 @@ class Elemental(pygame.sprite.Sprite):
 		super().__init__()
 		if tipo == "Sand":
 			self.image = arena
+			self.potencia = 2
 		if tipo == "Rock":
 			self.image = piedra
+			self.potencia = 4
 		if tipo == "Water":
 			self.image = agua
+			self.potencia = 8
 		if tipo == "Fire":
 			self.image = fuego
+			self.potencia = 8
 		self.rect = self.image.get_rect()
 	def update(self):
 		self.rect.y += 10 
@@ -562,7 +565,7 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["arquero","escudero","hacha","maza"])
+		x = random.choice(["arquero"]) #,"escudero","hacha","maza"])
 		if x == "arquero":
 			arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
 			arquero_list.add(arquero)
@@ -615,7 +618,11 @@ segundo2 = 0
 minuto1 = 0
 minuto2 = 0
 resto = 0
-resto_2 = 0
+#Variables de ataque
+resto_torre = 0
+resto_arquero =0
+cadencia = 2
+cadencia_arquero = 1
 #Variables de compra
 sand_rook_hitbox = [pygame.Rect(25,35,135,125), "Sand"]
 rock_rook_hitbox = [pygame.Rect(25,187,135,125), "Rock"]
@@ -691,10 +698,10 @@ while True:
 	    minuto1 = 0
 	    minuto2 += 1
 	
-	tiempo_2 = pygame.time.get_ticks()//1000-resto_2
-	if tiempo_2 == cadencia:
-		tiempo_2 = 0
-		resto_2 += cadencia
+	tiempo_torre = pygame.time.get_ticks()//1000-resto_torre
+	if tiempo_torre == cadencia:
+		tiempo_torre = 0
+		resto_torre += cadencia
 		for rook in rook_list:
 			for avatar in avatar_list:
 				if rook.rect.x == 252 and avatar.rect.x == 185 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
@@ -707,7 +714,39 @@ while True:
 					rook.attack()
 				if rook.rect.x == 583 and avatar.rect.x == 520 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
-			
+	tiempo_arquero = pygame.time.get_ticks()//1000-resto_arquero
+	if tiempo_arquero == cadencia_arquero:
+		tiempo_arquero = 0
+		resto_arquero +=cadencia_arquero
+		for arquero in arquero_list:
+			for cuadro in Cuadros:
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 185 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+					arquero.attack()
+					arquero.attack()
+					arquero.attack()
+					arquero.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 270 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+					arquero.attack()
+					arquero.attack()
+					arquero.attack()
+					arquero.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 355 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+					arquero.attack()
+					arquero.attack()
+					arquero.attack()
+					arquero.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 435 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+					arquero.attack()
+					arquero.attack()
+					arquero.attack()
+					arquero.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 520 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+					arquero.attack()
+					arquero.attack()
+					arquero.attack()
+					arquero.atacando = True
+				else:
+					arquero.atacando = False
 	
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
@@ -809,12 +848,7 @@ while True:
 	#Renderizado de cantidad de monedas
 	cant_monedas = font.render(str(monedas),0,(239,184,16))
 
-	#Ataque de avatars
-	for avatar in avatar_list:
-	    if avatar.rect.y == 500:
-	        avatar.attack()
-	    else:
-	    	avatar.update()
+	
 	for proyectil in proyectil_list:
 	    if proyectil.rect.y < -10:
 	    	all_sprite_list.remove(proyectil)
@@ -868,6 +902,9 @@ while True:
 	screen.blit(water_rook_icon, [40,430])
 	proyectil_list.update()
 	elemental_list.update()
+	for avatar in avatar_list:
+		if avatar.atacando == False:
+			avatar.update()
 	all_sprite_list.draw(screen)
 	mouse_pos = pygame.mouse.get_pos()
 	if agarrar==True and clase == "Sand":
