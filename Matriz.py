@@ -246,7 +246,6 @@ class Arquero(pygame.sprite.Sprite):
 	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
 	        	proyectil_list.add(proyectil)
-	        	self.rect.y -=1
 
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
@@ -299,9 +298,7 @@ class Escudero(pygame.sprite.Sprite):
 	        	proyectil.rect.x = self.rect.x+100
 	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
-	        	proyectil_list.add(proyectil)
-	        	self.rect.y -=1
-	        	self.rect.y -=1 
+	        	proyectil_list.add(proyectil) 
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
         self.image = self.get_frame(lista,accion)
@@ -348,8 +345,7 @@ class Hacha(pygame.sprite.Sprite):
     	if accion == "ataque":
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
-	        	self.frame = 0
-	        	self.rect.y -=1 
+	        	self.frame = 0 
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
         self.image = self.get_frame(lista,accion)
@@ -396,8 +392,7 @@ class Maza(pygame.sprite.Sprite):
     	if accion == "ataque":
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
-	        	self.frame =0
-	        	self.rect.y -=1 
+	        	self.frame =0 
 	    	return lista[self.frame]
     def change_image(self, lista,accion):
         self.image = self.get_frame(lista,accion)
@@ -565,7 +560,7 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["arquero"]) #,"escudero","hacha","maza"])
+		x = random.choice(["hacha"]) #,"escudero","hacha","maza"])
 		if x == "arquero":
 			arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
 			arquero_list.add(arquero)
@@ -621,8 +616,14 @@ resto = 0
 #Variables de ataque
 resto_torre = 0
 resto_arquero =0
+resto_escudero = 0
+resto_hacha = 0
+resto_maza = 0
 cadencia = 2
 cadencia_arquero = 1
+cadencia_escudero = 1
+cadencia_hacha = 1
+cadencia_maza = 1
 #Variables de compra
 sand_rook_hitbox = [pygame.Rect(25,35,135,125), "Sand"]
 rock_rook_hitbox = [pygame.Rect(25,187,135,125), "Rock"]
@@ -673,7 +674,7 @@ Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
 Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
-escenario = 1
+escenario = 4
 reset = 1
 invocar()
 #Main loop
@@ -720,33 +721,93 @@ while True:
 		resto_arquero +=cadencia_arquero
 		for arquero in arquero_list:
 			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 185 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 185 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 270 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 270 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 355 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 355 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 435 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 435 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 520 and arquero.rect.y < 700 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 520 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				else:
-					arquero.atacando = False
+	tiempo_escudero = pygame.time.get_ticks()//1000-resto_escudero
+	if tiempo_escudero == cadencia_escudero:
+		tiempo_escudero = 0
+		resto_escudero +=cadencia_escudero
+		for escudero in escudero_list:
+			for cuadro in Cuadros:
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and escudero.rect.x == 185 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+					escudero.attack()
+					escudero.attack()
+					escudero.attack()
+					escudero.atacando = True
+				if cuadro[1] !=0 and cuadro[0].x==336 and escudero.rect.x == 270 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+					escudero.attack()
+					escudero.attack()
+					escudero.attack()
+					escudero.atacando = True
+				if cuadro[1] !=0 and cuadro[0].x==419 and escudero.rect.x == 355 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+					escudero.attack()
+					escudero.attack()
+					escudero.attack()
+					escudero.atacando = True
+				if cuadro[1] !=0 and cuadro[0].x==501 and escudero.rect.x == 435 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+					escudero.attack()
+					escudero.attack()
+					escudero.attack()
+					escudero.atacando = True
+				if cuadro[1] !=0 and cuadro[0].x==586 and escudero.rect.x == 520 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+					escudero.attack()
+					escudero.attack()
+					escudero.attack()
+					escudero.atacando = True
+	tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
+	if tiempo_hacha == cadencia_hacha:
+		tiempo_hacha = 0
+		resto_hacha +=cadencia_hacha
+		for hacha in hacha_list:
+			for cuadro in Cuadros:
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and hacha.rect.x == 185 and hacha.rect.y < 775 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					hacha.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					hacha.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					hacha.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					hacha.atacando = True
+				elif cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					hacha.atacando = True
 	
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
