@@ -788,27 +788,29 @@ while True:
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-	
+				if cuadro[1]==0:
+					hacha.atacando()
+
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
@@ -961,12 +963,12 @@ while True:
 	screen.blit(rock_rook_icon, [40,147])
 	screen.blit(fire_rook_icon, [40,287])
 	screen.blit(water_rook_icon, [40,430])
+	all_sprite_list.draw(screen)
 	proyectil_list.update()
 	elemental_list.update()
 	for avatar in avatar_list:
 		if avatar.atacando == False:
 			avatar.update()
-	all_sprite_list.draw(screen)
 	mouse_pos = pygame.mouse.get_pos()
 	if agarrar==True and clase == "Sand":
 		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])

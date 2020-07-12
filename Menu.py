@@ -41,7 +41,8 @@ while game_over:
 		 if event.type == pygame.MOUSEBUTTONDOWN: 
 		 	mouse = event.pos
 		 	if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
-		 		game_over= False
+		 		game_over = False
+		 		print("jugar")
 		 		pygame.quit()
 		 		os.system("Matriz.py")
 		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
