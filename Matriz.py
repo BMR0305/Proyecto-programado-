@@ -783,27 +783,27 @@ while True:
 		resto_hacha +=cadencia_hacha
 		for hacha in hacha_list:
 			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and hacha.rect.x == 185 and hacha.rect.y < 775 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and hacha.rect.x == 185 and hacha.rect.y < 775 and hacha.rect.y - cuadro[0].y < 95 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <95 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <95 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 95 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 95 and hacha.rect.y - cuadro[0].y > 0: 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
