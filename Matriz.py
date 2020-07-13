@@ -287,7 +287,7 @@ class Escudero(pygame.sprite.Sprite):
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame= 0
 	        	proyectil = Proyectil("espada")
-	        	proyectil.rect.x = self.rect.x+100
+	        	proyectil.rect.x = self.rect.x+40
 	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
 	        	proyectil_list.add(proyectil) 
@@ -552,24 +552,24 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["arquero"]) 
+		x = random.choice(["arquero", "escudero"]) 
 		if x == "arquero":
 			arquero = Arquero((random.choice([252,333,416,498,583]),coordy))
 			arquero_list.add(arquero)
 			avatar_list.add(arquero)
 			all_sprite_list.add(arquero)
 		if x == "escudero":
-			escudero = Escudero((random.choice([185,270,355,435,520]),coordy))
+			escudero = Escudero((random.choice([252,333,416,498,583]),coordy))
 			escudero_list.add(escudero)
 			avatar_list.add(escudero)
 			all_sprite_list.add(escudero)
 		if x == "hacha":
-			hacha = Hacha((random.choice([185,270,355,435,520]),coordy))
+			hacha = Hacha((random.choice([252,333,416,498,583]),coordy))
 			hacha_list.add(hacha)
 			avatar_list.add(hacha)
 			all_sprite_list.add(hacha)
 		if x == "maza":
-			maza = Maza((random.choice([185,270,355,435,520]),coordy))
+			maza = Maza((random.choice([252,333,416,498,583]),coordy))
 			maza_list.add(maza)
 			avatar_list.add(maza)
 			all_sprite_list.add(maza)
@@ -744,27 +744,27 @@ while True:
 		resto_escudero +=cadencia_escudero
 		for escudero in escudero_list:
 			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and escudero.rect.x == 185 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and escudero.rect.x == 252 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
 					escudero.attack()
 					escudero.attack()
 					escudero.attack()
 					escudero.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==336 and escudero.rect.x == 270 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==336 and escudero.rect.x == 333 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
 					escudero.attack()
 					escudero.attack()
 					escudero.attack()
 					escudero.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==419 and escudero.rect.x == 355 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==419 and escudero.rect.x == 416 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
 					escudero.attack()
 					escudero.attack()
 					escudero.attack()
 					escudero.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==501 and escudero.rect.x == 435 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==501 and escudero.rect.x == 498 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
 					escudero.attack()
 					escudero.attack()
 					escudero.attack()
 					escudero.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==586 and escudero.rect.x == 520 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
+				if cuadro[1] !=0 and cuadro[0].x==586 and escudero.rect.x == 583 and escudero.rect.y < 700 and escudero.rect.y - cuadro[0].y > 0: 
 					escudero.attack()
 					escudero.attack()
 					escudero.attack()
