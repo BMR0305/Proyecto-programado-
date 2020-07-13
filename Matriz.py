@@ -174,21 +174,13 @@ muertem.set_colorkey([0,0,0])
 
 #Cargar las imagenes de los rooks
 sand_rook_icon = pygame.image.load("Imagenes/Base.png")
-sand_rook_icon.set_colorkey([0,0,0])
 sand_rook = pygame.image.load("Imagenes/Sand.png")
-sand_rook.set_colorkey([0,0,0])
 rock_rook_icon = pygame.image.load("Imagenes/Base.png")
-rock_rook_icon.set_colorkey([0,0,0])
 rock_rook = pygame.image.load("Imagenes/Sand.png")
-rock_rook.set_colorkey([0,0,0])
 fire_rook_icon = pygame.image.load("Imagenes/Base.png")
-fire_rook_icon.set_colorkey([0,0,0])
 fire_rook = pygame.image.load("Imagenes/Sand.png")
-fire_rook.set_colorkey([0,0,0])
 water_rook_icon = pygame.image.load("Imagenes/Base.png")
-water_rook_icon.set_colorkey([0,0,0])
 water_rook = pygame.image.load("Imagenes/Sand.png")
-water_rook.set_colorkey([0,0,0])
 arena = pygame.image.load("Imagenes/Disparos/Arena.png")
 arena.set_colorkey([0,0,0])
 piedra = pygame.image.load("Imagenes/Disparos/Piedra.png")
@@ -560,7 +552,7 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["hacha"]) #,"escudero","hacha","maza"])
+		x = random.choice(["arquero"]) 
 		if x == "arquero":
 			arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
 			arquero_list.add(arquero)
@@ -777,39 +769,18 @@ while True:
 					escudero.attack()
 					escudero.attack()
 					escudero.atacando = True
+	
 	tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
 	if tiempo_hacha == cadencia_hacha:
 		tiempo_hacha = 0
 		resto_hacha +=cadencia_hacha
 		for hacha in hacha_list:
-			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and hacha.rect.x == 185 and hacha.rect.y < 775 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
+			for rook in rook_list:
+				if 	pygame.sprite.collide_rect(hacha, rook): 
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==336 and hacha.rect.x == 270 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
-					hacha.attack()
-					hacha.attack()
-					hacha.attack()
-					hacha.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==419 and hacha.rect.x == 355 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y <80 and hacha.rect.y - cuadro[0].y > 0: 
-					hacha.attack()
-					hacha.attack()
-					hacha.attack()
-					hacha.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==501 and hacha.rect.x == 435 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
-					hacha.attack()
-					hacha.attack()
-					hacha.attack()
-					hacha.atacando = True
-				if cuadro[1] !=0 and cuadro[0].x==586 and hacha.rect.x == 520 and hacha.rect.y < 700 and hacha.rect.y - cuadro[0].y < 80 and hacha.rect.y - cuadro[0].y > 0: 
-					hacha.attack()
-					hacha.attack()
-					hacha.attack()
-					hacha.atacando = True
-				if cuadro[1]==0:
-					hacha.atacando()
 
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
@@ -913,9 +884,14 @@ while True:
 
 	
 	for proyectil in proyectil_list:
-	    if proyectil.rect.y < -10:
-	    	all_sprite_list.remove(proyectil)
-	    	proyectil_list.remove(proyectil)	
+		for rook in rook_list:
+			if pygame.sprite.collide_rect_ratio(0.5)(proyectil, rook):
+				all_sprite_list.remove(proyectil)
+				proyectil_list.remove(proyectil)
+			
+			if proyectil.rect.y < -10:
+				all_sprite_list.remove(proyectil)
+				proyectil_list.remove(proyectil)	
 	
 	for elemental in elemental_list:
 		if elemental.rect.y > 800:
