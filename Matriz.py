@@ -812,9 +812,6 @@ while True:
 					hacha.attack()
 					hacha.attack()
 					hacha.atacando = True
-				if cuadro[1]==0:
-					hacha.atacando()
-
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
