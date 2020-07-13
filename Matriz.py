@@ -234,7 +234,7 @@ class Arquero(pygame.sprite.Sprite):
 	    	if self.frame > (len(lista) - 1):
 	        	self.frame =0
 	        	proyectil = Proyectil("flecha")
-	        	proyectil.rect.x = self.rect.x+100
+	        	proyectil.rect.x = self.rect.x+40
 	        	proyectil.rect.y = self.rect.y-20
 	        	all_sprite_list.add(proyectil)
 	        	proyectil_list.add(proyectil)
@@ -554,7 +554,7 @@ def invocar():
 	for i in range(60):
 		x = random.choice(["arquero"]) 
 		if x == "arquero":
-			arquero = Arquero((random.choice([185,270,355,435,520]),coordy))
+			arquero = Arquero((random.choice([252,333,416,498,583]),coordy))
 			arquero_list.add(arquero)
 			avatar_list.add(arquero)
 			all_sprite_list.add(arquero)
@@ -697,15 +697,15 @@ while True:
 		resto_torre += cadencia
 		for rook in rook_list:
 			for avatar in avatar_list:
-				if rook.rect.x == 252 and avatar.rect.x == 185 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+				if rook.rect.x == 252 and avatar.rect.x == 252 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
-				if rook.rect.x == 333 and avatar.rect.x == 270 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+				if rook.rect.x == 333 and avatar.rect.x == 333 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
-				if rook.rect.x == 416 and avatar.rect.x == 355 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+				if rook.rect.x == 416 and avatar.rect.x == 416 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
-				if rook.rect.x == 498 and avatar.rect.x == 435 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+				if rook.rect.x == 498 and avatar.rect.x == 498 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
-				if rook.rect.x == 583 and avatar.rect.x == 520 and avatar.rect.y < 700 and avatar.rect.y - rook.rect.y > 0: 
+				if rook.rect.x == 583 and avatar.rect.x == 583 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 					rook.attack()
 	tiempo_arquero = pygame.time.get_ticks()//1000-resto_arquero
 	if tiempo_arquero == cadencia_arquero:
@@ -713,27 +713,27 @@ while True:
 		resto_arquero +=cadencia_arquero
 		for arquero in arquero_list:
 			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 185 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 252 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 270 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 333 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 355 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 416 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 435 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 498 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 520 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 583 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
@@ -882,18 +882,44 @@ while True:
 	
 	for proyectil in proyectil_list:
 		for rook in rook_list:
-			if pygame.sprite.collide_rect_ratio(0.5)(proyectil, rook):
+			if pygame.sprite.collide_rect_ratio(0.4)(proyectil, rook):
 				all_sprite_list.remove(proyectil)
 				proyectil_list.remove(proyectil)
+				rook.vida -= proyectil.potencia
+				if rook.vida <0:
+					rook_list.remove(rook)
+					all_sprite_list.remove(rook)
+					for avatar in avatar_list:
+						avatar.atacando = False
+					for cuadro in Cuadros:
+						if cuadro[1]==rook:
+							cuadro[1] = 0
 			
 			if proyectil.rect.y < -10:
 				all_sprite_list.remove(proyectil)
 				proyectil_list.remove(proyectil)	
 	
 	for elemental in elemental_list:
-		if elemental.rect.y > 800:
-			all_sprite_list.remove(elemental)
-			elemental_list.remove(elemental)
+		for avatar in avatar_list:
+			if pygame.sprite.collide_rect_ratio(0.6)(elemental, avatar):
+				all_sprite_list.remove(elemental)
+				elemental_list.remove(elemental)
+				avatar.vida-=elemental.potencia
+				if avatar.vida <0:
+					avatar_list.remove(avatar)
+					all_sprite_list.remove(avatar)
+					if avatar in arquero_list:
+						arquero_list.remove(avatar)
+					if avatar in escudero_list:
+						escudero_list.remove(avatar)
+					if avatar in hacha_list:
+						hacha_list.remove(avatar)
+					if avatar in maza_list:
+						maza_list.remove(avatar) 
+
+			if elemental.rect.y > 800:
+				all_sprite_list.remove(elemental)
+				elemental_list.remove(elemental)
 	#Mostrar en pantala
 	if escenario ==1:
 		screen.blit(matriz1,[0,0])
