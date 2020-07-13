@@ -552,7 +552,7 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["maza"]) 
+		x = random.choice(["arquero", "escudero", "hacha", "maza"]) 
 		if x == "arquero":
 			arquero = Arquero((random.choice([252,333,416,498,583]),coordy))
 			arquero_list.add(arquero)
@@ -580,7 +580,7 @@ def invocar():
 			if enemigos==5:
 				oleada += 1
 				enemigos =0
-				if oleada == 4:
+				if oleada == 5:
 					break
 		elif oleada < 9:
 			coordy += 210
@@ -588,7 +588,7 @@ def invocar():
 			if enemigos==5:
 				oleada += 1
 				enemigos =0
-				if oleada == 8:
+				if oleada == 9:
 					break
 		elif oleada < 13:
 			coordy += 120
@@ -596,7 +596,7 @@ def invocar():
 			if enemigos==5:
 				oleada += 1
 				enemigos =0
-				if oleada == 12:
+				if oleada == 13:
 					break
 		else:
 			break
@@ -616,7 +616,9 @@ cadencia_arquero = 1
 cadencia_escudero = 1
 cadencia_hacha = 1
 cadencia_maza = 1
-numero_ataque = 1
+numero_ataque_hacha = 1
+numero_ataque_maza = 1
+score = 0
 #Variables de compra
 sand_rook_hitbox = [pygame.Rect(25,35,135,125), "Sand"]
 rock_rook_hitbox = [pygame.Rect(25,187,135,125), "Rock"]
@@ -667,14 +669,13 @@ Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
 Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
-escenario = 4
+escenario = 1
 reset = 1
 invocar()
 #Main loop
 while True:
 	tiempo = pygame.time.get_ticks()//1000-resto
 	if tiempo == 10 :
-		escenario +=1
 		tiempo=0
 		segundo2 += 1
 		resto += 10
@@ -957,7 +958,8 @@ while True:
 					if avatar in hacha_list:
 						hacha_list.remove(avatar)
 					if avatar in maza_list:
-						maza_list.remove(avatar) 
+						maza_list.remove(avatar)
+					score +=1 
 
 			if elemental.rect.y > 800:
 				all_sprite_list.remove(elemental)
@@ -967,6 +969,7 @@ while True:
 		screen.blit(matriz1,[0,0])
 
 	if escenario == 2:
+		invocar()
 		screen.blit(matriz2,[0,0])
 		if reset == 1:
 			for rook in rook_list:
@@ -981,6 +984,7 @@ while True:
 			reset +=1
 
 	if escenario >= 3:
+		invocar()
 		screen.blit(matriz3,[0,0])
 		if reset == 2:
 			for rook in rook_list:
@@ -1019,6 +1023,10 @@ while True:
 		screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 	if agarrar==True and clase == "Water":
 		screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+	if score == 20:
+		escenario +=1
+		score=0
+		
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
