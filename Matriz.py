@@ -777,10 +777,7 @@ while True:
 		for hacha in hacha_list:
 			for rook in rook_list:
 				if 	pygame.sprite.collide_rect(hacha, rook): 
-					hacha.attack()
-					hacha.attack()
-					hacha.attack()
-					hacha.atacando = True
+
 
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
