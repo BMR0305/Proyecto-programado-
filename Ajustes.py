@@ -23,6 +23,7 @@ class Entry():
 		self.color = color_inactive
 		self.text = ""
 		self.rect = pygame.Rect(rect)
+font = pygame.font.Font(None, 40)
 
 #Entries
 cadencia_rooks = Entry([339, 200, 80, 40])
@@ -35,27 +36,47 @@ velocidad_escudero = Entry([548, 389, 80, 40])
 velocidad_hacha = Entry([178, 628, 80, 40])
 velocidad_maza = Entry([548, 625, 80, 40])
 Entries = [cadencia_rooks,cadencia_arquero,cadencia_escudero,cadencia_hacha,cadencia_maza,velocidad_arquero,velocidad_escudero,velocidad_hacha,velocidad_maza]
-while True:
+game_over = True
+while game_over:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			game_over = False 
-			sys.exit()
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
 			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
 				pygame.quit()
 				os.system("Menu.py")
-			if mouse[0]>339 and mouse[0]<390 and mouse[1]>200 and mouse [1]<240:
-				cadencia_rooks.active = True
-				cadencia_rooks.color = color_active
-			else:
-				cadencia_rooks.active = False
-				cadencia_rooks.color = color_inactive 
+			for entry in Entries:
+				if entry.rect.collidepoint(event.pos):
+					entry.active = True
+					entry.color = color_active
+				else:
+					entry.active = False
+					entry.color = color_inactive  
+		if event.type == pygame.K_KP1:
+			for entry in Entries:
+				if entry.active: 
+					if event.key == pygame.K_RETURN:
+						print(entry.text)
+						entry.text = ""
+					elif event.key == pygame.K_BACKSPACE:
+						entry.text = entry.text [:len(entry.text)-1]
+					elif len(entry.text)>0:
+						if event.key == pygame.K_BACKSPACE:
+							entry.text = entry.text [:len(entry.text)-1]
+						else:
+							None
+					else :
+						entry.text += event.unicode
 		#Fondo
 		screen.blit(background,[0,0])
 		screen.blit(volver, [630,5])
 		for entry in Entries:
-			pygame.draw.rect(screen, [255,255,255], entry, 4)
+			pygame.draw.rect(screen, entry.color, entry, 4)
+			txt_surface = font.render(entry.text, True, color_inactive)
+			screen.blit(txt_surface, (entry.rect.x+5, entry.rect.y+7))
 
 		pygame.display.flip()
 		clock.tick(60)
+sys.exit()
+#event.type == pygame.K_RETURN or event.type == pygame.K_BACKSPACE or event.type == pygame.K_1 or event.type == pygame.K_2 or event.type == pygame.K_3 or event.type == pygame.K_4 or event.type == pygame.K_5 or event.type == pygame.K_6 or event.type == pygame.K_7 or event.type == pygame.K_8 or event.type == pygame.K_KP9
