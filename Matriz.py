@@ -552,7 +552,7 @@ def invocar():
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["arquero", "escudero"]) 
+		x = random.choice(["maza"]) 
 		if x == "arquero":
 			arquero = Arquero((random.choice([252,333,416,498,583]),coordy))
 			arquero_list.add(arquero)
@@ -616,6 +616,7 @@ cadencia_arquero = 1
 cadencia_escudero = 1
 cadencia_hacha = 1
 cadencia_maza = 1
+numero_ataque = 1
 #Variables de compra
 sand_rook_hitbox = [pygame.Rect(25,35,135,125), "Sand"]
 rock_rook_hitbox = [pygame.Rect(25,187,135,125), "Rock"]
@@ -770,13 +771,53 @@ while True:
 					escudero.attack()
 					escudero.atacando = True
 	
-	"""tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
+	tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
 	if tiempo_hacha == cadencia_hacha:
 		tiempo_hacha = 0
 		resto_hacha +=cadencia_hacha
 		for hacha in hacha_list:
 			for rook in rook_list:
-				if 	pygame.sprite.collide_rect(hacha, rook):""" 
+				if 	pygame.sprite.collide_rect(hacha, rook) and hacha.rect.y - rook.rect.y > 0:
+					hacha.attack()
+					hacha.attack()
+					hacha.attack()
+					numero_ataque +=1
+					hacha.atacando = True
+					if numero_ataque ==3:
+						rook.vida -= hacha.potencia
+						numero_ataque=1
+				if rook.vida <0:
+					rook_list.remove(rook)
+					all_sprite_list.remove(rook)
+					for avatar in avatar_list:
+						avatar.atacando = False
+					for cuadro in Cuadros:
+						if cuadro[1]==rook:
+							cuadro[1] = 0
+	tiempo_maza = pygame.time.get_ticks()//1000-resto_maza
+	if tiempo_maza == cadencia_maza:
+		tiempo_maza = 0
+		resto_maza +=cadencia_maza
+		for maza in maza_list:
+			for rook in rook_list:
+				if 	pygame.sprite.collide_rect(maza, rook) and maza.rect.y - rook.rect.y > 0:
+					maza.attack()
+					maza.attack()
+					maza.attack()
+					numero_ataque +=1
+					maza.atacando = True
+					if numero_ataque ==3:
+						rook.vida -= maza.potencia
+						numero_ataque=1
+				if rook.vida <0:
+					rook_list.remove(rook)
+					all_sprite_list.remove(rook)
+					for avatar in avatar_list:
+						avatar.atacando = False
+					for cuadro in Cuadros:
+						if cuadro[1]==rook:
+							cuadro[1] = 0
+
 
 
 	for event in pygame.event.get():
@@ -886,7 +927,7 @@ while True:
 				all_sprite_list.remove(proyectil)
 				proyectil_list.remove(proyectil)
 				rook.vida -= proyectil.potencia
-				if rook.vida <0:
+				if rook.vida <=0:
 					rook_list.remove(rook)
 					all_sprite_list.remove(rook)
 					for avatar in avatar_list:
@@ -905,7 +946,8 @@ while True:
 				all_sprite_list.remove(elemental)
 				elemental_list.remove(elemental)
 				avatar.vida-=elemental.potencia
-				if avatar.vida <0:
+				if avatar.vida <=0:
+					monedas += 100
 					avatar_list.remove(avatar)
 					all_sprite_list.remove(avatar)
 					if avatar in arquero_list:
