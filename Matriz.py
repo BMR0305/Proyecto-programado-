@@ -770,16 +770,18 @@ while True:
 					escudero.attack()
 					escudero.atacando = True
 	
-	tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
+	"""tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
 	if tiempo_hacha == cadencia_hacha:
 		tiempo_hacha = 0
 		resto_hacha +=cadencia_hacha
 		for hacha in hacha_list:
 			for rook in rook_list:
-				if 	pygame.sprite.collide_rect(hacha, rook):
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
+				if 	pygame.sprite.collide_rect(hacha, rook):""" 
+
+
+	for event in pygame.event.get():
+	        if event.type == pygame.QUIT:
+	            sys.exit()
 	if event.type == pygame.MOUSEMOTION:
 		for coin in monedas_list:
 			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
