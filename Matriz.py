@@ -782,9 +782,9 @@ while True:
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
-					numero_ataque +=1
+					numero_ataque_hacha +=1
 					hacha.atacando = True
-					if numero_ataque ==3:
+					if numero_ataque_hacha ==3:
 						rook.vida -= hacha.potencia
 						numero_ataque=1
 				if rook.vida <0:
@@ -805,9 +805,9 @@ while True:
 					maza.attack()
 					maza.attack()
 					maza.attack()
-					numero_ataque +=1
+					numero_ataque_maza +=1
 					maza.atacando = True
-					if numero_ataque ==3:
+					if numero_ataque_maza ==3:
 						rook.vida -= maza.potencia
 						numero_ataque=1
 				if rook.vida <0:
