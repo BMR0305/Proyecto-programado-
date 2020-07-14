@@ -53,7 +53,7 @@ while game_over:
 				else:
 					entry.active = False
 					entry.color = color_inactive  
-		if event.type == pygame.K_KP1:
+		if event.type == pygame.KEYDOWN:
 			for entry in Entries:
 				if entry.active: 
 					if event.key == pygame.K_RETURN:
@@ -66,7 +66,7 @@ while game_over:
 							entry.text = entry.text [:len(entry.text)-1]
 						else:
 							None
-					else :
+					elif event.key == pygame.K_1 or event.key == pygame.K_2 or event.key == pygame.K_3 or event.key == pygame.K_4 or event.key == pygame.K_5 or event.key == pygame.K_6 or event.key == pygame.K_7 or event.key == pygame.K_8 or event.key == pygame.K_9 :
 						entry.text += event.unicode
 		#Fondo
 		screen.blit(background,[0,0])
@@ -79,4 +79,3 @@ while game_over:
 		pygame.display.flip()
 		clock.tick(60)
 sys.exit()
-#event.type == pygame.K_RETURN or event.type == pygame.K_BACKSPACE or event.type == pygame.K_1 or event.type == pygame.K_2 or event.type == pygame.K_3 or event.type == pygame.K_4 or event.type == pygame.K_5 or event.type == pygame.K_6 or event.type == pygame.K_7 or event.type == pygame.K_8 or event.type == pygame.K_KP9
