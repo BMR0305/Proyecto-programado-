@@ -1029,7 +1029,6 @@ while True:
 		if score == 20:
 			escenario +=1
 			score=0
-	print(avatar_list)
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
