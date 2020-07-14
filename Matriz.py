@@ -581,7 +581,7 @@ def invocar():
 				oleada += 1
 				enemigos =0
 				if oleada == 5:
-					break
+					coordy+=1200
 		elif oleada < 9:
 			coordy += 210
 			enemigos += 1
@@ -589,7 +589,7 @@ def invocar():
 				oleada += 1
 				enemigos =0
 				if oleada == 9:
-					break
+					coordy+=1200
 		elif oleada < 13:
 			coordy += 120
 			enemigos += 1
@@ -671,6 +671,7 @@ Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
 escenario = 1
 reset = 1
+game_over = False
 invocar()
 #Main loop
 while True:
@@ -969,7 +970,6 @@ while True:
 		screen.blit(matriz1,[0,0])
 
 	if escenario == 2:
-		invocar()
 		screen.blit(matriz2,[0,0])
 		if reset == 1:
 			for rook in rook_list:
@@ -984,7 +984,6 @@ while True:
 			reset +=1
 
 	if escenario == 3:
-		invocar()
 		screen.blit(matriz3,[0,0])
 		if reset == 2:
 			for rook in rook_list:
@@ -997,36 +996,40 @@ while True:
 				if cuadro[1]!=0:
 					cuadro[1] = 0
 			reset +=1
-	screen.blit(relojseg1,[140,710])
-	screen.blit(relojseg2,[120,710])
-	screen.blit(relojmin1,[80,710])
-	screen.blit(relojmin2,[60,710])
-	screen.blit(cant_monedas,[70,635])
-	screen.blit(separacion,[105,706])
-	screen.blit(volver, [630,0])
-	screen.blit(sand_rook_icon, [40,0])
-	screen.blit(rock_rook_icon, [40,147])
-	screen.blit(fire_rook_icon, [40,287])
-	screen.blit(water_rook_icon, [40,430])
-	all_sprite_list.draw(screen)
-	proyectil_list.update()
-	elemental_list.update()
-	for avatar in avatar_list:
-		if avatar.atacando == False:
-			avatar.update()
-	mouse_pos = pygame.mouse.get_pos()
-	if agarrar==True and clase == "Sand":
-		screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-	if agarrar==True and clase == "Rock":
-		screen.blit(rock_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-	if agarrar==True and clase == "Fire":
-		screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-	if agarrar==True and clase == "Water":
-		screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-	if score == 20:
-		escenario +=1
-		score=0
 		
+	if game_over == False:
+		screen.blit(relojseg1,[140,710])
+		screen.blit(relojseg2,[120,710])
+		screen.blit(relojmin1,[80,710])
+		screen.blit(relojmin2,[60,710])
+		screen.blit(cant_monedas,[70,635])
+		screen.blit(separacion,[105,706])
+		screen.blit(volver, [630,0])
+		screen.blit(sand_rook_icon, [40,0])
+		screen.blit(rock_rook_icon, [40,147])
+		screen.blit(fire_rook_icon, [40,287])
+		screen.blit(water_rook_icon, [40,430])
+		all_sprite_list.draw(screen)
+		proyectil_list.update()
+		elemental_list.update()
+		for avatar in avatar_list:
+			if avatar.atacando == False:
+				avatar.update()
+			if avatar.rect.y <20:
+				game_over == True 
+		mouse_pos = pygame.mouse.get_pos()
+		if agarrar==True and clase == "Sand":
+			screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+		if agarrar==True and clase == "Rock":
+			screen.blit(rock_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+		if agarrar==True and clase == "Fire":
+			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+		if agarrar==True and clase == "Water":
+			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+		if score == 20:
+			escenario +=1
+			score=0
+	print(avatar_list)
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
