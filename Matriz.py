@@ -17,6 +17,7 @@ matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
 matriz3 = pygame.image.load("Imagenes/Matriz3.jpg").convert()
 ganador = pygame.image.load("Imagenes/Ganaste.jpg").convert()
 perdedor = pygame.image.load("Imagenes/Game over.jpg").convert()
+negro = pygame.image.load("Imagenes/Negro.jpg").convert()
 #Boton
 volver = pygame.image.load("Imagenes/Volver.png")
 volver.set_colorkey([0,0,0])
@@ -234,7 +235,7 @@ class Arquero(pygame.sprite.Sprite):
     	if accion == "ataque":
 	    	self.frame += 1
 	    	if self.frame > (len(lista) - 1):
-	        	self.frame =0
+	        	self.frame = 0
 	        	proyectil = Proyectil("flecha")
 	        	proyectil.rect.x = self.rect.x+40
 	        	proyectil.rect.y = self.rect.y-20
@@ -677,6 +678,7 @@ reset = 1
 game_over = False
 perdiste = False
 ganaste= False
+animacion = 0
 invocar()
 #Main loop
 while True:
@@ -721,27 +723,27 @@ while True:
 		resto_arquero +=cadencia_arquero
 		for arquero in arquero_list:
 			for cuadro in Cuadros:
-				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 252 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				if 	cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 252 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 333 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 333 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 416 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 416 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 498 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 498 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
 					arquero.atacando = True
-				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 583 and arquero.rect.y < 775 and arquero.rect.y - cuadro[0].y > 0: 
+				elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 583 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
 					arquero.attack()
 					arquero.attack()
 					arquero.attack()
@@ -1023,6 +1025,7 @@ while True:
 			if avatar.rect.y <=21:
 				perdiste = True
 				game_over = True
+				animacion = 0
 		mouse_pos = pygame.mouse.get_pos()
 		if agarrar==True and clase == "Sand":
 			screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
@@ -1032,20 +1035,33 @@ while True:
 			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Water":
 			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-		if score == 1:
+		if score == 20:
 			escenario +=1
 			score=0
-			if score == 0 and escenario >1:
+			if score == 0 and escenario >3:
 				ganaste = True
 				game_over =True
+				animacion = 0
 	if game_over== True:
 		if perdiste == True:
-			screen.blit(perdedor,[0,0])
+			if animacion%2 == 0:
+				screen.blit(negro,[0,0])
+				time.sleep(0.5)
+			if animacion%2 == 1:
+				screen.blit(perdedor,[0,0])
+			animacion += 1
+			time.sleep(0.5)
 		if ganaste == True:
-			screen.blit(ganador,[0,0])
+			if animacion%2 == 0:
+				screen.blit(negro,[0,0])
+				time.sleep(0.5)
+			if animacion%2 == 1:
+				screen.blit(ganador,[0,0])
 			if score ==0:
 				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
 				score +=1
+			animacion += 1
+			time.sleep(0.5)
 
 			resultado = font.render("Tiempo: "+str(tiempo_conseguido)+" segundos",0,(255,255,255))
 			screen.blit(resultado,[150,600])
