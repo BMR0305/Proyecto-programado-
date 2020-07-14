@@ -15,6 +15,8 @@ monedas = 1000
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
 matriz3 = pygame.image.load("Imagenes/Matriz3.jpg").convert()
+ganador = pygame.image.load("Imagenes/Ganaste.jpg").convert()
+perdedor = pygame.image.load("Imagenes/Game over.jpg").convert()
 #Boton
 volver = pygame.image.load("Imagenes/Volver.png")
 volver.set_colorkey([0,0,0])
@@ -1033,27 +1035,20 @@ while True:
 		if score == 1:
 			escenario +=1
 			score=0
-<<<<<<< HEAD
 			if score == 0 and escenario >1:
 				ganaste = True
 				game_over =True
 	if game_over== True:
 		if perdiste == True:
-			print("perdiste")
+			screen.blit(perdedor,[0,0])
 		if ganaste == True:
-			print("ganaste")
+			screen.blit(ganador,[0,0])
 			if score ==0:
 				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
 				score +=1
 
-			resultado = font.render(str(tiempo_conseguido)+"segundos",0,(255,255,255))
-			screen.blit(resultado,[500,500])
-=======
-			if score == 0 and escenario >3:
-				print("ganaste")
-	else:
-		print("perdiste")
->>>>>>> bbd4b43fe2892307e7b1c9a812cb34c20ace8bb3
+			resultado = font.render("Tiempo: "+str(tiempo_conseguido)+" segundos",0,(255,255,255))
+			screen.blit(resultado,[150,600])
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
