@@ -53,7 +53,7 @@ while game_over:
 				else:
 					entry.active = False
 					entry.color = color_inactive  
-		if event.type == pygame.K_KP1:
+		if event.key == pygame.K_1:
 			for entry in Entries:
 				if entry.active: 
 					if event.key == pygame.K_RETURN:

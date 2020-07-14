@@ -983,7 +983,7 @@ while True:
 					cuadro[1] = 0
 			reset +=1
 
-	if escenario >= 3:
+	if escenario == 3:
 		invocar()
 		screen.blit(matriz3,[0,0])
 		if reset == 2:
