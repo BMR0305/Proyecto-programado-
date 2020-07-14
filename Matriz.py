@@ -1033,6 +1033,7 @@ while True:
 		if score == 1:
 			escenario +=1
 			score=0
+<<<<<<< HEAD
 			if score == 0 and escenario >1:
 				ganaste = True
 				game_over =True
@@ -1047,6 +1048,12 @@ while True:
 
 			resultado = font.render(str(tiempo_conseguido)+"segundos",0,(255,255,255))
 			screen.blit(resultado,[500,500])
+=======
+			if score == 0 and escenario >3:
+				print("ganaste")
+	else:
+		print("perdiste")
+>>>>>>> bbd4b43fe2892307e7b1c9a812cb34c20ace8bb3
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
