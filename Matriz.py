@@ -390,9 +390,10 @@ class Maza(pygame.sprite.Sprite):
         self.image = self.get_frame(lista,accion)
 
     def update(self):
-    	if self.rect.y > 0:
+    	if self.rect.y > 20:
         	self.change_image(self.caminar, "caminar")
         	self.rect.y -= 5
+
     
     def attack(self):
     	self.change_image(self.ataque, "ataque")
@@ -672,6 +673,8 @@ Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 
 escenario = 1
 reset = 1
 game_over = False
+perdiste = False
+ganaste= False
 invocar()
 #Main loop
 while True:
@@ -1015,8 +1018,9 @@ while True:
 		for avatar in avatar_list:
 			if avatar.atacando == False:
 				avatar.update()
-			if avatar.rect.y <20:
-				game_over == True 
+			if avatar.rect.y <=21:
+				perdiste = True
+				game_over = True
 		mouse_pos = pygame.mouse.get_pos()
 		if agarrar==True and clase == "Sand":
 			screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
@@ -1026,13 +1030,30 @@ while True:
 			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Water":
 			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-		if score == 20:
+		if score == 1:
 			escenario +=1
 			score=0
+<<<<<<< HEAD
+			if score == 0 and escenario >1:
+				ganaste = True
+				game_over =True
+	if game_over== True:
+		if perdiste == True:
+			print("perdiste")
+		if ganaste == True:
+			print("ganaste")
+			if score ==0:
+				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
+				score +=1
+
+			resultado = font.render(str(tiempo_conseguido)+"segundos",0,(255,255,255))
+			screen.blit(resultado,[500,500])
+=======
 			if score == 0 and escenario >3:
 				print("ganaste")
 	else:
 		print("perdiste")
+>>>>>>> bbd4b43fe2892307e7b1c9a812cb34c20ace8bb3
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
