@@ -1029,7 +1029,11 @@ while True:
 		if score == 20:
 			escenario +=1
 			score=0
-	print(avatar_list)
+			if score == 0 and escenario >3:
+				print("ganaste")
+	else:
+		print("perdiste")
+
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
