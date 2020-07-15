@@ -61,7 +61,6 @@ flecha = pygame.image.load("Imagenes/Arquero/Flecha.png").convert()
 flecha.set_colorkey([0,0,0])
 #Sonido de proyectil
 sonidoFlecha = pygame.mixer.Sound("Sonidos/Impacto flecha.wav")
-
 #Imagenes del escudero
 ataque0e = pygame.image.load("Imagenes/Escudero/Ataque0.png").convert()
 ataque0e.set_colorkey([0,0,0])
