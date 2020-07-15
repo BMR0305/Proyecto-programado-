@@ -36,43 +36,43 @@ while game_over:
 
 	for event in pygame.event.get():
 		 if event.type == pygame.QUIT:  
-		 	sys.exit()
+			sys.exit()
 		 if event.type == pygame.MOUSEBUTTONDOWN: 
-		 	mouse = event.pos
-		 	if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
-		 		game_over = False
-		 		pygame.quit()
-		 		os.system("Matriz.py")
-		 		
-		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
-		 		game_over = False
-		 		pygame.quit()
-		 		os.system("Ajustes.py")
-		 	if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
-		 		print("ayuda")
-		 	if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
-		 		print("creditos")
-		 	if input_box.collidepoint(event.pos): #revisa si se da click en el entry
-		 		active = True
-		 		color = color_active
-		 	else:
-		 		active = False
-		 		color = color_inactive 
+			mouse = event.pos
+			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
+				game_over = False
+				pygame.quit()
+				os.system("Matriz.py")
+				
+			if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
+				game_over = False
+				pygame.quit()
+				os.system("Ajustes.py")
+			if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
+				print("ayuda")
+			if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
+				print("creditos")
+			if input_box.collidepoint(event.pos): #revisa si se da click en el entry
+				active = True
+				color = color_active
+			else:
+				active = False
+				color = color_inactive 
 
 		 if event.type == pygame.KEYDOWN:
-		 	if active: 
-		 		if event.key == pygame.K_RETURN:
-		 			print(text)
-		 			text = ""
-		 		elif event.key == pygame.K_BACKSPACE:
-		 			text = text [:len(text)-1]
-		 		elif len(text)>10:
-		 			if event.key == pygame.K_BACKSPACE:
-		 				text = text [:len(text)-1]
-		 			else:
-		 				None
-		 		else:
-		 			text += event.unicode
+			if active: 
+				if event.key == pygame.K_RETURN:
+					print(text)
+					text = ""
+				elif event.key == pygame.K_BACKSPACE:
+					text = text [:len(text)-1]
+				elif len(text)>10:
+					if event.key == pygame.K_BACKSPACE:
+						text = text [:len(text)-1]
+					else:
+						None
+				else:
+					text += event.unicode
 
 
 	try:
