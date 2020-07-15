@@ -212,43 +212,43 @@ cobre.set_colorkey([0,0,0])
 		#E: instancia #S:- #R:-
 class Arquero(pygame.sprite.Sprite):
 	def __init__(self, position):
-			super().__init__()
-			self.image = caminar1a
-			self.rect = self.image.get_rect()
-			self.rect.topleft = position
-			self.frame = 0
-			self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
-			self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
-			self.muerte = muertea
-			self.daño = dañoa
-			self.proyectil = flecha
-			self.vida = 5
-			self.atacando = False
+		super().__init__()
+		self.image = caminar1a
+		self.rect = self.image.get_rect()
+		self.rect.topleft = position
+		self.frame = 0
+		self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
+		self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
+		self.muerte = muertea
+		self.daño = dañoa
+		self.proyectil = flecha
+		self.vida = 5
+		self.atacando = False
 
 	def get_frame(self, lista, accion):
 		if accion == "caminar":
-				self.frame += 1
-				if self.frame > (len(lista) - 1):
-						self.frame = 0
-				return lista[self.frame]
+			self.frame += 1
+			if self.frame > (len(lista) - 1):
+				self.frame = 0
+			return lista[self.frame]
 		if accion == "ataque":
-				self.frame += 1
-				if self.frame > (len(lista) - 1):
-						self.frame = 0
-						proyectil = Proyectil("flecha")
-						proyectil.rect.x = self.rect.x+40
-						proyectil.rect.y = self.rect.y-20
-						all_sprite_list.add(proyectil)
-						proyectil_list.add(proyectil)
+			self.frame += 1
+			if self.frame > (len(lista) - 1):
+				self.frame = 0
+				proyectil = Proyectil("flecha")
+				proyectil.rect.x = self.rect.x+40
+				proyectil.rect.y = self.rect.y-20
+				all_sprite_list.add(proyectil)
+				proyectil_list.add(proyectil)
 
-				return lista[self.frame]
+			return lista[self.frame]
 	def change_image(self, lista,accion):
 		self.image = self.get_frame(lista,accion)
 
 	def update(self):
 		if self.rect.y > 20:
-				self.change_image(self.caminar, "caminar")
-				self.rect.y -= 5
+			self.change_image(self.caminar, "caminar")
+			self.rect.y -= 5
 		
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
