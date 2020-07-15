@@ -929,6 +929,33 @@ while True:
 	#Renderizado de cantidad de monedas
 	cant_monedas = font.render(str(monedas),0,(239,184,16))
 
+    for arquero in arquero_list:
+            for cuadro in Cuadros:
+                if  cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 252 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.atacando = True
+                elif cuadro[1] !=0 and cuadro[0].x==336 and arquero.rect.x == 333 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.atacando = True
+                elif cuadro[1] !=0 and cuadro[0].x==419 and arquero.rect.x == 416 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.atacando = True
+                elif cuadro[1] !=0 and cuadro[0].x==501 and arquero.rect.x == 498 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.atacando = True
+                elif cuadro[1] !=0 and cuadro[0].x==586 and arquero.rect.x == 583 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.attack()
+                    arquero.atacando = True
 	
 	for proyectil in proyectil_list:
 		for rook in rook_list:
