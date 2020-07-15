@@ -826,9 +826,6 @@ while True:
 					for cuadro in Cuadros:
 						if cuadro[1]==rook:
 							cuadro[1] = 0
-
-
-
 	for event in pygame.event.get():
 	        if event.type == pygame.QUIT:
 	            sys.exit()
