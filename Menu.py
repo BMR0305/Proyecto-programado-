@@ -43,6 +43,7 @@ while game_over:
 		 		game_over = False
 		 		pygame.quit()
 		 		os.system("Matriz.py")
+		 		
 		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
 		 		game_over = False
 		 		pygame.quit()
@@ -98,5 +99,5 @@ while game_over:
 		pass
 
 
-	
+
 sys.exit()
