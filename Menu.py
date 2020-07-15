@@ -35,8 +35,7 @@ game_over = True
 while game_over:
 
 	for event in pygame.event.get():
-		 if event.type == pygame.QUIT:
-		 	game_over = False 
+		 if event.type == pygame.QUIT:  
 		 	sys.exit()
 		 if event.type == pygame.MOUSEBUTTONDOWN: 
 		 	mouse = event.pos
@@ -47,7 +46,7 @@ while game_over:
 		 	if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
 		 		game_over = False
 		 		pygame.quit()
-		 		os.system("Matriz.py")
+		 		os.system("Ajustes.py")
 		 	if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
 		 		print("ayuda")
 		 	if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 

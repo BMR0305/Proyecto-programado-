@@ -40,7 +40,7 @@ game_over = True
 while game_over:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
-			game_over = False 
+			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
 			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
