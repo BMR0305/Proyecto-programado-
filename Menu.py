@@ -43,7 +43,7 @@ while game_over:
 				game_over = False
 				pygame.quit()
 				os.system("Matriz.py")
-				
+
 			if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
 				game_over = False
 				pygame.quit()
@@ -73,8 +73,6 @@ while game_over:
 						None
 				else:
 					text += event.unicode
-
-
 	try:
 		#Fondo
 		screen.blit(background,[0,0])
@@ -94,7 +92,7 @@ while game_over:
 		
 		pygame.display.flip()
 		clock.tick(60)
-	
+
 	except:
 		pass
 
