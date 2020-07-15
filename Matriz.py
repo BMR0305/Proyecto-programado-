@@ -827,6 +827,7 @@ while True:
 							cuadro[1] = 0
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
+			pygame.quit()
 			sys.exit()
 	if event.type == pygame.MOUSEMOTION:
 		for coin in monedas_list:
