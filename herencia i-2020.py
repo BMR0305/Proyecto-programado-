@@ -14,7 +14,6 @@ class Vehiculo:
         print("Kilometraje: ", self.kilometraje)
         print("Combustible: ", self.combustible)
         print("Consumo por km: ", self.consumo, "litros")
-        print("----------------------------------------")
 
     def hacerViaje(self,kms):
     	self.kilometraje.set(kms)
@@ -24,10 +23,13 @@ class Vehiculo:
 
     def get_kilometros(self):
     	return self.kilometraje
+    
+    def get_marca(self):
+        return self.marca
 
 class Auto(Vehiculo):
     def __init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo, modelo, año):
-        Vehiculo.__init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo, modelo, año)
+        Vehiculo.__init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo)
         self.modelo = modelo
         self.año = año
     def mostrar(self):
@@ -38,7 +40,7 @@ class Auto(Vehiculo):
 
 class Moto(Vehiculo):
     def __init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo, estilo, cilindraje):
-        Vehiculo.__init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo, estilo, cilindraje)
+        Vehiculo.__init__(self, placa, marca, cantidad_ruedas, kilometraje, combustible, consumo)
         self.estilo = estilo
         self.cilindraje = cilindraje
     def mostrar(self):
@@ -52,6 +54,11 @@ vehiculos = [Auto("1234", "BMW", 4, 11000, "Gasolina", 500, "Serie 2", 2017), Au
 
 
 def revise(lista):
-	for vehiculo in vehiculos:
-		if vehiculos.get_kilometros > 10000:
-			mostrar.vehiculo
+    for vehiculo in vehiculos:
+        if vehiculo.get_kilometros() > 10000:
+            vehiculo.mostrar()
+
+def busque(lista,marca):
+    for vehiculo in vehiculos:
+        if vehiculo.get_marca() == marca:
+            vehiculo.mostrar() 
