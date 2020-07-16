@@ -35,9 +35,9 @@ game_over = True
 while game_over:
 
 	for event in pygame.event.get():
-		 if event.type == pygame.QUIT:  
+		if event.type == pygame.QUIT:  
 			sys.exit()
-		 if event.type == pygame.MOUSEBUTTONDOWN: 
+		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
 			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
 				game_over = False
@@ -59,7 +59,7 @@ while game_over:
 				active = False
 				color = color_inactive 
 
-		 if event.type == pygame.KEYDOWN:
+		if event.type == pygame.KEYDOWN:
 			if active: 
 				if event.key == pygame.K_RETURN:
 					print(text)
