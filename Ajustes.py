@@ -47,12 +47,13 @@ while game_over:
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
 			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
+				pygame.quit()
+				os.system("Menu.py")
+			if mouse[0]>263 and mouse[0]<451 and mouse[1]>755 and mouse [1]<792: #Boton aplicar cambios 
 				config = open("Config.txt","w")
 				for entry in Entries:
 					config.write(entry.text +"\n")
 				config.close()
-				pygame.quit()
-				os.system("Menu.py")
 			for entry in Entries:
 				if entry.rect.collidepoint(event.pos):
 					entry.active = True
@@ -60,9 +61,7 @@ while game_over:
 				else:
 					entry.active = False
 					entry.color = color_inactive
-			#if:
-			#	for entry in Entries:
-			#		Config.write(entry.text+"\n")   
+			print (mouse)
 		if event.type == pygame.KEYDOWN:
 			for entry in Entries:
 				if entry.active: 
@@ -86,13 +85,16 @@ while game_over:
 		except:
 			config.close()
 	#Fondo
-	screen.blit(background,[0,0])
-	screen.blit(volver, [630,5])
-	for entry in Entries:
-		pygame.draw.rect(screen, entry.color, entry, 4)
-		txt_surface = font.render(entry.text, True, color_inactive)
-		screen.blit(txt_surface, (entry.rect.x+5, entry.rect.y+7))
+	try:
+		screen.blit(background,[0,0])
+		screen.blit(volver, [630,5])
+		for entry in Entries:
+			pygame.draw.rect(screen, entry.color, entry, 4)
+			txt_surface = font.render(entry.text, True, color_inactive)
+			screen.blit(txt_surface, (entry.rect.x+5, entry.rect.y+7))
 
-	pygame.display.flip()
-	clock.tick(60)
+		pygame.display.flip()
+		clock.tick(60)
+	except:
+		pass
 sys.exit()
