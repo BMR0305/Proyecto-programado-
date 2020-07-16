@@ -11,6 +11,19 @@ clock=pygame.time.Clock()
 font = pygame.font.Font(None, 60)
 #Variables de monedas
 monedas = 1000
+#Abrir txt
+config = open("Config.txt", "r")
+read = config.readlines()
+#Variables de configuraciones
+cadencia = read[0][0]
+cadencia_arquero = 10-int(read[1][0])
+cadencia_escudero = 10-int(read[2][0])
+cadencia_hacha = 10-int(read[3][0])
+cadencia_maza = 10-int(read[4][0])
+velocidad_arquero = int(read[5][0])
+velocidad_escudero = int(read[6][0])
+velocidad_hacha = int(read[7][0])
+velocidad_maza= int(read[8][0])
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
@@ -248,7 +261,7 @@ class Arquero(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.y > 20:
 			self.change_image(self.caminar, "caminar")
-			self.rect.y -= 5
+			self.rect.y -= velocidad_arquero
 		
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
@@ -300,7 +313,7 @@ class Escudero(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.y > 20:
 				self.change_image(self.caminar, "caminar")
-				self.rect.y -= 5
+				self.rect.y -= velocidad_escudero
 	
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
@@ -347,7 +360,7 @@ class Hacha(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.y > 20:
 				self.change_image(self.caminar, "caminar")
-				self.rect.y -= 5
+				self.rect.y -= velocidad_hacha
 	
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
@@ -394,7 +407,7 @@ class Maza(pygame.sprite.Sprite):
 	def update(self):
 		if self.rect.y > 20:
 			self.change_image(self.caminar, "caminar")
-			self.rect.y -= 5
+			self.rect.y -= velocidad_maza
 
 	
 	def attack(self):
@@ -614,11 +627,6 @@ resto_arquero =0
 resto_escudero = 0
 resto_hacha = 0
 resto_maza = 0
-cadencia = 2
-cadencia_arquero = 1
-cadencia_escudero = 1
-cadencia_hacha = 1
-cadencia_maza = 1
 numero_ataque_hacha = 1
 numero_ataque_maza = 1
 score = 0
