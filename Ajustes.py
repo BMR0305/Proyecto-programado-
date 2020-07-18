@@ -10,6 +10,12 @@ clock=pygame.time.Clock()
 
 #Cargar txt
 config = open("Config.txt", "r")
+read = config.readlines()
+#Variable musica
+if int(read[9]) == 1: 
+	musica = True
+else:
+	musica = False
 #Boton
 volver = pygame.image.load("Imagenes/Volver.png")
 volver.set_colorkey([0,0,0])
@@ -38,7 +44,6 @@ velocidad_hacha = Entry([178, 628, 80, 40])
 velocidad_maza = Entry([548, 625, 80, 40])
 Entries = [cadencia_rooks,cadencia_arquero,cadencia_escudero,cadencia_hacha,cadencia_maza,velocidad_arquero,velocidad_escudero,velocidad_hacha,velocidad_maza]
 numero_linea = 0
-read = config.readlines()
 game_over = True
 while game_over:
 	for event in pygame.event.get():
@@ -46,6 +51,12 @@ while game_over:
 			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
+			print(mouse)
+			if mouse[0]>14 and mouse[0]<132 and mouse[1]>24 and mouse [1]<68: #Boton musica
+				if musica == True:
+					musica = False
+				else:
+					musica = True
 			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
 				pygame.quit()
 				os.system("Menu.py")
@@ -53,6 +64,10 @@ while game_over:
 				config = open("Config.txt","w")
 				for entry in Entries:
 					config.write(entry.text +"\n")
+				if musica == True:
+					config.write("1")
+				elif musica == False:
+					config.write("0")
 				config.close()
 			for entry in Entries:
 				if entry.rect.collidepoint(event.pos):
@@ -80,14 +95,17 @@ while game_over:
 	#Leer txt
 	for entry in Entries:
 		try:
-			entry.text = read[numero_linea][0]
-			numero_linea+=1
+			if numero_linea < 9:
+				entry.text = read[numero_linea][0]
+				numero_linea+=1
 		except:
 			config.close()
 	#Fondo
 	try:
 		screen.blit(background,[0,0])
 		screen.blit(volver, [630,5])
+		if musica == False:
+			pygame.draw.line(screen,[220,20,60],(14,24),(132,68),4)
 		for entry in Entries:
 			pygame.draw.rect(screen, entry.color, entry, 4)
 			txt_surface = font.render(entry.text, True, color_inactive)

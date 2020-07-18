@@ -14,6 +14,11 @@ monedas = 1000
 #Abrir txt
 config = open("Config.txt", "r")
 read = config.readlines()
+#Musica
+if int(read[9]) == 1: 
+	musica_fondo = pygame.mixer.music.load("Sonidos/Spring village.mp3")
+	pygame.mixer.music.set_volume(0.3)
+	pygame.mixer.music.play(3)
 #Variables de configuraciones
 cadencia = int(read[0][0])
 cadencia_arquero = 10-int(read[1][0])
@@ -1035,20 +1040,25 @@ while True:
 				game_over =True
 				animacion = 0
 	if game_over== True:
+		pygame.mixer.music.stop()
 		if perdiste == True:
 			if animacion%2 == 0:
 				screen.blit(negro,[0,0])
+				screen.blit(volver, [630,0])
 				time.sleep(0.5)
 			if animacion%2 == 1:
 				screen.blit(perdedor,[0,0])
+				screen.blit(volver, [630,0])
 			animacion += 1
 			time.sleep(0.5)
 		if ganaste == True:
 			if animacion%2 == 0:
 				screen.blit(negro,[0,0])
+				screen.blit(volver, [630,0])
 				time.sleep(0.5)
 			if animacion%2 == 1:
 				screen.blit(ganador,[0,0])
+				screen.blit(volver, [630,0])
 			if score ==0:
 				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
 				score +=1
