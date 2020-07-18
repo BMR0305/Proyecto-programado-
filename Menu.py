@@ -52,9 +52,11 @@ while game_over:
 				pygame.quit()
 				os.system("Ajustes.py")
 			if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
-				print("ayuda")
+				pygame.quit()
+				os.system("Ayuda.py")
 			if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
-				print("creditos")
+				pygame.quit()
+				os.system("Creditos.py")
 			if input_box.collidepoint(event.pos): #revisa si se da click en el entry
 				active = True
 				color = color_active

@@ -51,19 +51,26 @@ while game_over:
 			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
-			print(mouse)
 			if mouse[0]>14 and mouse[0]<132 and mouse[1]>24 and mouse [1]<68: #Boton musica
 				if musica == True:
 					musica = False
 				else:
 					musica = True
 			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
+				for entry in Entries:
+					if entry.text == "":
+						entry.text = "1"
 				pygame.quit()
 				os.system("Menu.py")
+
 			if mouse[0]>263 and mouse[0]<451 and mouse[1]>755 and mouse [1]<792: #Boton aplicar cambios 
 				config = open("Config.txt","w")
 				for entry in Entries:
-					config.write(entry.text +"\n")
+					if entry.text == "":
+						config.write("1"+"\n")
+					else:
+						config.write(entry.text +"\n")
+
 				if musica == True:
 					config.write("1")
 				elif musica == False:

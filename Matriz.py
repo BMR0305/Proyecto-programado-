@@ -17,10 +17,13 @@ read = config.readlines()
 #Musica
 if int(read[9]) == 1: 
 	musica_fondo = pygame.mixer.music.load("Sonidos/Spring village.mp3")
-	pygame.mixer.music.set_volume(0.3)
-	pygame.mixer.music.play(3)
+	pygame.mixer.music.set_volume(0.2)
+	pygame.mixer.music.play(12)
+#Sonidos
+golpe = pygame.mixer.Sound("Sonidos/Golpe.wav")
+#golpe.play()
 #Variables de configuraciones
-cadencia = int(read[0][0])
+cadencia = 10-int(read[0][0])
 cadencia_arquero = 10-int(read[1][0])
 cadencia_escudero = 10-int(read[2][0])
 cadencia_hacha = 10-int(read[3][0])
@@ -29,6 +32,13 @@ velocidad_arquero = int(read[5][0])
 velocidad_escudero = int(read[6][0])
 velocidad_hacha = int(read[7][0])
 velocidad_maza= int(read[8][0])
+#Niveles
+nivel_1 =pygame.image.load("Imagenes/Nivel 1.png").convert()
+nivel_1.set_colorkey([0,0,0])
+nivel_2 =pygame.image.load("Imagenes/Nivel 2.png").convert()
+nivel_2.set_colorkey([0,0,0])
+nivel_3 =pygame.image.load("Imagenes/Nivel 3.png").convert()
+nivel_3.set_colorkey([0,0,0])
 #Fondos
 matriz1 = pygame.image.load("Imagenes/Matriz1.jpg").convert()
 matriz2 = pygame.image.load("Imagenes/Matriz2.jpg").convert()
@@ -77,8 +87,6 @@ muertea.set_colorkey([0,0,0])
 #Proyectil arquero
 flecha = pygame.image.load("Imagenes/Arquero/Flecha.png").convert()
 flecha.set_colorkey([0,0,0])
-#Sonido de proyectil
-sonidoFlecha = pygame.mixer.Sound("Sonidos/Impacto flecha.wav")
 #Imagenes del escudero
 ataque0e = pygame.image.load("Imagenes/Escudero/Ataque0.png").convert()
 ataque0e.set_colorkey([0,0,0])
@@ -949,6 +957,7 @@ while True:
 	for elemental in elemental_list:
 		for avatar in avatar_list:
 			if pygame.sprite.collide_rect_ratio(0.6)(elemental, avatar):
+				golpe.play()
 				all_sprite_list.remove(elemental)
 				elemental_list.remove(elemental)
 				avatar.vida-=elemental.potencia
@@ -972,9 +981,11 @@ while True:
 	#Mostrar en pantala
 	if escenario ==1:
 		screen.blit(matriz1,[0,0])
+		screen.blit(nivel_1,[170,-10])
 
 	if escenario == 2:
 		screen.blit(matriz2,[0,0])
+		screen.blit(nivel_2,[170,-10])
 		if reset == 1:
 			for rook in rook_list:
 				rook_list.remove(rook)
@@ -989,6 +1000,7 @@ while True:
 
 	if escenario == 3:
 		screen.blit(matriz3,[0,0])
+		screen.blit(nivel_3,[170,-10])
 		if reset == 2:
 			for rook in rook_list:
 				rook_list.remove(rook)
