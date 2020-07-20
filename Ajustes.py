@@ -83,7 +83,6 @@ while game_over:
 				else:
 					entry.active = False
 					entry.color = color_inactive
-			print (mouse)
 		if event.type == pygame.KEYDOWN:
 			for entry in Entries:
 				if entry.active: 

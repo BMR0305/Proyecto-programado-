@@ -125,8 +125,6 @@ muertee.set_colorkey([0,0,0])
 #Proyectil escudero
 espada = pygame.image.load("Imagenes/Escudero/Espada.png").convert()
 espada.set_colorkey([0,0,0])
-#Sonido de proyectil
-sonidoEspada = pygame.mixer.Sound("Sonidos/Impacto espada.wav")
 
 #Imagenes del hachero
 ataque0h = pygame.image.load("Imagenes/Hacha/Ataque0.png").convert()
