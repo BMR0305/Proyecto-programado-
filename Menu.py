@@ -43,6 +43,9 @@ while game_over:
 				usuario = open("Usuario.txt","w")
 				usuario.write(text)
 				usuario.close()
+				usuarios = open("Registro de Usuarios.txt","a")
+				usuarios.write(text+", ")
+				usuarios.close()
 				game_over = False
 				pygame.quit()
 				os.system("Matriz.py")

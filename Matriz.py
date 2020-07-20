@@ -1044,10 +1044,10 @@ while True:
 			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Water":
 			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-		if score == 20:
+		if score == 1:
 			escenario +=1
 			score=0
-			if score == 0 and escenario >3:
+			if score == 0 and escenario >1:
 				ganaste = True
 				game_over =True
 				animacion = 0
@@ -1073,12 +1073,17 @@ while True:
 				screen.blit(volver, [630,0])
 			if score ==0:
 				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
+				records = open("Records.txt", "a")
+				usuario = open("Usuario.txt","r")
+				records.write(usuario.readline()+"\n")
+				records.write(str(tiempo_conseguido)+"\n")
 				score +=1
 			animacion += 1
 			time.sleep(0.5)
 
 			resultado = font.render("Tiempo: "+str(tiempo_conseguido)+" segundos",0,(255,255,255))
 			screen.blit(resultado,[150,600])
+
 	#Default
 	pygame.display.flip()
 	clock.tick(15)
