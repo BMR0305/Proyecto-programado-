@@ -10,7 +10,7 @@ clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
 #Variables de monedas
-monedas = 1000
+monedas = 200
 #Abrir txt
 config = open("Config.txt", "r")
 read = config.readlines()
@@ -1042,10 +1042,10 @@ while True:
 			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Water":
 			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
-		if score == 1:
+		if score == 20:
 			escenario +=1
 			score=0
-			if score == 0 and escenario >1:
+			if score == 0 and escenario >3:
 				ganaste = True
 				game_over =True
 				animacion = 0

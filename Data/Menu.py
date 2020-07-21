@@ -39,7 +39,6 @@ while game_over:
 			sys.exit()
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
-			print (mouse)
 			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
 				usuario = open("Usuario.txt","w")
 				usuario.write(text)
