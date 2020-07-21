@@ -1,3 +1,5 @@
+G
+12
 F
 100
 Jorge
@@ -6,5 +8,3 @@ YoSoyBatman
 200
 Your Boos
 207
-Superman34
-300
