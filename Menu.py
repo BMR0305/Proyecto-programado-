@@ -39,6 +39,7 @@ while game_over:
 			sys.exit()
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
+			print (mouse)
 			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
 				usuario = open("Usuario.txt","w")
 				usuario.write(text)
@@ -60,6 +61,9 @@ while game_over:
 			if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
 				pygame.quit()
 				os.system("Creditos.py")
+			if mouse[0]>341 and mouse[0]<393 and mouse[1]>553 and mouse [1]<650: #boton salon de la fama
+				pygame.quit()
+				os.system("Salon.py")
 			if input_box.collidepoint(event.pos): #revisa si se da click en el entry
 				active = True
 				color = color_active

@@ -1055,17 +1055,14 @@ while True:
 			if animacion%2 == 0:
 				screen.blit(negro,[0,0])
 				screen.blit(volver, [630,0])
-				time.sleep(0.5)
 			if animacion%2 == 1:
 				screen.blit(perdedor,[0,0])
 				screen.blit(volver, [630,0])
 			animacion += 1
-			time.sleep(0.5)
 		if ganaste == True:
 			if animacion%2 == 0:
 				screen.blit(negro,[0,0])
 				screen.blit(volver, [630,0])
-				time.sleep(0.5)
 			if animacion%2 == 1:
 				screen.blit(ganador,[0,0])
 				screen.blit(volver, [630,0])
@@ -1073,11 +1070,63 @@ while True:
 				tiempo_conseguido = tiempo+ segundo2*10 + minuto1 *60
 				records = open("Records.txt", "a")
 				usuario = open("Usuario.txt","r")
-				records.write(usuario.readline()+"\n")
-				records.write(str(tiempo_conseguido)+"\n")
+				records.write(usuario.readline())
+				records.write("\n"+str(tiempo_conseguido))
+				#Txt
+				records = open("Records.txt", "r")
+				#Ordenar podio
+				lista = records.readlines()
+				tiempos=[]
+				nombres = []
+				final = []
+				def ordenar():
+					global lista
+					global tiempos
+					global nombres
+					global final
+					i=0
+					n= len(lista)
+					while i<n:
+						if i%2==0:
+							nombres.append(lista[i][:len(lista[i])-1])
+						else:
+							tiempos.append(int(lista[i][:3]))
+						i+=1
+					i=0
+					for i in range(1,len(tiempos)):
+						for j in range(0,len(tiempos)-i):
+							if tiempos[j+1] < tiempos[j]:
+								aux = tiempos[j]
+								tiempos[j] = tiempos[j+1]
+								tiempos[j+1] = aux
+
+								aux=nombres[j]
+								nombres[j]=nombres[j+1]
+								nombres[j+1]= aux
+					i=0
+					j=0
+					h=0
+					while i<n:
+						if i%2==0:
+							final.append(nombres[j])
+							j+=1
+						else:
+							final.append(str(tiempos[h]))
+							h+=1
+						i+=1
+				ordenar()
+				records.close()
+
+				def reescribir():
+					global final
+					i=0
+					records = open("Records.txt", "w")
+					while i<10:
+						records.write(final[i]+"\n")
+						i += 1
+				reescribir()
 				score +=1
 			animacion += 1
-			time.sleep(0.5)
 
 			resultado = font.render("Tiempo: "+str(tiempo_conseguido)+" segundos",0,(255,255,255))
 			screen.blit(resultado,[150,600])
