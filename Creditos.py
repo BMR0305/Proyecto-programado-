@@ -19,10 +19,9 @@ while True:
 			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
-			print(mouse)
 			if mouse[0]>14 and mouse[0]<81 and mouse[1]>734 and mouse [1]<783: #Boton volver
 				pygame.quit()
-				os.system("Menu.py")
+				os.system("Avatars_vs_Rook.py")
 	try:
 		screen.blit(background,[0,0])
 		screen.blit(volver,[5,725])

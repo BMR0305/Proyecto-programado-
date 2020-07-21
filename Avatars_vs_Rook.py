@@ -9,7 +9,7 @@ pygame.display.set_caption("Avatar vs Rooks")
 clock=pygame.time.Clock()
 
 #Cargar imagnes
-background = pygame.image.load("Imagenes/Menu.jpg").convert()
+background = pygame.image.load("Imagenes\Menu.jpg").convert()
 jugar = pygame.image.load("Imagenes/Jugar.png").convert()
 jugar.set_colorkey([0,0,0])
 ayuda = pygame.image.load("Imagenes/Ayuda.png").convert()
@@ -72,10 +72,7 @@ while game_over:
 
 		if event.type == pygame.KEYDOWN:
 			if active: 
-				if event.key == pygame.K_RETURN:
-					print(text)
-					text = ""
-				elif event.key == pygame.K_BACKSPACE:
+				if event.key == pygame.K_BACKSPACE:
 					text = text [:len(text)-1]
 				elif len(text)>10:
 					if event.key == pygame.K_BACKSPACE:

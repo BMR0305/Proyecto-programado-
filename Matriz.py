@@ -9,11 +9,14 @@ screen = pygame.display.set_mode(size)
 clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.Font(None, 60)
+font2 = pygame.font.Font(None, 50)
 #Variables de monedas
 monedas = 200
 #Abrir txt
 config = open("Config.txt", "r")
 read = config.readlines()
+usuario = open("Usuario.txt", "r")
+jugador = usuario.readline()
 #Musica
 if int(read[9]) == 1: 
 	musica_fondo = pygame.mixer.music.load("Sonidos/Spring village.mp3")
@@ -825,7 +828,7 @@ while True:
 		mouse = event.pos
 		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
 			pygame.quit()
-			os.system("Menu.py")
+			os.system("Avatars_vs_Rook.py")
 		for hitbox in hitboxes:
 			if hitbox[0].collidepoint(mouse) and not agarrar:
 				if hitbox[1]=="Sand" and monedas >= 50:
@@ -1012,6 +1015,8 @@ while True:
 			reset +=1
 			
 	if game_over == False:
+		player = font2.render(jugador,True,[255,255,255])
+		screen.blit(player, (330,10))
 		screen.blit(relojseg1,[140,710])
 		screen.blit(relojseg2,[120,710])
 		screen.blit(relojmin1,[80,710])

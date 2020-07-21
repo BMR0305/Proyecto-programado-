@@ -61,7 +61,7 @@ while game_over:
 					if entry.text == "":
 						entry.text = "1"
 				pygame.quit()
-				os.system("Menu.py")
+				os.system("Avatars_vs_Rook.py")
 
 			if mouse[0]>263 and mouse[0]<451 and mouse[1]>755 and mouse [1]<792: #Boton aplicar cambios 
 				config = open("Config.txt","w")
@@ -86,10 +86,7 @@ while game_over:
 		if event.type == pygame.KEYDOWN:
 			for entry in Entries:
 				if entry.active: 
-					if event.key == pygame.K_RETURN:
-						print(entry.text)
-						entry.text = ""
-					elif event.key == pygame.K_BACKSPACE:
+					if event.key == pygame.K_BACKSPACE:
 						entry.text = entry.text [:len(entry.text)-1]
 					elif len(entry.text)>0:
 						if event.key == pygame.K_BACKSPACE:
