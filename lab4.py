@@ -98,12 +98,14 @@ class ListaDoble:
 					self.tail = self.tail.prev
 					self.size -=1
 					self.tail.next = None
+					exito = True
 					break
 				elif tmp.next.get_valor()== valor:
 					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
+					exito = True
 					break
 				else:
 					tmp = tmp.next
@@ -121,15 +123,18 @@ class ListaDoble:
 					self.tail = self.tail.prev
 					self.size -=1
 					self.tail.next = None
+					exito = True
 				elif tmp.next.get_valor()== valor:
 					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
+					exito = True
 				elif self.head.get_valor()== valor:
 					self.head = self.head.next
 					self.size -=1
 					self.head.prev = None
+					exito = True
 				else:
 					tmp = tmp.next
 			if not exito:
