@@ -10,7 +10,7 @@ class ListaDoble:
 	def __init__(self):
 		self.head = None  #puntero al inicio de la lista
 		self.tail = None  #puntero al final de la lista
-		self.largo = 0
+		self.size = 0
 
 	def printL(self):
 		nodo = self.head
@@ -37,7 +37,7 @@ class ListaDoble:
 		elif p == 1:
 			print (',',end = "")
 			p = 2
-			return self.rprintL_aux(nodo.prev,p)
+			return self.rprintL_aux(nodo,p)
 		else:
 			print(nodo.get_valor(),end = "")
 			p = 1
@@ -45,7 +45,7 @@ class ListaDoble:
 
 	def appe (self, dato):
 		if isinstance (dato, int):
-			self.largo +=1
+			self.size +=1
 			if self.head == None:
 				self.head = Nodo (dato)
 				self.tail = self.head 
@@ -71,7 +71,7 @@ class ListaDoble:
 			tmp = self.head 
 			while tmp.next != None:
 				if tmp.next.get_valor()== valor:
-					exito = true
+					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
@@ -89,7 +89,7 @@ class ListaDoble:
 			tmp = self.head 
 			while tmp.next != None:
 				if tmp.next.get_valor()== valor:
-					exito = true
+					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
@@ -107,5 +107,32 @@ class ListaDoble:
 			return "Lista vacia"
 		temp = self.tail
 		
+
+	def ins(valor1, valor2):
+		if self.head == None:
+			return "Lista vacia"
+		elif isinstance (dato, int):
+			self.size +=1
+			if self.head == valor2:
+				tmp = self.head
+				self.head = Nodo(valor1)
+				self.head.next = tmp  
+			else:
+				exito = False
+				tmp = self.head 
+				while tmp.next != None:
+					if tmp.next.get_valor()== valor2:
+						exito = True
+						sig = tmp.next
+						tmp.next = Nodo(valor1)
+						tmp.next.prev = tmp
+						tmp.next.next = sig
+						sig.prev = temp.next 
+						self.size +=1
+						break
+					else:
+						tmp = tmp.next
+				if not exito:
+					return "Elemento no existe"
 
 
