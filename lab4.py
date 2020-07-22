@@ -140,7 +140,7 @@ class ListaDoble:
 			return "Lista vacia"
 		elif isinstance (valor1, int):
 			self.size +=1
-			if self.head == valor2:
+			if self.head.get_valor() == valor2:
 				tmp = self.head
 				self.head = Nodo(valor1)
 				self.head.next = tmp  
@@ -154,7 +154,7 @@ class ListaDoble:
 						tmp.next = Nodo(valor1)
 						tmp.next.prev = tmp
 						tmp.next.next = sig
-						sig.prev = temp.next 
+						sig.prev = tmp.next 
 						self.size +=1
 						break
 					else:
