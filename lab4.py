@@ -4,7 +4,8 @@ class Nodo:
 		self.prev = None  #puntero al nodo anterior
 		self.valor = valor
 	def get_valor(self):
-	return self.valor
+		return self.valor
+
 class ListaDoble:
 	def __init__(self):
 		self.head = None  #puntero al inicio de la lista
@@ -28,7 +29,7 @@ class ListaDoble:
 	def rprintL(self):
 		nodo = self.tail
 		print('[',end = "")
-		return self.rprintL_aux(nodo,1)
+		return self.rprintL_aux(nodo,2)
 	def rprintL_aux(self,nodo,p):
 		if nodo == None:
 			print(']')
@@ -36,6 +37,7 @@ class ListaDoble:
 		elif p == 1:
 			print (',',end = "")
 			p = 2
+			return self.rprintL_aux(nodo.prev,p)
 		else:
 			print(nodo.get_valor(),end = "")
 			p = 1
@@ -76,3 +78,24 @@ class ListaDoble:
 					tmp = tmp.next
 			if not exito:
 				return "Elemento no existe"
+
+	def dela(self,valor):
+		if self.head == None:
+			return "Lista vacia"
+		else:
+			exito = False
+			tmp = self.head 
+			while tmp.next != None:
+				if tmp.next.get_valor()== valor:
+					exito = true
+					tmp.next = tmp.next.next
+					self.size -=1
+				elif self.head.get_valor()== valor:
+					self.head = self.head.next
+					self.size -=1
+					self.head.prev = None
+				else:
+					tmp = tmp.next
+			if not exito:
+				return "Elemento no existe"
+
