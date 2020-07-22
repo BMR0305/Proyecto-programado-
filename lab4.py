@@ -90,6 +90,7 @@ class ListaDoble:
 			while tmp.next != None:
 				if tmp.next.get_valor()== valor:
 					exito = true
+					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
 				elif self.head.get_valor()== valor:
