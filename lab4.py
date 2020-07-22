@@ -1,3 +1,10 @@
+#Clase Nodo:
+#Atributos:
+	#next: referencia al siguiente nodo
+	#prev: referencia al nodo anterio
+	#valor: valor contenido en el nodo
+#Metodos:
+	#get.valor(): obtiene el valor de la instancia
 class Nodo:
 	def __init__(self,valor):
 		self.next = None  #puntero al nodo siguiente
@@ -5,7 +12,24 @@ class Nodo:
 		self.valor = valor
 	def get_valor(self):
 		return self.valor
-
+#Clase ListaDoble
+#Atributos:
+	#head: referencia al primer nodo de la lista
+	#prev: referencia al ultimo nodo de la lista
+	#size: contiene el largo de la lista
+#Metodos:
+	#printL(): enseña la lista en consola
+	#rprintL(): enseña la lista alrevez en consola
+	#appe(): añade un nodo a la lista con el valor dado
+		#E: numero #S:añade un nodo a la lista #R:numero debe ser entero
+	#dele(): elimina el primer elemento de la lista igual al valor dado
+		#E: numero #S:lista con el nodo igual al valor eliminado #R:-
+	#dela(): elimina todos los elementos de la lista igual al valor dado
+		#E: numero #S:lista con los nodos igual al valor eliminados #R:-
+	#findl(): dice en que posicion de la lista se encuentra el valor dado
+		#E: numero #S:posicion en la lista del nodo #R:-
+	#ins(): inserta un nodo antes de otro nodo que el valor del mismo sea igual a el segundo numero dado
+		#E 2 numeros #S primer numero insertado como nodo antes del primer nodo con el segundo valor #R-
 class ListaDoble:
 	def __init__(self):
 		self.head = None  #puntero al inicio de la lista
