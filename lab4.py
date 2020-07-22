@@ -134,15 +134,11 @@ class ListaDoble:
 			return final
 		else:
 			return "No se encontro el valor"
-
-
 			
-		
-
-	def ins(valor1, valor2):
+	def ins(self,valor1, valor2):
 		if self.head == None:
 			return "Lista vacia"
-		elif isinstance (dato, int):
+		elif isinstance (valor1, int):
 			self.size +=1
 			if self.head == valor2:
 				tmp = self.head
