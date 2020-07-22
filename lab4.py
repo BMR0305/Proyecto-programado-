@@ -4,7 +4,7 @@ class Nodo:
 		self.prev = None  #puntero al nodo anterior
 		self.valor = valor
 	def get_valor(self):
-	return self.valor
+		return self.valor
 class ListaDoble:
 	def __init__(self):
 		self.head = None  #puntero al inicio de la lista
@@ -46,7 +46,7 @@ class ListaDoble:
 			self.largo +=1
 			if self.head == None:
 				self.head = Nodo (dato)
-				self.tail = self.head
+				self.head = self.tail
 			else:
 				tmp = self.tail
 				ant = tmp
@@ -69,6 +69,7 @@ class ListaDoble:
 			while tmp.next != None:
 				if tmp.next.get_valor()== valor:
 					exito = true
+					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
 					break
