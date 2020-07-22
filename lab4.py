@@ -100,3 +100,10 @@ class ListaDoble:
 			if not exito:
 				return "Elemento no existe"
 
+	def findl(self,valor):
+		if self.head == None:
+			return "Lista vacia"
+		temp = self.tail
+		
+
+
