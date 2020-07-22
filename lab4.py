@@ -48,10 +48,11 @@ class ListaDoble:
 			self.largo +=1
 			if self.head == None:
 				self.head = Nodo (dato)
-				self.head = self.tail
+				self.tail = self.head 
 			else:
 				tmp = self.tail
 				ant = tmp
+				tmp.next = Nodo (dato)
 				tmp = tmp.next
 				tmp.prev = ant 
 				self.tail = tmp
