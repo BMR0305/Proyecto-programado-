@@ -48,7 +48,7 @@ class ListaDoble:
 			self.largo +=1
 			if self.head == None:
 				self.head = Nodo (dato)
-				self.tail = self.head
+				self.head = self.tail
 			else:
 				tmp = self.tail
 				ant = tmp
@@ -71,6 +71,7 @@ class ListaDoble:
 			while tmp.next != None:
 				if tmp.next.get_valor()== valor:
 					exito = true
+					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
 					break
