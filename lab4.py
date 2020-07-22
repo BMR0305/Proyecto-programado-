@@ -76,6 +76,11 @@ class ListaDoble:
 					tmp.next = tmp.next.next
 					self.size -=1
 					break
+				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
+					break
 				else:
 					tmp = tmp.next
 			if not exito:
@@ -97,6 +102,11 @@ class ListaDoble:
 					self.head = self.head.next
 					self.size -=1
 					self.head.prev = None
+
+				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
 				else:
 					tmp = tmp.next
 			if not exito:
@@ -128,5 +138,32 @@ class ListaDoble:
 
 			
 		
+
+	def ins(valor1, valor2):
+		if self.head == None:
+			return "Lista vacia"
+		elif isinstance (dato, int):
+			self.size +=1
+			if self.head == valor2:
+				tmp = self.head
+				self.head = Nodo(valor1)
+				self.head.next = tmp  
+			else:
+				exito = False
+				tmp = self.head 
+				while tmp.next != None:
+					if tmp.next.get_valor()== valor2:
+						exito = True
+						sig = tmp.next
+						tmp.next = Nodo(valor1)
+						tmp.next.prev = tmp
+						tmp.next.next = sig
+						sig.prev = temp.next 
+						self.size +=1
+						break
+					else:
+						tmp = tmp.next
+				if not exito:
+					return "Elemento no existe"
 
 
