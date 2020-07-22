@@ -94,16 +94,16 @@ class ListaDoble:
 			exito = False
 			tmp = self.head 
 			while tmp.next != None:
-				if tmp.next.get_valor()== valor:
+				if self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
+					break
+				elif tmp.next.get_valor()== valor:
 					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
 					self.size -=1
-					break
-				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
-					self.tail = self.tail.prev
-					self.size -=1
-					self.tail.next = None
 					break
 				else:
 					tmp = tmp.next
@@ -117,7 +117,11 @@ class ListaDoble:
 			exito = False
 			tmp = self.head 
 			while tmp.next != None:
-				if tmp.next.get_valor()== valor:
+				if self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
+				elif tmp.next.get_valor()== valor:
 					exito = True
 					tmp.next.next.prev = tmp
 					tmp.next = tmp.next.next
@@ -126,11 +130,6 @@ class ListaDoble:
 					self.head = self.head.next
 					self.size -=1
 					self.head.prev = None
-
-				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
-					self.tail = self.tail.prev
-					self.size -=1
-					self.tail.next = None
 				else:
 					tmp = tmp.next
 			if not exito:
