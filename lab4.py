@@ -40,3 +40,39 @@ class ListaDoble:
 			print(nodo.get_valor(),end = "")
 			p = 1
 			return self.rprintL_aux(nodo.prev,p)
+
+	def appe (self, dato):
+		if isinstance (dato, int):
+			self.largo +=1
+			if self.head == None:
+				self.head = Nodo (dato)
+				self.tail = self.head
+			else:
+				tmp = self.tail
+				ant = tmp
+				tmp = tmp.next
+				tmp.prev = ant 
+				self.tail = tmp
+		else:
+			print ("Error")
+
+	def dele(self, valor):
+		if self.head == None:
+			return "Lista vacia"
+		elif self.head.get_valor()== valor:
+			self.head = self.head.next
+			self.size -=1
+			self.head.prev = None
+		else:
+			exito = False
+			tmp = self.head 
+			while tmp.next != None:
+				if tmp.next.get_valor()== valor:
+					exito = true
+					tmp.next = tmp.next.next
+					self.size -=1
+					break
+				else:
+					tmp = tmp.next
+			if not exito:
+				return "Elemento no existe"
