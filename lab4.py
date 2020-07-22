@@ -76,6 +76,11 @@ class ListaDoble:
 					tmp.next = tmp.next.next
 					self.size -=1
 					break
+				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
+					break
 				else:
 					tmp = tmp.next
 			if not exito:
@@ -97,6 +102,11 @@ class ListaDoble:
 					self.head = self.head.next
 					self.size -=1
 					self.head.prev = None
+
+				elif self.tail.get_valor()== valor and tmp.next.get_valor()== valor:
+					self.tail = self.tail.prev
+					self.size -=1
+					self.tail.next = None
 				else:
 					tmp = tmp.next
 			if not exito:
