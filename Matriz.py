@@ -1,5 +1,5 @@
 import pygame, sys, random ,time, os 
-os.environ['SDL_VIDEO_CENTERED'] = '1'
+os.environ['SDL_VIDEO_CENTERED'] = '1' #se centra la ventana de juego
 pygame.init()
 #Pantalla
 size = (720,800)
@@ -7,10 +7,10 @@ pygame.display.set_caption("Avatars vs Rooks")
 screen = pygame.display.set_mode(size)
 #Reloj
 clock=pygame.time.Clock()
-#Fuente
+#Fuentes
 font = pygame.font.Font(None, 60)
 font2 = pygame.font.Font(None, 50)
-#Variables de monedas
+#Monedas iniciales
 monedas = 200
 #Abrir txt
 config = open("Config.txt", "r")
@@ -24,7 +24,6 @@ if int(read[9]) == 1:
 	pygame.mixer.music.play(12)
 #Sonidos
 golpe = pygame.mixer.Sound("Sonidos/Golpe.wav")
-#golpe.play()
 #Variables de configuraciones
 cadencia = 10-int(read[0][0])
 cadencia_arquero = 10-int(read[1][0])
@@ -226,17 +225,25 @@ plata.set_colorkey([0,0,0])
 cobre = pygame.image.load("Imagenes/Cobre.png").convert()
 cobre.set_colorkey([0,0,0])
 
-#Clase Arquero
-#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+"""Clase Arquero
+#Atributos: image: imagen que enseña la instancia 
+					rect: hitbox de la imagen
+					rect.topleft: posicion
+					frame: variable para elegir la imagen
+					caminar: lsita de imagenes para la animacion de caminar
+					ataque: listad e imagenes para la animacion de ataque
+					proyectil: proyectil asociado a la clase
+					vida: aguante de la instancia
+					atacando: boolean sobre el estado de ataque
 #Funciones
 #get_frame(): obtiene el valor de self.frame
 		#E:lista de imagenes #S:imagen segun el frame #R:-
 #change_image(): cambia la imagen que se observa en pantalla
-		#E:lista de imaganes #S:- #R-:
+		#E:lista de imaganes #S:cambia la imagen #R-:
 #update():actualiza la posicion del sprite
-		#E:instancia #S:- #R:-
+		#E:instancia #S:muestra la imagen #R:-
 #attack(): inicia la secuencia de ataaque
-		#E: instancia #S:- #R:-
+		#E: instancia #S:muestra la imagen #R:-"""
 class Arquero(pygame.sprite.Sprite):
 	def __init__(self, position):
 		super().__init__()
@@ -246,8 +253,6 @@ class Arquero(pygame.sprite.Sprite):
 		self.frame = 0
 		self.caminar = [caminar1a, caminar2a, caminar3a, caminar4a, caminar5a, caminar6a, caminar7a]
 		self.ataque = [ataque0a, ataque1a, ataque2a, ataque3a, ataque4a, ataque5a, ataque6a, ataque7a] 
-		self.muerte = muertea
-		self.daño = dañoa
 		self.proyectil = flecha
 		self.vida = 5
 		self.atacando = False
@@ -280,17 +285,25 @@ class Arquero(pygame.sprite.Sprite):
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
 
-#Clase Escudero
-#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+"""Clase Escudero
+#Atributos: image: imagen que enseña la instancia 
+					rect: hitbox de la imagen
+					rect.topleft: posicion
+					frame: variable para elegir la imagen
+					caminar: lsita de imagenes para la animacion de caminar
+					ataque: listad e imagenes para la animacion de ataque
+					proyectil: proyectil asociado a la clase
+					vida: aguante de la instancia
+					atacando: boolean sobre el estado de ataque
 #Funciones
 #get_frame(): obtiene el valor de self.frame
 		#E:lista de imagenes #S:imagen segun el frame #R:-
 #change_image(): cambia la imagen que se observa en pantalla
-		#E:lista de imaganes #S:- #R-:
+		#E:lista de imaganes #S:cambia a magen #R-:
 #update():actualiza la posicion del sprite
-		#E:instancia #S:- #R:-
+		#E:instancia #S:muestra la imagen #R:-
 #attack(): inicia la secuencia de ataaque
-		#E: instancia #S:- #R:-
+		#E: instancia #S:muestra imagen #R:-"""
 class Escudero(pygame.sprite.Sprite):
 	def __init__(self, position):
 			super().__init__()
@@ -300,8 +313,6 @@ class Escudero(pygame.sprite.Sprite):
 			self.frame = 0
 			self.caminar = [caminar1e, caminar2e, caminar3e, caminar4e, caminar5e, caminar6e, caminar7e]
 			self.ataque = [ataque0e, ataque1e, ataque2e, ataque3e, ataque4e, ataque5e, ataque6e, ataque7e] 
-			self.muerte = muertee
-			self.daño = dañoe
 			self.vida = 10
 			self.atacando = False
 
@@ -331,17 +342,26 @@ class Escudero(pygame.sprite.Sprite):
 	
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
-#Clase Hacha
-#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+"""#Clase Hacha
+#Atributos: image: imagen que enseña la instancia 
+					rect: hitbox de la imagen
+					rect.topleft: posicion
+					frame: variable para elegir la imagen
+					caminar: lsita de imagenes para la animacion de caminar
+					ataque: listad e imagenes para la animacion de ataque
+					proyectil: proyectil asociado a la clase
+					vida: aguante de la instancia
+					potencia: daño caudsado con el ataque
+					atacando: boolean sobre el estado de ataque
 #Funciones
 #get_frame(): obtiene el valor de self.frame
 		#E:lista de imagenes #S:imagen segun el frame #R:-
 #change_image(): cambia la imagen que se observa en pantalla
-		#E:lista de imaganes #S:- #R-:
+		#E:lista de imaganes #S:cambia la imagen #R-:
 #update():actualiza la posicion del sprite
-		#E:instancia #S:- #R:-
+		#E:instancia #S:muestra la imagen #R:-
 #attack(): inicia la secuencia de ataaque
-		#E: instancia #S:- #R:-
+		#E: instancia #S: muestra la imagen #R:-"""
 class Hacha(pygame.sprite.Sprite):
 	def __init__(self, position):
 			super().__init__()
@@ -351,8 +371,6 @@ class Hacha(pygame.sprite.Sprite):
 			self.frame = 0
 			self.caminar = [caminar1h, caminar2h, caminar3h, caminar4h, caminar5h, caminar6h, caminar7h]
 			self.ataque = [ataque0h, ataque1h, ataque2h, ataque3h, ataque4h, ataque5h, ataque6h, ataque7h]
-			self.muerte = muerteh
-			self.daño = dañoh
 			self.vida = 20
 			self.potencia = 9
 			self.atacando = False
@@ -378,17 +396,26 @@ class Hacha(pygame.sprite.Sprite):
 	
 	def attack(self):
 		self.change_image(self.ataque, "ataque")
-#Clase Maza
-#Atributos: image,rect,rect.topleft,frame,caminar,ataque,muerte,daño
+"""#Clase Maza
+#Atributos: image: imagen que enseña la instancia 
+					rect: hitbox de la imagen
+					rect.topleft: posicion
+					frame: variable para elegir la imagen
+					caminar: lsita de imagenes para la animacion de caminar
+					ataque: listad e imagenes para la animacion de ataque
+					proyectil: proyectil asociado a la clase
+					vida: aguante de la instancia
+					potencia: daño caudsado con el ataque
+					atacando: boolean sobre el estado de ataque
 #Funciones
 #get_frame(): obtiene el valor de self.frame
 		#E:lista de imagenes #S:imagen segun el frame #R:-
 #change_image(): cambia la imagen que se observa en pantalla
-		#E:lista de imaganes #S:- #R-:
+		#E:lista de imaganes #S:cambio de imagen #R-:
 #update():actualiza la posicion del sprite
-		#E:instancia #S:- #R:-
+		#E:instancia #S:muestra la imagen #R:-
 #attack(): inicia la secuencia de ataaque
-		#E: instancia #S:- #R:-
+		#E: instancia #S: muestra la imagen #R:-"""
 class Maza(pygame.sprite.Sprite):
 	def __init__(self, position):
 		super().__init__()
@@ -398,8 +425,6 @@ class Maza(pygame.sprite.Sprite):
 		self.frame = 0
 		self.caminar = [caminar1m, caminar2m, caminar3m, caminar4m, caminar5m, caminar6m, caminar7m]
 		self.ataque = [ataque0m, ataque1m, ataque2m, ataque3m, ataque4m, ataque5m, ataque6m, ataque7m] 
-		self.muerte = muertem
-		self.daño = dañom
 		self.vida = 25
 		self.potencia = 12
 		self.atacando = False
@@ -428,7 +453,9 @@ class Maza(pygame.sprite.Sprite):
 		self.change_image(self.ataque, "ataque")
 
 #Clase Proyectil
-#Atributos: self.image, self.rect
+#Atributos: image: imagen de la instancia
+			#rect: hitbox de la instancia
+			#potencia: daño causado por el proyectil
 #Funciones
 #update(): actualiza la posicion del sprite
 		#E: instancia #S: - #R: -
@@ -445,7 +472,9 @@ class Proyectil(pygame.sprite.Sprite):
 	def update(self):
 		self.rect.y -= 10 
 #Clase Moneda
-#Atributos:self.tipo,self.image,self.rect
+#Atributos: tipo: tipo de moneda creada
+			#image: imagen mostrada 
+			#rect: hitbox 
 #Funciones -
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self,tipo):
@@ -462,10 +491,12 @@ class Moneda(pygame.sprite.Sprite):
 			self.rect = self.image.get_rect()
 
 #Clase Sand
-#Atributos: self.image, self.rect
+#Atributos: image: imagen mostrada
+			#rect: hitbox
+			#vida: aguante de la instancia
 #Funciones:
 #attack(): crea la instancia elemental (ataque de los rooks)
-		#E: instancia #S: - #R: -  
+		#E: instancia #S:creacion de elemental #R: -  
 class Sand(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -481,10 +512,12 @@ class Sand(pygame.sprite.Sprite):
 
 
 #Clase Rock
-#Atributos: self.image, self.rect
+#Atributos: image: imagen mostrada
+			#rect: hitbox
+			#vida: aguante de la instancia
 #Funciones:
 #attack(): crea la instancia elemental (ataque de los rooks)
-		#E: instancia #S: - #R: - 
+		#E: instancia #S:creacion de elemental #R: -  
 class Rock(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -499,10 +532,12 @@ class Rock(pygame.sprite.Sprite):
 		elemental_list.add(elemental)
 
 #Clase Fire
-#Atributos: self.image, self.rect
+#Atributos: image: imagen mostrada
+			#rect: hitbox
+			#vida: aguante de la instancia
 #Funciones:
 #attack(): crea la instancia elemental (ataque de los rooks)
-		#E: instancia #S: - #R: - 
+		#E: instancia #S:creacion de elemental #R: -  
 class Fire(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -517,10 +552,12 @@ class Fire(pygame.sprite.Sprite):
 		elemental_list.add(elemental)
 
 #Clase Water
-#Atributos: self.image, self.rect
+#Atributos: image: imagen mostrada
+			#rect: hitbox
+			#vida: aguante de la instancia
 #Funciones:
 #attack(): crea la instancia elemental (ataque de los rooks)
-		#E: instancia #S: - #R: - 
+		#E: instancia #S:creacion de elemental #R: -  
 class Water(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -536,7 +573,9 @@ class Water(pygame.sprite.Sprite):
 
 
 #Clase Elemental
-#Atributos: self.image, self.rect
+#Atributos: image: imagen mostrada 
+			#rect: hitbox
+			#potencia: daño causado
 #Funciones
 #update(): actualiza la posicion del sprite
 		#E: instancia #S: - #R: -
@@ -577,28 +616,31 @@ coordy =1200
 oleada = 1
 enemigos = 0
 #Creacion de avatars
+#E: coordy, oleada y enemigos (variables globales)
+#S: creacion de avatars
+#R:-
 def invocar():
 	global coordy
 	global oleada
 	global enemigos
 	for i in range(60):
-		x = random.choice(["arquero", "escudero", "hacha", "maza"]) 
-		if x == "arquero":
+		x = random.choice(["arquero", "escudero", "hacha", "maza"]) #seleccion de avatar alazar 
+		if x == "arquero": #creacion de arquero
 			arquero = Arquero((random.choice([252,333,416,498,583]),coordy))
 			arquero_list.add(arquero)
 			avatar_list.add(arquero)
 			all_sprite_list.add(arquero)
-		if x == "escudero":
+		if x == "escudero": #creacion de escuderos
 			escudero = Escudero((random.choice([252,333,416,498,583]),coordy))
 			escudero_list.add(escudero)
 			avatar_list.add(escudero)
 			all_sprite_list.add(escudero)
-		if x == "hacha":
+		if x == "hacha": #creacion de le{adores}
 			hacha = Hacha((random.choice([252,333,416,498,583]),coordy))
 			hacha_list.add(hacha)
 			avatar_list.add(hacha)
 			all_sprite_list.add(hacha)
-		if x == "maza":
+		if x == "maza": #creacion de canibales
 			maza = Maza((random.choice([252,333,416,498,583]),coordy))
 			maza_list.add(maza)
 			avatar_list.add(maza)
@@ -611,7 +653,7 @@ def invocar():
 				oleada += 1
 				enemigos =0
 				if oleada == 5:
-					coordy+=1200
+					coordy+=1500
 		elif oleada < 9:
 			coordy += 210
 			enemigos += 1
@@ -619,7 +661,7 @@ def invocar():
 				oleada += 1
 				enemigos =0
 				if oleada == 9:
-					coordy+=1200
+					coordy+=1500
 		elif oleada < 13:
 			coordy += 120
 			enemigos += 1
@@ -693,7 +735,9 @@ Cuadro_37 = [pygame.Rect(336,649, 75, 62),0]
 Cuadro_38 = [pygame.Rect(419,649, 75, 62),0]
 Cuadro_39 = [pygame.Rect(501,649, 75, 62),0]
 Cuadro_40 = [pygame.Rect(586,649, 75, 62),0]
+#Lista que contiene todos los cuadros
 Cuadros = [Cuadro_1 ,Cuadro_2 ,Cuadro_3 ,Cuadro_4 ,Cuadro_5 ,Cuadro_6 ,Cuadro_7 ,Cuadro_8 ,Cuadro_9 ,Cuadro_10 ,Cuadro_11 ,Cuadro_12 ,Cuadro_13 ,Cuadro_14 ,Cuadro_15 ,Cuadro_16 ,Cuadro_17 ,Cuadro_18 ,Cuadro_19 ,Cuadro_20 ,Cuadro_21 ,Cuadro_22 ,Cuadro_23 ,Cuadro_24 ,Cuadro_25 ,Cuadro_26 ,Cuadro_27 ,Cuadro_28 ,Cuadro_29 ,Cuadro_30 ,Cuadro_31 ,Cuadro_32 ,Cuadro_33 ,Cuadro_34 ,Cuadro_35 ,Cuadro_36 ,Cuadro_37 ,Cuadro_38 ,Cuadro_39 ,Cuadro_40]   
+#Variables de cambio de escenario
 escenario = 1
 reset = 1
 game_over = False
@@ -703,6 +747,7 @@ animacion = 0
 invocar()
 #Main loop
 while True:
+	#inicializacion del tiempo
 	tiempo = pygame.time.get_ticks()//1000-resto
 	if tiempo == 10 :
 		tiempo=0
@@ -721,13 +766,14 @@ while True:
 	if minuto1 > 9:
 		minuto1 = 0
 		minuto2 += 1
-	
+	#Cadencia de los rooks
 	tiempo_torre = pygame.time.get_ticks()//1000-resto_torre
 	if tiempo_torre == cadencia:
 		tiempo_torre = 0
 		resto_torre += cadencia
 		for rook in rook_list:
 			for avatar in avatar_list:
+				#deteccion rango de ataque
 				if rook.rect.x == 252 and avatar.rect.x == 252 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 						rook.attack()
 				if rook.rect.x == 333 and avatar.rect.x == 333 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
@@ -738,35 +784,36 @@ while True:
 						rook.attack()
 				if rook.rect.x == 583 and avatar.rect.x == 583 and avatar.rect.y < 780 and avatar.rect.y - rook.rect.y > 0: 
 						rook.attack()
+	#Cadencia de arquero
 	tiempo_arquero = pygame.time.get_ticks()//1000-resto_arquero
 	if tiempo_arquero == cadencia_arquero:
 		tiempo_arquero = 0
 		resto_arquero +=cadencia_arquero
 		for arquero in arquero_list:
-			if arquero.atacando == True:
+			if arquero.atacando == True:#revisa estado del arquero
 				arquero.attack()
 				arquero.attack()
 				arquero.attack()
 				arquero.attack()
-
+	#Cadencia de escudero
 	tiempo_escudero = pygame.time.get_ticks()//1000-resto_escudero
 	if tiempo_escudero == cadencia_escudero:
 		tiempo_escudero = 0
 		resto_escudero +=cadencia_escudero
 		for escudero in escudero_list:
-			if escudero.atacando == True:
+			if escudero.atacando == True:#revisa estado del escudero
 				escudero.attack()
 				escudero.attack()
 				escudero.attack()
 				escudero.attack()
 
-	
+	#cadencia del leñador
 	tiempo_hacha = pygame.time.get_ticks()//1000-resto_hacha
 	if tiempo_hacha == cadencia_hacha:
 		tiempo_hacha = 0
 		resto_hacha +=cadencia_hacha
 		for hacha in hacha_list:
-			if hacha.atacando==True:
+			if hacha.atacando==True: #revisa estado del leñador
 					hacha.attack()
 					hacha.attack()
 					hacha.attack()
@@ -774,7 +821,7 @@ while True:
 					if numero_ataque_hacha ==3:
 						rook.vida -= hacha.potencia
 						numero_ataque=1
-					if rook.vida <0:
+					if rook.vida <=0: #eliminacion del rook
 						rook_list.remove(rook)
 						all_sprite_list.remove(rook)
 					for avatar in avatar_list:
@@ -782,7 +829,7 @@ while True:
 					for cuadro in Cuadros:
 						if cuadro[1]==rook:
 							cuadro[1] = 0
-
+	#cadencia canibal
 	tiempo_maza = pygame.time.get_ticks()//1000-resto_maza
 	if tiempo_maza == cadencia_maza:
 		tiempo_maza = 0
@@ -796,7 +843,7 @@ while True:
 					if numero_ataque_maza ==3:
 						rook.vida -= maza.potencia
 						numero_ataque=1
-					if rook.vida <0:
+					if rook.vida <=0: #eliminacion del rook
 						rook_list.remove(rook)
 						all_sprite_list.remove(rook)
 					for avatar in avatar_list:
@@ -804,13 +851,16 @@ while True:
 					for cuadro in Cuadros:
 						if cuadro[1]==rook:
 							cuadro[1] = 0
+	#Captura de eventos
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
 	if event.type == pygame.MOUSEMOTION:
+		#Recoleccion de monedas
 		for coin in monedas_list:
 			if mouse_pos[0]>=coin.rect.x+10 and mouse_pos[0]<=coin.rect.x+40 and mouse_pos[1]>=coin.rect.y+10 and mouse_pos[1]<=coin.rect.y+40:
+				#Suma al contador de monedas dependiendo del tipo 
 				if coin.tipo == "oro":
 					monedas += 100
 					monedas_list.remove(coin)
@@ -823,12 +873,13 @@ while True:
 					monedas += 25
 					monedas_list.remove(coin)
 					all_sprite_list.remove(coin)
-
+	#Clic izquierdo
 	if pygame.mouse.get_pressed()[0]==1:
 		mouse = event.pos
-		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver
+		if mouse[0]>640 and mouse[0]<706 and mouse[1]>9 and mouse [1]<56: #Boton volver, regresa al men
 			pygame.quit()
 			os.system("Avatars_vs_Rook.py")
+		#Detecciones en los cuadros de compra
 		for hitbox in hitboxes:
 			if hitbox[0].collidepoint(mouse) and not agarrar:
 				if hitbox[1]=="Sand" and monedas >= 50:
@@ -847,6 +898,7 @@ while True:
 					monedas -=150
 					agarrar = True
 					clase = hitbox[1]
+		#Deteccion de colocacion de rooks
 		for cuadro in Cuadros:
 			if cuadro[0].collidepoint(mouse) and agarrar and clase == "Sand" and cuadro[1]==0:
 				agarrar = False
@@ -885,14 +937,16 @@ while True:
 				rook_list.add(water)
 				cuadro[1] = water
 				clase == ""
-
+	#Click derecho
 	if pygame.mouse.get_pressed()[2]==1:
 		mouse = event.pos
+		#Eliminacion de rooks
 		for cuadro in Cuadros:
 			if cuadro[0].collidepoint(mouse) and not agarrar and cuadro[1]!=0:
 				all_sprite_list.remove(cuadro[1])
 				rook_list.remove(cuadro[1])
 				cuadro[1]=0
+	#Deteccionde rango de ataque de los avatars
 	for arquero in arquero_list:
 			for cuadro in Cuadros:
 				if  cuadro[1] !=0 and cuadro[0].x==255 and arquero.rect.x == 252 and arquero.rect.y < 750 and arquero.rect.y - cuadro[0].y > 0: 
@@ -935,14 +989,14 @@ while True:
 	relojmin2 = font.render(str(minuto2),0,(255,255,255))
 	#Renderizado de cantidad de monedas
 	cant_monedas = font.render(str(monedas),0,(239,184,16))
-
+	#Daño realizado por los proyectiles
 	for proyectil in proyectil_list:
 		for rook in rook_list:
-			if pygame.sprite.collide_rect_ratio(0.4)(proyectil, rook):
+			if pygame.sprite.collide_rect_ratio(0.4)(proyectil, rook):#detecta colision
 				all_sprite_list.remove(proyectil)
 				proyectil_list.remove(proyectil)
 				rook.vida -= proyectil.potencia
-				if rook.vida <=0:
+				if rook.vida <=0: #eliminacion de los rooks
 					rook_list.remove(rook)
 					all_sprite_list.remove(rook)
 					for avatar in avatar_list:
@@ -950,19 +1004,19 @@ while True:
 					for cuadro in Cuadros:
 						if cuadro[1]==rook:
 							cuadro[1] = 0
-			
+			#limite de pantalla
 			if proyectil.rect.y < -10:
 				all_sprite_list.remove(proyectil)
 				proyectil_list.remove(proyectil)        
-		
+	#Daño realizado por los rooks
 	for elemental in elemental_list:
 		for avatar in avatar_list:
-			if pygame.sprite.collide_rect_ratio(0.6)(elemental, avatar):
+			if pygame.sprite.collide_rect_ratio(0.6)(elemental, avatar):#detecta colision
 				golpe.play()
 				all_sprite_list.remove(elemental)
 				elemental_list.remove(elemental)
 				avatar.vida-=elemental.potencia
-				if avatar.vida <=0:
+				if avatar.vida <=0: #eliminacion de avatars
 					monedas += 100
 					avatar_list.remove(avatar)
 					all_sprite_list.remove(avatar)
@@ -975,11 +1029,11 @@ while True:
 					if avatar in maza_list:
 						maza_list.remove(avatar)
 					score +=1 
-
+			#limite de pantalla
 			if elemental.rect.y > 800:
 				all_sprite_list.remove(elemental)
 				elemental_list.remove(elemental)
-	#Mostrar en pantala
+	#Mostrar en pantala segun escenario
 	if escenario ==1:
 		screen.blit(matriz1,[0,0])
 		screen.blit(nivel_1,[170,-10])
@@ -1013,7 +1067,7 @@ while True:
 				if cuadro[1]!=0:
 					cuadro[1] = 0
 			reset +=1
-			
+	#mostrar en pantalla mientras se juego
 	if game_over == False:
 		player = font2.render(jugador,True,[255,255,255])
 		screen.blit(player, (330,10))
@@ -1031,6 +1085,7 @@ while True:
 		all_sprite_list.draw(screen)
 		proyectil_list.update()
 		elemental_list.update()
+		#Movimiento de los avatars
 		for avatar in avatar_list:
 			if avatar.atacando == False:
 				avatar.update()
@@ -1039,6 +1094,7 @@ while True:
 				game_over = True
 				animacion = 0
 		mouse_pos = pygame.mouse.get_pos()
+		#Seguimiento de imagenen del rook si se realiza una compra
 		if agarrar==True and clase == "Sand":
 			screen.blit(sand_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Rock":
@@ -1047,6 +1103,7 @@ while True:
 			screen.blit(fire_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
 		if agarrar==True and clase == "Water":
 			screen.blit(water_rook, [mouse_pos[0]-35, mouse_pos[1]-70])
+		#comprobacion de score y escenario 
 		if score == 20:
 			escenario +=1
 			score=0
@@ -1054,6 +1111,7 @@ while True:
 				ganaste = True
 				game_over =True
 				animacion = 0
+	#muestra en pantalla la animacion de perdedor o ganador
 	if game_over== True:
 		pygame.mixer.music.stop()
 		if perdiste == True:
@@ -1084,6 +1142,10 @@ while True:
 				tiempos=[]
 				nombres = []
 				final = []
+				#Funcion que ordena los records
+				#E: lista, tiempos, nombres y final (variables globales)
+				#S: modificacion del txt de los records
+				#R-
 				def ordenar():
 					global lista
 					global tiempos
@@ -1091,6 +1153,7 @@ while True:
 					global final
 					i=0
 					n= len(lista)
+					#Separacion de nombres y tiempos
 					while i<n:
 						if i%2==0:
 							nombres.append(lista[i][:len(lista[i])-1])
@@ -1098,6 +1161,7 @@ while True:
 							tiempos.append(int(lista[i][:3]))
 						i+=1
 					i=0
+					#Ordenamiento burbuja de forma ascendente
 					for i in range(1,len(tiempos)):
 						for j in range(0,len(tiempos)-i):
 							if tiempos[j+1] < tiempos[j]:
@@ -1111,6 +1175,7 @@ while True:
 					i=0
 					j=0
 					h=0
+					#Compilacion en la listafinal
 					while i<n:
 						if i%2==0:
 							final.append(nombres[j])
@@ -1121,7 +1186,10 @@ while True:
 						i+=1
 				ordenar()
 				records.close()
-
+				#Funcion que sobreescribe el txt
+				#E: final (global)
+				#S: txt sin sobreinformacion
+				#R: -
 				def reescribir():
 					global final
 					i=0
@@ -1132,7 +1200,7 @@ while True:
 				reescribir()
 				score +=1
 			animacion += 1
-
+			#Renderizado del record conseguido
 			resultado = font.render("Tiempo: "+str(tiempo_conseguido)+" segundos",0,(255,255,255))
 			screen.blit(resultado,[150,600])
 
