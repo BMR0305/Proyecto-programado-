@@ -1,5 +1,5 @@
 import pygame, sys, os
-os.environ['SDL_VIDEO_CENTERED'] = '50' 
+os.environ['SDL_VIDEO_CENTERED'] = '50' #se centra la pantalla
 pygame.init()
 #Crear ventana
 size = (720,800)
