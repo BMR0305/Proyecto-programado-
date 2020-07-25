@@ -5,7 +5,7 @@ pygame.init()
 size = (720,800)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Avatar vs Rooks")
-
+#Reloj
 clock=pygame.time.Clock()
 #Fuente
 font = pygame.font.SysFont("Papyrus", 30)
@@ -18,20 +18,23 @@ background = pygame.image.load("Imagenes/Fama.jpg").convert()
 records = open("Records.txt", "r")
 #Lista del podio
 final = records.readlines()
-
+#Bucle principal
 while True:
+	#Captura de eventos
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
-			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver
+			if mouse[0]>640 and mouse[0]<706 and mouse[1]>12 and mouse [1]<65: #Boton volver, cambia a la ventana de menú
 				pygame.quit()
 				os.system("Avatars_vs_Rook.py")
 	try:
+		#Renderizado de fondo
 		screen.blit(background,[0,0])
 		screen.blit(volver, [630,5])
 
+		#Renderizado de records
 		puesto1 = font.render(final[0][:len(final[0])-1], True,[0,0,0])
 		screen.blit(puesto1, (157,100))
 		puesto1_tiempo = font.render("Tiempo:"+final[1][:3]+"s", True,[0,0,0])
