@@ -24,15 +24,21 @@ background = pygame.image.load("Imagenes/Ajustes fondo.jpg").convert()
 color_inactive = pygame.Color(255,255,255)
 color_active = pygame.Color(155,155,155)
 #Clase Entry
+#Atributos:
+#active: dice si la instancia esta activo o no
+#color: define el color de la instacia
+#text: contiene el texto que va a mostrar la instancia
+
 class Entry():
 	def __init__(self,rect):
 		self.active = False
 		self.color = color_inactive
 		self.text = ""
 		self.rect = pygame.Rect(rect)
+#Fuente
 font = pygame.font.Font(None, 40)
 
-#Entries
+#creaccion de la instancia Entry
 cadencia_rooks = Entry([339, 200, 80, 40])
 cadencia_arquero = Entry([178, 460, 80, 40])
 cadencia_escudero = Entry([548, 459, 80, 40])
@@ -43,10 +49,13 @@ velocidad_escudero = Entry([548, 389, 80, 40])
 velocidad_hacha = Entry([178, 628, 80, 40])
 velocidad_maza = Entry([548, 625, 80, 40])
 Entries = [cadencia_rooks,cadencia_arquero,cadencia_escudero,cadencia_hacha,cadencia_maza,velocidad_arquero,velocidad_escudero,velocidad_hacha,velocidad_maza]
+#variables globales 
 numero_linea = 0
 game_over = True
+#bucle principal
 while game_over:
 	for event in pygame.event.get():
+		#salir del juego
 		if event.type == pygame.QUIT:
 			sys.exit() 
 		if event.type == pygame.MOUSEBUTTONDOWN: 
@@ -65,6 +74,7 @@ while game_over:
 
 			if mouse[0]>263 and mouse[0]<451 and mouse[1]>755 and mouse [1]<792: #Boton aplicar cambios 
 				config = open("Config.txt","w")
+				#carga el texto de las instancias
 				for entry in Entries:
 					if entry.text == "":
 						config.write("1"+"\n")
@@ -76,6 +86,7 @@ while game_over:
 				elif musica == False:
 					config.write("0")
 				config.close()
+			#color de indica si se esta escribiendo
 			for entry in Entries:
 				if entry.rect.collidepoint(event.pos):
 					entry.active = True
@@ -83,6 +94,7 @@ while game_over:
 				else:
 					entry.active = False
 					entry.color = color_inactive
+		#deteccion de botones del teclado para escribit
 		if event.type == pygame.KEYDOWN:
 			for entry in Entries:
 				if entry.active: 
@@ -105,6 +117,7 @@ while game_over:
 			config.close()
 	#Fondo
 	try:
+		#rederizado del fondo y boton volver
 		screen.blit(background,[0,0])
 		screen.blit(volver, [630,5])
 		if musica == False:
