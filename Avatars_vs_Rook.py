@@ -5,11 +5,11 @@ pygame.init()
 size = (720,800)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Avatar vs Rooks")
-
+#Reloj
 clock=pygame.time.Clock()
 
 #Cargar imagnes
-background = pygame.image.load("Imagenes\Menu.jpg").convert()
+background = pygame.image.load("Imagenes/Menu.jpg").convert()
 jugar = pygame.image.load("Imagenes/Jugar.png").convert()
 jugar.set_colorkey([0,0,0])
 ayuda = pygame.image.load("Imagenes/Ayuda.png").convert()
@@ -32,17 +32,20 @@ color = color_inactive
 input_box = pygame.Rect(320, 185, 230, 40)
 
 game_over = True
+#Bucle principal
 while game_over:
-
+	#Captura de eventos
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:  
 			sys.exit()
 		if event.type == pygame.MOUSEBUTTONDOWN: 
 			mouse = event.pos
-			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar
+			if mouse[0]>270 and mouse[0]<470 and mouse[1]>270 and mouse [1]<370 and text != "": #boton jugar, abre al pestaña de juego
+				#Guarda en un txt el usuario actual
 				usuario = open("Usuario.txt","w")
 				usuario.write(text)
 				usuario.close()
+				#Guarda el usuario en el sistema de registro
 				usuarios = open("Registro de Usuarios.txt","a")
 				usuarios.write(text+", ")
 				usuarios.close()
@@ -50,17 +53,17 @@ while game_over:
 				pygame.quit()
 				os.system("Matriz.py")
 
-			if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes 
+			if mouse[0]>250 and mouse[0]<485 and mouse[1]>420 and mouse [1]<525: #boton ajustes, abre la opestaña de ajustes 
 				game_over = False
 				pygame.quit()
 				os.system("Ajustes.py")
-			if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda
+			if mouse[0]>635 and mouse[0]<741 and mouse[1]>695 and mouse [1]<775: #boton ayuda,abre la pestaña de ayuda
 				pygame.quit()
 				os.system("Ayuda.py")
-			if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos 
+			if mouse[0]>26 and mouse[0]<295 and mouse[1]>705 and mouse [1]<790: #boton creditos, abre la pestaña de créditos 
 				pygame.quit()
 				os.system("Creditos.py")
-			if mouse[0]>341 and mouse[0]<393 and mouse[1]>553 and mouse [1]<650: #boton salon de la fama
+			if mouse[0]>341 and mouse[0]<393 and mouse[1]>553 and mouse [1]<650: #salon de la fama, abre la pestaña del salon de la fama
 				pygame.quit()
 				os.system("Salon.py")
 			if input_box.collidepoint(event.pos): #revisa si se da click en el entry
@@ -72,15 +75,15 @@ while game_over:
 
 		if event.type == pygame.KEYDOWN:
 			if active: 
-				if event.key == pygame.K_BACKSPACE:
+				if event.key == pygame.K_BACKSPACE: #detecta si es el boton es el de borrar para eliminar un caracter
 					text = text [:len(text)-1]
-				elif len(text)>10:
-					if event.key == pygame.K_BACKSPACE:
+				elif len(text)>10: #limite de caracteres
+					if event.key == pygame.K_BACKSPACE: 
 						text = text [:len(text)-1]
 					else:
 						None
 				else:
-					text += event.unicode
+					text += event.unicode #escribe las teclas que se presionan
 	try:
 		#Fondo
 		screen.blit(background,[0,0])
