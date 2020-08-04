@@ -9,6 +9,7 @@ pygame.display.set_caption("Avdvice Machine")
 clock=pygame.time.Clock()
 #Fondos
 background = pygame.image.load("Imagenes/Menu.jpg").convert()
+fondo = pygame.image.load("Imagenes/Fondo.jpg").convert()
 #Botonoes
 start = pygame.image.load("Imagenes/Start.png").convert()
 start.set_colorkey([0,0,0])
@@ -118,7 +119,7 @@ while True:
 			screen.blit(english_v, [275,300])
 	
 	if escenario ==2:
-		screen.blit(background,[0,0])
+		screen.blit(fondo,[0,0])
 	if escenario ==3:
 		screen.blit(background, [0,0])
 	pygame.display.flip()
