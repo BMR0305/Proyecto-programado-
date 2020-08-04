@@ -62,7 +62,7 @@ color_active = pygame.Color(47,117,161)
 color = color_inactive
 input_box = pygame.Rect(167, 550, 170, 40)
 escenario = 1
-mostrar=""
+codificado=""
 privacidad = True
 #Variables botones
 idioma = "español"
@@ -91,14 +91,14 @@ while True:
 					beep.play()
 					escenario = 2
 					incorrecto = False
-					mostrar=""
+					codificado=""
 				if hit_admin.collidepoint(mouse):
 					beep.play()
 					if text == "1234": 
 						escenario = 3
 					else:
 						text = ""
-						mostrar=""
+						codificado=""
 						incorrecto =True
 				if hit_ojo.collidepoint(mouse):
 					if privacidad == True:
@@ -119,11 +119,11 @@ while True:
 				if active: 
 					if event.key == pygame.K_BACKSPACE: #detecta si es el boton es el de borrar para eliminar un caracter
 						text = text [:len(text)-1]
-						mostrar = mostrar[:len(text)-1]
+						codificado = codificado[:len(text)-1]
 					elif len(text)>6: #limite de caracteres
 						if event.key == pygame.K_BACKSPACE: 
 							text = text [:len(text)-1]
-							mostrar = mostrar [:len(text)-1]
+							codificado = modificado [:len(text)-1]
 						else:
 							None
 					elif event.key == pygame.K_RETURN:
@@ -132,10 +132,10 @@ while True:
 							escenario = 3
 						else:
 							text = ""
-							mostrar=""
+							codificado=""
 							incorrecto =True
 					else:
-						mostrar +="*"
+						codificado +="*"
 						text += event.unicode
 		
 		if escenario == 2:
@@ -161,7 +161,7 @@ while True:
 		pygame.draw.rect(screen, color, input_box, 4)
 		#Renderiza el texto
 		if privacidad == True:
-			txt_surface = font.render(mostrar, True, color_inactive)
+			txt_surface = font.render(codificado, True, color_inactive)
 		if privacidad == False:
 			txt_surface = font.render(text, True, color_inactive)
 		screen.blit(txt_surface, (input_box.x+5, input_box.y+7))
