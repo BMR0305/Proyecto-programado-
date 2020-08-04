@@ -33,7 +33,7 @@ equis.set_colorkey([0,0,0])
 beep = pygame.mixer.Sound("Sonidos/Boton.wav")
 beep.set_volume(0.1)
 cerradura = pygame.mixer.Sound("Sonidos/Cerradura.wav")
-cerradura.set_volume(0.1)
+cerradura.set_volume(0.4)
 #Hitbox botones menu
 hit_start = pygame.Rect(372, 67, 145, 80)
 hit_español = pygame.Rect(368,200,150,73)
@@ -54,6 +54,7 @@ color_active = pygame.Color(47,117,161)
 color = color_inactive
 input_box = pygame.Rect(167, 550, 230, 40)
 escenario = 1
+mostrar=""
 #Variables botones
 idioma = "español"
 press_s = False
@@ -80,11 +81,15 @@ while True:
 				if hit_start.collidepoint(mouse):
 					beep.play()
 					escenario = 2
+					incorrecto = False
+					mostrar=""
 				if hit_admin.collidepoint(mouse):
 					beep.play()
 					if text == "1234": 
 						escenario = 3
 					else:
+						text = ""
+						mostrar=""
 						incorrecto =True
 			if event.type == pygame.MOUSEMOTION:
 				if mouse[0]>=385 and mouse[0]<=506 and mouse[1]>=80 and mouse[1]<=140:
@@ -98,12 +103,15 @@ while True:
 				if active: 
 					if event.key == pygame.K_BACKSPACE: #detecta si es el boton es el de borrar para eliminar un caracter
 						text = text [:len(text)-1]
+						mostrar = mostrar[:len(text)-1]
 					elif len(text)>10: #limite de caracteres
 						if event.key == pygame.K_BACKSPACE: 
 							text = text [:len(text)-1]
+							mostrar = mostrar [:len(text)-1]
 						else:
 							None
 					else:
+						mostrar +="*"
 						text += event.unicode
 		
 		if escenario == 2:
@@ -128,7 +136,7 @@ while True:
 		#Input box
 		pygame.draw.rect(screen, color, input_box, 4)
 		#Renderiza el texto
-		txt_surface = font.render(text, True, color_inactive)
+		txt_surface = font.render(mostrar, True, color_inactive)
 		screen.blit(txt_surface, (input_box.x+5, input_box.y+7))
 		#Botones
 		if press_s == True:
