@@ -29,11 +29,22 @@ english_r = pygame.image.load("Imagenes/English_r.png").convert()
 english_r.set_colorkey([0,0,0])
 equis = pygame.image.load("Imagenes/Equis.png").convert()
 equis.set_colorkey([0,0,0])
-#Hitbox botones
+#Sonidos
+beep = pygame.mixer.Sound("Sonidos/Boton.wav")
+beep.set_volume(0.1)
+cerradura = pygame.mixer.Sound("Sonidos/Cerradura.wav")
+cerradura.set_volume(0.1)
+#Hitbox botones menu
 hit_start = pygame.Rect(372, 67, 145, 80)
 hit_español = pygame.Rect(368,200,150,73)
 hit_english = pygame.Rect(275,300,150,73)
 hit_admin = pygame.Rect(207,435, 150, 72)
+#hitbox botones maquina
+hit_calidad = pygame.Rect(507,66, 59, 59)
+hit_tipo = pygame.Rect(134,66,59,59)
+hit_enter = pygame.Rect(301,253,97,50)
+#Volver
+hit_volver = pygame.Rect(615,11, 70,70)
 #Variables de entry
 active = False
 text = ""
@@ -48,13 +59,13 @@ idioma = "español"
 press_s = False
 incorrecto= False
 while True:
-	mouse_pos = pygame.mouse.get_pos()
+	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
+		print(mouse)
 		if event.type == pygame.QUIT:  
 			sys.exit()
 		if escenario == 1:
 			if event.type == pygame.MOUSEBUTTONDOWN: 
-				mouse = event.pos
 				if input_box.collidepoint(mouse): #revisa si se da click en el entry
 					active = True
 					color = color_active
@@ -62,20 +73,24 @@ while True:
 					active = False
 					color = color_inactive
 				if hit_english.collidepoint(mouse):
+					beep.play()
 					idioma = "english"
 				if hit_español.collidepoint(mouse):
+					beep.play()
 					idioma= "español"
 				if hit_start.collidepoint(mouse):
+					beep.play()
 					escenario = 2
 				if hit_admin.collidepoint(mouse):
+					beep.play()
 					if text == "1234": 
 						escenario = 3
 					else:
 						incorrecto =True
 			if event.type == pygame.MOUSEMOTION:
-				if mouse_pos[0]>=385 and mouse_pos[0]<=506 and mouse_pos[1]>=80 and mouse_pos[1]<=140:
+				if mouse[0]>=385 and mouse[0]<=506 and mouse[1]>=80 and mouse[1]<=140:
 					press_s = True
-				elif mouse_pos[0]>=207 and mouse_pos[0]<=357 and mouse_pos[1]>=435 and mouse_pos[1]<=507:
+				elif mouse[0]>=207 and mouse[0]<=357 and mouse[1]>=435 and mouse[1]<=507:
 					press_a = True
 				else:
 					press_s =False
@@ -91,7 +106,23 @@ while True:
 							None
 					else:
 						text += event.unicode
-	
+		
+		if escenario == 2:
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				if hit_tipo.collidepoint(mouse):
+					beep.play()
+				
+				if hit_calidad.collidepoint(mouse):
+					beep.play()
+
+				if hit_enter.collidepoint(mouse):
+					beep.play()
+
+				if hit_volver.collidepoint(mouse):
+					cerradura.play()
+					escenario = 1
+
+
 	if escenario == 1:
 		#Renderiza el fondo
 		screen.blit(background,[0,0])
