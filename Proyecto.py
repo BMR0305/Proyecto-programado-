@@ -27,10 +27,10 @@ english_v = pygame.image.load("Imagenes/English_v.png").convert()
 english_v.set_colorkey([0,0,0])
 english_r = pygame.image.load("Imagenes/English_r.png").convert()
 english_r.set_colorkey([0,0,0])
-#ojo = pygame.image.load("Imagenes/Ojo.png").convert()
-#ojo.set_colorkey([0,0,0])
-#ojo_c = pygame.image.load("Imagenes/Ojo_c.png").convert()
-#ojo_c.set_colorkey([0,0,0])
+ojo = pygame.image.load("Imagenes/Ojo.png").convert()
+ojo.set_colorkey([0,0,0])
+ojo_c = pygame.image.load("Imagenes/Ojo_c.png").convert()
+ojo_c.set_colorkey([0,0,0])
 
 #Sonidos
 beep = pygame.mixer.Sound("Sonidos/Boton.wav")
@@ -46,7 +46,7 @@ hit_start = pygame.Rect(372, 67, 145, 80)
 hit_español = pygame.Rect(368,200,150,73)
 hit_english = pygame.Rect(275,300,150,73)
 hit_admin = pygame.Rect(207,435, 150, 72)
-hot_ojo = pygame.Rect(0,0,0,0)
+hit_ojo = pygame.Rect(350,551,50,35)
 #hitbox botones maquina
 hit_calidad = pygame.Rect(507,66, 59, 59)
 hit_tipo = pygame.Rect(134,66,59,59)
@@ -56,7 +56,7 @@ hit_volver = pygame.Rect(615,11, 70,70)
 #Variables de entry
 active = False
 text = ""
-font = pygame.font.Font(None, 40)
+font = pygame.font.Font(None, 35)
 color_inactive = pygame.Color(45,154,212)
 color_active = pygame.Color(47,117,161)
 color = color_inactive
@@ -100,6 +100,11 @@ while True:
 						text = ""
 						mostrar=""
 						incorrecto =True
+				if hit_ojo.collidepoint(mouse):
+					if privacidad == True:
+						privacidad = False
+					elif privacidad == False:
+						privacidad =True
 
 
 			if event.type == pygame.MOUSEMOTION:
@@ -158,7 +163,7 @@ while True:
 		if privacidad == True:
 			txt_surface = font.render(mostrar, True, color_inactive)
 		if privacidad == False:
-			txt_surface = font.render(texto, True, color_inactive)
+			txt_surface = font.render(text, True, color_inactive)
 		screen.blit(txt_surface, (input_box.x+5, input_box.y+7))
 		#Botones
 		if press_s == True:
@@ -177,6 +182,10 @@ while True:
 		if idioma == "english":
 			screen.blit(español_r, [368,200])
 			screen.blit(english_v, [275,300])
+		if privacidad == True:
+			screen.blit(ojo_c, [350,545])
+		if privacidad == False:
+			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
 		screen.blit(fondo,[0,0])
