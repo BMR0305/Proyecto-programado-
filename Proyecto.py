@@ -122,4 +122,4 @@ while True:
 	if escenario ==3:
 		screen.blit(background, [0,0])
 	pygame.display.flip()
-	clock.tick(60)
+	clock.tick(15)
