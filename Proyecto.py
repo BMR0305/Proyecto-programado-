@@ -33,7 +33,7 @@ equis.set_colorkey([0,0,0])
 beep = pygame.mixer.Sound("Sonidos/Boton.wav")
 beep.set_volume(0.1)
 cerradura = pygame.mixer.Sound("Sonidos/Cerradura.wav")
-cerradura.set_volume(0.1)
+cerradura.set_volume(0.4)
 #Hitbox botones menu
 hit_start = pygame.Rect(372, 67, 145, 80)
 hit_español = pygame.Rect(368,200,150,73)
