@@ -61,7 +61,6 @@ incorrecto= False
 while True:
 	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
-		print(mouse)
 		if event.type == pygame.QUIT:  
 			sys.exit()
 		if escenario == 1:
