@@ -4,7 +4,7 @@ pygame.init()
 #Crear vnetana
 size = (700, 700)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Avdvice Machine")
+pygame.display.set_caption("Advice Machine")
 #Reloj
 clock=pygame.time.Clock()
 #Fondos
@@ -45,6 +45,10 @@ beep = pygame.mixer.Sound("Sonidos/Boton.wav")
 beep.set_volume(0.1)
 cerradura = pygame.mixer.Sound("Sonidos/Cerradura.wav")
 cerradura.set_volume(0.4)
+moneda_s = pygame.mixer.Sound("Sonidos/Moneda.wav")
+moneda_s.set_volume(1)
+imprimir = pygame.mixer.Sound("Sonidos/Imprimir.wav")
+imprimir.set_volume(1)
 #otros
 equis = pygame.image.load("Imagenes/Equis.png").convert()
 equis.set_colorkey([0,0,0])
@@ -350,6 +354,8 @@ while True:
 					agarrar =False
 
 			if m.getanimacion() == True:
+				if m.getframe() == 0:
+					moneda_s.play()
 				m.setrect(70,550)
 				m.update()
 				if m.getframe() == 4:
@@ -357,8 +363,11 @@ while True:
 					monedas_list.remove(m)
 					all_sprite_list.remove(m)
 					monto+=m.getvalor()
+		
 		for d in dispenser_list:
 			if dispensador.get_animacion() == True:
+				if m.getframe() == 0:
+					imprimir.play()
 				d.update()
 				if d.getframe() == 7:
 					d.update()
