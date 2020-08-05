@@ -161,17 +161,20 @@ class Dispensador(pygame.sprite.Sprite):
 		self.rect = (450,560)
 		self.frame = 0
 		self.mensaje = [dispensador1,dispensador2,dispensador3,dispensador4,dispensador5,dispensador6,dispensador7,dispensador8]
-		self.estado = False #por si acaso
+		self.animacion = False 
 
-	def get_estado(self):
-		return self.estado
+	def get_animacion(self):
+		return self.animacion
 
-	def set_estado(self):
-		if self.estado == True:
-			self.estado = False
+	def set_animacion(self):
+		if self.animacion == True:
+			self.animacion = False
 		else:
-			self.estado = True
+			self.animacion = True
 
+	def getframe(self):
+		return self.frame	
+			
 	def get_frame(self):
 		self.frame += 1
 		if self.frame > (len(self.mensaje)-1):
@@ -266,7 +269,7 @@ while True:
 					beep.play()
 
 				if hit_enter.collidepoint(mouse):
-					dispensador.update()
+					dispensador.set_animacion()
 					beep.play()
 					for m in monedas_list:
 						monedas_list.remove(m)
@@ -354,6 +357,12 @@ while True:
 					monedas_list.remove(m)
 					all_sprite_list.remove(m)
 					monto+=m.getvalor()
+		for d in dispenser_list:
+			if dispensador.get_animacion() == True:
+				d.update()
+				if d.getframe() == 7:
+					d.update()
+					d.set_animacion ()
 
 		all_sprite_list.draw(screen)
 	if escenario ==3:
