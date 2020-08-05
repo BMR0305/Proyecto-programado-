@@ -4,7 +4,7 @@ pygame.init()
 #Crear vnetana
 size = (700, 700)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Avdvice Machine")
+pygame.display.set_caption("Advice Machine")
 #Reloj
 clock=pygame.time.Clock()
 #Fondos
