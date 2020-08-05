@@ -48,7 +48,7 @@ cerradura.set_volume(0.4)
 moneda_s = pygame.mixer.Sound("Sonidos/Moneda.wav")
 moneda_s.set_volume(1)
 imprimir = pygame.mixer.Sound("Sonidos/Imprimir.wav")
-imprimir.set_volume(1)
+imprimir.set_volume(0.3)
 #otros
 equis = pygame.image.load("Imagenes/Equis.png").convert()
 equis.set_colorkey([0,0,0])
