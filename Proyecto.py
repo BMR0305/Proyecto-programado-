@@ -31,7 +31,15 @@ ojo = pygame.image.load("Imagenes/Ojo.png").convert()
 ojo.set_colorkey([0,0,0])
 ojo_c = pygame.image.load("Imagenes/Ojo_c.png").convert()
 ojo_c.set_colorkey([0,0,0])
-
+#Dispensador imagenes
+dispensador1 = pygame.image.load("Imagenes/Dispensador/Dispensador1.JPG").convert()
+dispensador2 = pygame.image.load("Imagenes/Dispensador/Dispensador2.JPG").convert()
+dispensador3 = pygame.image.load("Imagenes/Dispensador/Dispensador3.JPG").convert()
+dispensador4 = pygame.image.load("Imagenes/Dispensador/Dispensador4.JPG").convert()
+dispensador5 = pygame.image.load("Imagenes/Dispensador/Dispensador5.JPG").convert()
+dispensador6 = pygame.image.load("Imagenes/Dispensador/Dispensador6.JPG").convert()
+dispensador7 = pygame.image.load("Imagenes/Dispensador/Dispensador7.JPG").convert()
+dispensador8 = pygame.image.load("Imagenes/Dispensador/Dispensador8.JPG").convert()
 #Sonidos
 beep = pygame.mixer.Sound("Sonidos/Boton.wav")
 beep.set_volume(0.1)
@@ -68,49 +76,6 @@ privacidad = True
 idioma = "español"
 press_s = False
 incorrecto= False
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Cargar imagenes de moneda
 moneda1_10 = pygame.image.load("Imagenes/Moneda10/Moneda1.png").convert()
 moneda1_10.set_colorkey([0,0,0])
@@ -188,6 +153,40 @@ class Moneda(pygame.sprite.Sprite):
 	def update(self):
 		self.change_image()
 
+
+class Dispensador(pygame.sprite.Sprite):
+	def __init__(self):
+		super().__init__()
+		self.image = dispensador1
+		self.rect = (450,560)
+		self.frame = 0
+		self.mensaje = [dispensador1,dispensador2,dispensador3,dispensador4,dispensador5,dispensador6,dispensador7,dispensador8]
+		self.estado = False #por si acaso
+
+	def get_estado(self):
+		return self.estado
+
+	def set_estado(self):
+		if self.estado == True:
+			self.estado = False
+		else:
+			self.estado = True
+
+	def get_frame(self):
+		self.frame += 1
+		if self.frame > (len(self.mensaje)-1):
+			self.frame = 0
+		return self.mensaje[self.frame]
+
+	def update(self):
+		self.image = self.get_frame()
+
+#Creación del dispensador
+dispenser_list = pygame.sprite.Group()
+dispensador = Dispensador()
+dispenser_list.add(dispensador)
+all_sprite_list.add(dispensador)
+
 while True:
 	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
@@ -218,13 +217,13 @@ while True:
 						escenario = 3
 					else:
 						text = ""
-						codificado=""
-						incorrecto =True
+						codificado = ""
+						incorrecto = True
 				if hit_ojo.collidepoint(mouse):
 					if privacidad == True:
 						privacidad = False
 					elif privacidad == False:
-						privacidad =True
+						privacidad = True
 
 
 			if event.type == pygame.MOUSEMOTION:
@@ -267,6 +266,7 @@ while True:
 					beep.play()
 
 				if hit_enter.collidepoint(mouse):
+					dispensador.update()
 					beep.play()
 					for m in monedas_list:
 						monedas_list.remove(m)
@@ -356,7 +356,6 @@ while True:
 					monto+=m.getvalor()
 
 		all_sprite_list.draw(screen)
-
 	if escenario ==3:
 		screen.blit(background, [0,0])
 	
