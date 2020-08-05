@@ -107,7 +107,7 @@ monedas_list = pygame.sprite.Group()
 #Variables monedas
 cant_monedas = 0
 agarrar = False
-hit_entrada = pygame.Rect(56,468,86,100)
+hit_entrada = pygame.Rect(66,547,68,11)
 monto = 0
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self, valor):
