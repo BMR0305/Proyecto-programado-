@@ -68,6 +68,126 @@ privacidad = True
 idioma = "español"
 press_s = False
 incorrecto= False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Cargar imagenes de moneda
+moneda1_10 = pygame.image.load("Imagenes/Moneda10/Moneda1.png").convert()
+moneda1_10.set_colorkey([0,0,0])
+moneda2_10 = pygame.image.load("Imagenes/Moneda10/Moneda2.png").convert()
+moneda2_10.set_colorkey([0,0,0])
+moneda3_10 = pygame.image.load("Imagenes/Moneda10/Moneda3.png").convert()
+moneda3_10.set_colorkey([0,0,0])
+moneda4_10 = pygame.image.load("Imagenes/Moneda10/Moneda4.png").convert()
+moneda4_10.set_colorkey([0,0,0])
+moneda5_10 = pygame.image.load("Imagenes/Moneda10/Moneda5.png").convert()
+moneda5_10.set_colorkey([0,0,0])
+moneda1_5 = pygame.image.load("Imagenes/Moneda5/Moneda1.png").convert()
+moneda1_5.set_colorkey([0,0,0])
+moneda2_5 = pygame.image.load("Imagenes/Moneda5/Moneda2.png").convert()
+moneda2_5.set_colorkey([0,0,0])
+moneda3_5 = pygame.image.load("Imagenes/Moneda5/Moneda3.png").convert()
+moneda3_5.set_colorkey([0,0,0])
+moneda4_5 = pygame.image.load("Imagenes/Moneda5/Moneda4.png").convert()
+moneda4_5.set_colorkey([0,0,0])
+moneda5_5 = pygame.image.load("Imagenes/Moneda5/Moneda5.png").convert()
+moneda5_5.set_colorkey([0,0,0])
+#Listas de sprites
+all_sprite_list = pygame.sprite.Group()
+monedas_list = pygame.sprite.Group()
+#Variables monedas
+cant_monedas = 0
+agarrar = False
+hit_entrada = pygame.Rect(56,468,86,100)
+monto = 0
+class Moneda(pygame.sprite.Sprite):
+	def __init__(self, valor):
+		super().__init__()
+		self.valor = valor
+		if valor == 5:
+			self.image = moneda1_5
+			self.frames = [moneda1_5, moneda2_5, moneda3_5, moneda4_5, moneda5_5]
+		if valor == 10:
+			self.image = moneda1_10
+			self.frames = [moneda1_10, moneda2_10, moneda3_10, moneda4_10, moneda5_10]
+		self.rect = self.image.get_rect()
+		self.frame = 0
+		self.agarrar = False
+		self.animacion = False
+	def getagarrar (self):
+		return self.agarrar
+	def setagarrar(self, value):
+		self.agarrar = value
+	
+	def getanimacion (self):
+		return self.animacion
+	def setanimacion(self, value):
+		self.animacion = value
+
+	def getframe(self):
+		return self.frame
+	def getrect(self):
+		return self.rect
+
+	def setrect(self, x, y):
+		self.rect.y = y
+		self.rect.x = x
+
+	def getvalor(self):
+		return self.valor
+
+	def get_frame(self):
+		self.frame += 1
+		if self.frame > (len(self.frames) - 1):
+			self.frame = 0
+		return self.frames[self.frame]
+	
+	def change_image(self):
+		self.image = self.get_frame()
+
+	def update(self):
+		self.change_image()
+
 while True:
 	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
@@ -148,13 +268,30 @@ while True:
 
 				if hit_enter.collidepoint(mouse):
 					beep.play()
+					for m in monedas_list:
+						monedas_list.remove(m)
+						all_sprite_list.remove(m)
+					cant_monedas = 0
+					monto = 0
 
 				if hit_volver.collidepoint(mouse):
 					cerradura.play()
+					for m in monedas_list:
+						monedas_list.remove(m)
+						all_sprite_list.remove(m)
+					cant_monedas = 0
+					monto = 0
+					agarrar = False
 					escenario = 1
-
+						
+				for m in monedas_list:
+					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar:
+						m.setagarrar(True)
+						agarrar =True
 
 	if escenario == 1:
+		for m in monedas_list:
+			m.setagarrar(False)
 		#Renderiza el fondo
 		screen.blit(background,[0,0])
 		#Input box
@@ -188,8 +325,40 @@ while True:
 			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
+		mouse_pos = pygame.mouse.get_pos()
 		screen.blit(fondo,[0,0])
+		if cant_monedas == 0:
+			moneda5 = Moneda(5)
+			moneda5.setrect(80,620)
+			monedas_list.add(moneda5)
+			all_sprite_list.add(moneda5)
+			moneda10 = Moneda(10)
+			moneda10.setrect(200,620)
+			monedas_list.add(moneda10)
+			all_sprite_list.add(moneda10)
+			cant_monedas+=2
+		
+		for m in monedas_list:
+			if m.getagarrar() == True:
+				m.setrect(mouse_pos[0]-28, mouse_pos[1]-24)
+				if hit_entrada.colliderect(m):
+					m.setagarrar(False)
+					m.setanimacion(True)
+					agarrar =False
+
+			if m.getanimacion() == True:
+				m.setrect(70,550)
+				m.update()
+				if m.getframe() == 4:
+					m.setanimacion(False) 
+					monedas_list.remove(m)
+					all_sprite_list.remove(m)
+					monto+=m.getvalor()
+
+		all_sprite_list.draw(screen)
+
 	if escenario ==3:
 		screen.blit(background, [0,0])
+	
 	pygame.display.flip()
-	clock.tick(15)
+	clock.tick(10)
