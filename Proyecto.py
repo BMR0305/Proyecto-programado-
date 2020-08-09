@@ -302,8 +302,9 @@ while True:
 						for m in monedas_list:
 							monedas_list.remove(m)
 							all_sprite_list.remove(m)
-						vuelto = monto - precio
-						devolver = True
+						if monto >precio:
+							vuelto = monto - precio
+							devolver = True
 						cant_monedas = 0
 						monto = 0
 
