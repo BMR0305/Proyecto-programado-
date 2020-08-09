@@ -7,6 +7,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Advice Machine")
 #Reloj
 clock=pygame.time.Clock()
+tiempo = 15
 #Fondos
 background = pygame.image.load("Imagenes/Menu.jpg").convert()
 fondo = pygame.image.load("Imagenes/Fondo.jpg").convert()
@@ -42,7 +43,7 @@ dispensador7 = pygame.image.load("Imagenes/Dispensador/Dispensador7.JPG").conver
 dispensador8 = pygame.image.load("Imagenes/Dispensador/Dispensador8.JPG").convert()
 #Sonidos
 beep = pygame.mixer.Sound("Sonidos/Boton.wav")
-beep.set_volume(0.1)
+beep.set_volume(0.3)
 cerradura = pygame.mixer.Sound("Sonidos/Cerradura.wav")
 cerradura.set_volume(0.4)
 moneda_s = pygame.mixer.Sound("Sonidos/Moneda.wav")
@@ -63,6 +64,9 @@ hit_ojo = pygame.Rect(350,551,50,35)
 hit_calidad = pygame.Rect(507,66, 59, 59)
 hit_tipo = pygame.Rect(134,66,59,59)
 hit_enter = pygame.Rect(301,253,97,50)
+tipo = 1
+calidad = 1
+font_pantalla = pygame.font.SysFont("OCR A EXTENDED", 25)
 #Volver
 hit_volver = pygame.Rect(615,11, 70,70)
 #Variables de entry
@@ -78,6 +82,7 @@ codificado=""
 privacidad = True
 #Variables botones
 idioma = "español"
+press_a = False
 press_s = False
 incorrecto= False
 #Cargar imagenes de moneda
@@ -104,23 +109,26 @@ moneda5_5.set_colorkey([0,0,0])
 #Listas de sprites
 all_sprite_list = pygame.sprite.Group()
 monedas_list = pygame.sprite.Group()
+vuelto_list = pygame.sprite.Group()
 #Variables monedas
 cant_monedas = 0
 agarrar = False
 hit_entrada = pygame.Rect(66,547,68,11)
 monto = 0
+devolver = False
+vuelto = 0
 class Moneda(pygame.sprite.Sprite):
-	def __init__(self, valor):
+	def __init__(self, valor, frame):
 		super().__init__()
 		self.valor = valor
+		self.frame = frame
 		if valor == 5:
-			self.image = moneda1_5
 			self.frames = [moneda1_5, moneda2_5, moneda3_5, moneda4_5, moneda5_5]
+			self.image = self.frames[self.frame]
 		if valor == 10:
-			self.image = moneda1_10
 			self.frames = [moneda1_10, moneda2_10, moneda3_10, moneda4_10, moneda5_10]
-		self.rect = self.image.get_rect()
-		self.frame = 0
+			self.image = self.frames[self.frame]
+		self.rect = moneda1_5.get_rect()
 		self.agarrar = False
 		self.animacion = False
 	def getagarrar (self):
@@ -135,6 +143,7 @@ class Moneda(pygame.sprite.Sprite):
 
 	def getframe(self):
 		return self.frame
+	
 	def getrect(self):
 		return self.rect
 
@@ -145,17 +154,23 @@ class Moneda(pygame.sprite.Sprite):
 	def getvalor(self):
 		return self.valor
 
-	def get_frame(self):
-		self.frame += 1
-		if self.frame > (len(self.frames) - 1):
-			self.frame = 0
-		return self.frames[self.frame]
-	
-	def change_image(self):
-		self.image = self.get_frame()
+	def get_frame(self, accion):
+		if accion == "entrar":
+			self.frame += 1
+			if self.frame > (len(self.frames) - 1):
+				self.frame = 0
+			return self.frames[self.frame]
+		
+		if accion == "salir":
+			self.frame -= 1
+			return self.frames[self.frame]
 
-	def update(self):
-		self.change_image()
+	
+	def change_image(self, accion):
+		self.image = self.get_frame(accion)
+
+	def update(self, accion):
+		self.change_image(accion)
 
 
 class Dispensador(pygame.sprite.Sprite):
@@ -268,35 +283,58 @@ while True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if hit_tipo.collidepoint(mouse):
 					beep.play()
+					if tipo == 3:
+						tipo = 1
+					elif tipo <3:
+						tipo += 1
 				
 				if hit_calidad.collidepoint(mouse):
 					beep.play()
+					if calidad == 3:
+						calidad = 1
+					elif calidad <3:
+						calidad += 1
 
 				if hit_enter.collidepoint(mouse):
-					dispensador.set_animacion()
 					beep.play()
-					for m in monedas_list:
-						monedas_list.remove(m)
-						all_sprite_list.remove(m)
-					cant_monedas = 0
-					monto = 0
+					if monto>=precio:
+						dispensador.set_animacion()
+						for m in monedas_list:
+							monedas_list.remove(m)
+							all_sprite_list.remove(m)
+						vuelto = monto - precio
+						devolver = True
+						cant_monedas = 0
+						monto = 0
 
 				if hit_volver.collidepoint(mouse):
 					cerradura.play()
 					for m in monedas_list:
 						monedas_list.remove(m)
 						all_sprite_list.remove(m)
+					for v in vuelto_list:
+						vuelto_list.remove(v)
+						all_sprite_list.remove(v)
 					cant_monedas = 0
 					monto = 0
 					agarrar = False
 					escenario = 1
+					devolver = False
 						
 				for m in monedas_list:
-					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar:
+					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar and not devolver:
 						m.setagarrar(True)
 						agarrar =True
+				for v in vuelto_list:
+					if v.getrect().collidepoint(mouse):
+						devolver = False
+						monedas_list.remove(v)
+						all_sprite_list.remove(v)
+
+
 
 	if escenario == 1:
+		tiempo =15
 		for m in monedas_list:
 			m.setagarrar(False)
 		#Renderiza el fondo
@@ -332,14 +370,51 @@ while True:
 			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
+		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
 		screen.blit(fondo,[0,0])
+		#cambio de texto en tipo
+		if tipo == 1:
+			if idioma == "español": 
+				consejo = font_pantalla.render("Consejo", True,[255,255,255])
+				screen.blit(consejo, (220,80))
+			if idioma == "english":
+				advice = font_pantalla.render("Advice", True, [255,255,255])
+				screen.blit(advice, (220,80))
+		if tipo == 2:
+			if idioma == "español": 
+				dicho = font_pantalla.render("Dicho", True,[255,255,255])
+				screen.blit(dicho, (220,80))
+			if idioma == "english":
+				adage = font_pantalla.render("Adage", True, [255,255,255])
+				screen.blit(adage, (220,80))
+		if tipo == 3:
+			if idioma == "español": 
+				chiste = font_pantalla.render("Chiste", True,[255,255,255])
+				screen.blit(chiste, (220,80))
+			if idioma == "english":
+				joke = font_pantalla.render("Joke", True, [255,255,255])
+				screen.blit(joke, (220,80))
+		#cambio de texto en calidad
+		if calidad == 1:
+			precio = 5 
+			calidad_1 = font_pantalla.render("$"+str(precio), True, [255,255,255])
+			screen.blit(calidad_1, (430,80))
+		if calidad == 2:
+			precio = 10
+			calidad_2 = font_pantalla.render("$"+str(precio), True,[255,255,255])
+			screen.blit(calidad_2, (430,80))
+		if calidad == 3:
+			precio = 15
+			calidad_3 = font_pantalla.render("$"+str(precio), True,[255,255,255])
+			screen.blit(calidad_3, (430,80))
+		
 		if cant_monedas == 0:
-			moneda5 = Moneda(5)
+			moneda5 = Moneda(5,0)
 			moneda5.setrect(80,620)
 			monedas_list.add(moneda5)
 			all_sprite_list.add(moneda5)
-			moneda10 = Moneda(10)
+			moneda10 = Moneda(10,0)
 			moneda10.setrect(200,620)
 			monedas_list.add(moneda10)
 			all_sprite_list.add(moneda10)
@@ -357,8 +432,8 @@ while True:
 				if m.getframe() == 0:
 					moneda_s.play()
 				m.setrect(70,550)
-				m.update()
-				if m.getframe() == 4:
+				m.update("entrar")
+				if m.getframe() == 0:
 					m.setanimacion(False) 
 					monedas_list.remove(m)
 					all_sprite_list.remove(m)
@@ -369,13 +444,38 @@ while True:
 				if m.getframe() == 0:
 					imprimir.play()
 				d.update()
-				if d.getframe() == 7:
-					d.update()
+				if d.getframe() == 0:
 					d.set_animacion ()
-
+		
+		if devolver == True:
+			if vuelto == 5:
+				moneda5 = Moneda(5,4)
+				moneda5.setrect(213,480)
+				moneda5.setanimacion(True)
+				vuelto_list.add(moneda5)
+				all_sprite_list.add(moneda5)
+				vuelto =0
+			if vuelto == 10:
+				moneda10 = Moneda(10,4)
+				moneda10.setrect(213,480)
+				moneda10.setanimacion(True)
+				vuelto_list.add(moneda10)
+				all_sprite_list.add(moneda10)
+				vuelto =0
+			else: 
+				pass
+		monto_intro = font_pantalla.render("$"+str(monto), True,[255,255,255])
+		screen.blit(monto_intro, (330,170))
 		all_sprite_list.draw(screen)
+		for v in vuelto_list:
+			if v.getanimacion()== True:
+				v.update("salir")
+				if v.getframe()==0:
+					v.setanimacion(False)
+
+
 	if escenario ==3:
 		screen.blit(background, [0,0])
 	
 	pygame.display.flip()
-	clock.tick(10)
+	clock.tick(tiempo)
