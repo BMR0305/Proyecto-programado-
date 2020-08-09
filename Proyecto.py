@@ -106,6 +106,9 @@ moneda4_5 = pygame.image.load("Imagenes/Moneda5/Moneda4.png").convert()
 moneda4_5.set_colorkey([0,0,0])
 moneda5_5 = pygame.image.load("Imagenes/Moneda5/Moneda5.png").convert()
 moneda5_5.set_colorkey([0,0,0])
+#Papel
+papel = pygame.image.load("Imagenes/Hoja.png").convert()
+papel.set_colorkey([0,0,0])
 #Listas de sprites
 all_sprite_list = pygame.sprite.Group()
 monedas_list = pygame.sprite.Group()
@@ -337,8 +340,9 @@ while True:
 						monedas_list.remove(v)
 						all_sprite_list.remove(v)
 
-
-
+		if escenario == 2 and recogido == False:
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				recogido = True
 	if escenario == 1:
 		tiempo =15
 		for m in monedas_list:
@@ -376,11 +380,11 @@ while True:
 			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
+		screen.blit(fondo,[0,0])
 		if recogido == 	False:
-			print("hola")
+			screen.blit(papel,[0,0])
 		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
-		screen.blit(fondo,[0,0])
 		#cambio de texto en tipo
 		if tipo == 1:
 			if idioma == "español": 
