@@ -282,47 +282,51 @@ while True:
 		if escenario == 2:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if hit_tipo.collidepoint(mouse):
-					beep.play()
-					if tipo == 3:
-						tipo = 1
-					elif tipo <3:
-						tipo += 1
+					if agarrar == False:
+						beep.play()
+						if tipo == 3:
+							tipo = 1
+						elif tipo <3:
+							tipo += 1
 				
 				if hit_calidad.collidepoint(mouse):
-					beep.play()
-					if calidad == 3:
-						calidad = 1
-					elif calidad <3:
-						calidad += 1
+					if agarrar == False:
+						beep.play()
+						if calidad == 3:
+							calidad = 1
+						elif calidad <3:
+							calidad += 1
 
 				if hit_enter.collidepoint(mouse):
-					beep.play()
-					if monto>=precio:
+					if agarrar == False:
+						beep.play()
+					if monto>=precio and agarrar == False:
 						dispensador.set_animacion()
 						for m in monedas_list:
 							monedas_list.remove(m)
 							all_sprite_list.remove(m)
-						if monto >precio:
+						if monto > precio:
 							vuelto = monto - precio
 							devolver = True
 						cant_monedas = 0
 						monto = 0
 
 				if hit_volver.collidepoint(mouse):
-					cerradura.play()
-					for m in monedas_list:
-						monedas_list.remove(m)
-						all_sprite_list.remove(m)
-					for v in vuelto_list:
-						vuelto_list.remove(v)
-						all_sprite_list.remove(v)
-					cant_monedas = 0
-					monto = 0
-					agarrar = False
-					escenario = 1
-					devolver = False
+					if agarrar == False:
+						cerradura.play()
+						for m in monedas_list:
+							monedas_list.remove(m)
+							all_sprite_list.remove(m)
+						for v in vuelto_list:
+							vuelto_list.remove(v)
+							all_sprite_list.remove(v)
+						cant_monedas = 0
+						monto = 0
+						agarrar = False
+						escenario = 1
+						devolver = False
 						
-				for m in monedas_list:
+				for m in monedas_list: 
 					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar and not devolver:
 						m.setagarrar(True)
 						agarrar =True
