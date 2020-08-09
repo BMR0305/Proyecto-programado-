@@ -117,6 +117,7 @@ hit_entrada = pygame.Rect(66,547,68,11)
 monto = 0
 devolver = False
 vuelto = 0
+recogido =	True
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self, valor, frame):
 		super().__init__()
@@ -279,7 +280,7 @@ while True:
 						codificado +="*"
 						text += event.unicode
 		
-		if escenario == 2:
+		if escenario == 2 and recogido == True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if hit_tipo.collidepoint(mouse):
 					if agarrar == False:
@@ -375,6 +376,8 @@ while True:
 			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
+		if recogido == 	False:
+			print("hola")
 		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
 		screen.blit(fondo,[0,0])
@@ -450,7 +453,8 @@ while True:
 					imprimir.play()
 				d.update()
 				if d.getframe() == 0:
-					d.set_animacion ()
+					d.set_animacion()
+					recogido = False
 		
 		if devolver == True:
 			if vuelto == 5:
