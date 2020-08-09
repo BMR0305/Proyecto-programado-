@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////
-Dichos1
+Dichos2
 ///////////////////////////////////////////////////////
 1.“No es oro todo lo que reluce”
 
@@ -11,13 +11,13 @@ Dichos1
 
 5.“El tiempo lo cura todo”
 
-6."Cada palo aguante su vela"
+6.“Cada palo aguante su vela”
 
 7.“A buen pagador, no le duelen prendas”
 
-8."Escoba nueva barre bien" 
+8.“Escoba nueva barre bien” 
 
-9."Lo barato sale caro"
+9.“Lo barato sale caro”
 
 10.“Un clavo saca otro clavo”
 
@@ -74,50 +74,49 @@ Consejos1
 Chistes3
 /////////////////////////////////////////////////////////
 1.
-— ¿Por qué las focas del circo miran siempre hacia arriba?
-— Porque es donde están los focos.
+— ¿Por qué las focas del circo miran siempre hacia arriba?— Porque es donde están los focos.
+
 2.
-— ¡Estás obsesionado con la comida!
-— No sé a que te refieres croquetamente.
+— ¡Estás obsesionado con la comida!— No sé a que te refieres croquetamente.
+
 3.
-— ¿Por qué estás hablando con esas zapatillas?
-— Porque pone "converse"
+— ¿Por qué estás hablando con esas zapatillas?— Porque pone "converse".
+
 4.
-— ¿Sabes cómo se queda un mago después de comer?
-— Magordito
+— ¿Sabes cómo se queda un mago después de comer?— Magordito
+
 5.
-— Me da un café con leche corto.
-— Se me ha roto la máquina, cambio.
+— Me da un café con leche corto.— Se me ha roto la máquina, cambio.
+
 6.
-— Buenos días, me gustaría alquilar "Batman Forever".
-— No es posible, tiene que devolverla tomorrow.
+— Buenos días, me gustaría alquilar "Batman Forever".— No es posible, tiene que devolverla tomorrow.
+
 7.
-— ¡Camarero! Este filete tiene muchos nervios.
-— Normal, es la primera vez que se lo comen.
+— ¡Camarero! Este filete tiene muchos nervios.— Normal, es la primera vez que se lo comen.
+
 8.
-— ¿Qué le dice un techo a otro?
-— Techo de menos.
+— ¿Qué le dice un techo a otro?— Techo de menos.
+
 9.
-— Hola, ¿está Agustín?
-— No, estoy incomodín.
+— Hola, ¿está Agustín?— No, estoy incomodín.
+
 10.
-— ¿Cuál es la fruta más divertida?
-— La naranja ja ja ja ja
+— ¿Cuál es la fruta más divertida?— La naranja ja ja ja ja
+
 11.
-— ¿Dónde cuelga Superman su supercapa?
-— En superchero
+— ¿Dónde cuelga Superman su supercapa?— En superchero
+
 12.
-— ¿Qué le dice una iguana a su hermana gemela?
-— Somos iguanitas
+— ¿Qué le dice una iguana a su hermana gemela?— Somos iguanitas
+
 13.
-— Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?
-— Es que Windows me ha dicho que cierre las pestañas.
+— Abuelo, ¿por qué estás delante del ordenador con los ojos cerrados?— Es que Windows me ha dicho que cierre las pestañas.
+
 14.
-— ¿Qué es un pez en un cine?
-— Un mero espectador
+— ¿Qué es un pez en un cine?— Un mero espectador
+
 15.
-— ¿Para que van una caja al gimnasio?
-— Para hacerse caja fuerte.
+— ¿Para que van una caja al gimnasio?— Para hacerse caja fuerte.
+
 16.
-— ¿Por qué se suicidó el libro de matemáticas?
-— Porque tenía muchos problemas.
+— ¿Por qué se suicidó el libro de matemáticas?— Porque tenía muchos problemas.
