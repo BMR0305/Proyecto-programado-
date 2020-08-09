@@ -106,6 +106,9 @@ moneda4_5 = pygame.image.load("Imagenes/Moneda5/Moneda4.png").convert()
 moneda4_5.set_colorkey([0,0,0])
 moneda5_5 = pygame.image.load("Imagenes/Moneda5/Moneda5.png").convert()
 moneda5_5.set_colorkey([0,0,0])
+#Papel
+papel = pygame.image.load("Imagenes/Hoja.png").convert()
+papel.set_colorkey([0,0,0])
 #Listas de sprites
 all_sprite_list = pygame.sprite.Group()
 monedas_list = pygame.sprite.Group()
@@ -117,6 +120,7 @@ hit_entrada = pygame.Rect(66,547,68,11)
 monto = 0
 devolver = False
 vuelto = 0
+recogido =	True
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self, valor, frame):
 		super().__init__()
@@ -279,7 +283,7 @@ while True:
 						codificado +="*"
 						text += event.unicode
 		
-		if escenario == 2:
+		if escenario == 2 and recogido == True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				if hit_tipo.collidepoint(mouse):
 					if agarrar == False:
@@ -336,8 +340,9 @@ while True:
 						monedas_list.remove(v)
 						all_sprite_list.remove(v)
 
-
-
+		if escenario == 2 and recogido == False:
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				recogido = True
 	if escenario == 1:
 		tiempo =15
 		for m in monedas_list:
@@ -375,9 +380,11 @@ while True:
 			screen.blit(ojo, [350,545])
 	
 	if escenario ==2:
+		screen.blit(fondo,[0,0])
+		if recogido == 	False:
+			screen.blit(papel,[0,0])
 		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
-		screen.blit(fondo,[0,0])
 		#cambio de texto en tipo
 		if tipo == 1:
 			if idioma == "español": 
@@ -450,7 +457,8 @@ while True:
 					imprimir.play()
 				d.update()
 				if d.getframe() == 0:
-					d.set_animacion ()
+					d.set_animacion()
+					recogido = False
 		
 		if devolver == True:
 			if vuelto == 5:
