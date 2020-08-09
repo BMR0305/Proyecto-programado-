@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////
-Dichos
+Dichos1
 ///////////////////////////////////////////////////////
 1.“No es oro todo lo que reluce”
 
@@ -35,7 +35,7 @@ Dichos
 
 17.“A caballo regalado no se le mira el diente”
 //////////////////////////////////////////////////////
-Consejos
+Consejos1
 //////////////////////////////////////////////////////
 1.Si es posible, intenta no escatimar en dinero cuando quieras darte un capricho. Todos nos merecemos un regalo de vez en cuando.
 
@@ -71,7 +71,7 @@ Consejos
 
 17.No seas aburrido, trata de darle algo de diversión a las actividades rutinarias.
 /////////////////////////////////////////////////////////
-Chistes
+Chistes3
 /////////////////////////////////////////////////////////
 1.
 — ¿Por qué las focas del circo miran siempre hacia arriba?
