@@ -550,9 +550,12 @@ while True:
 					anterior= ventas_s.cell(row = orden-1, column = 1)
 					anterior_valor = anterior.value
 					n_trasnsaccion = ventas_s.cell(row = orden, column = 1, value= anterior_valor+1)
-				
-				fecha = ventas_s.cell(row = orden, column = 2,value = "")
-				hora = ventas_s.cell(row = orden, column = 3,value = "")
+				if now.minute <10:
+					minutos = "0"+str(now.minute)
+				else: 
+					minutos = str(now.minute)
+				fecha = ventas_s.cell(row = orden, column = 2,value = str(now.day)+"/"+str(now.month)+"/"+str(now.year))
+				hora = ventas_s.cell(row = orden, column = 3,value = str(now.hour)+":"+ minutos)
 				tipo_v = ventas_s.cell(row = orden, column = 4,value = tipo)
 				codigo_v = ventas_s.cell(row = orden, column = 5,value = codigo.value)
 				monto = ventas_s.cell(row = orden, column = 6,value = precio)
