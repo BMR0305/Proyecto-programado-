@@ -535,12 +535,20 @@ while True:
 				venta_valor = venta_m.value
 				venta_valor += 1
 				venta_m = mensajes_s.cell(row = fila, column = 6,value = venta_valor)
-				
-				
-				n_trasnsaccion = ventas_s.cell(row = orden, column = 1,value = orden-1)
-				n_trasnsaccion = ventas_s.cell(row = orden, column = 1,value = orden-1)
-				
+		
+				n_trasnsaccion = ventas_s.cell(row = orden, column = 1)
+				if n_trasnsaccion.value == None:
+					n_trasnsaccion = ventas_s.cell(row = orden, column = 1, value= 1)
+				else:
+					while n_trasnsaccion.value != None:
+						orden +=1
+						n_trasnsaccion = ventas_s.cell(row = orden, column = 1)
+					
+					anterior= ventas_s.cell(row = orden-1, column = 1)
+					anterior_valor = anterior.value
+					n_trasnsaccion = ventas_s.cell(row = orden, column = 1, value= anterior_valor+1)
 
+				
 				mensajes.save(filename = "Mensajes.xlsx")
 				ventas.save(filename = "Ventas.xlsx")
 				mostrar = False
