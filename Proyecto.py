@@ -537,6 +537,7 @@ while True:
 				venta_valor = venta_m.value
 				venta_valor += 1
 				venta_m = mensajes_s.cell(row = fila, column = 6,value = venta_valor)
+				codigo = mensajes_s.cell(row = fila, column = 2)
 		
 				n_trasnsaccion = ventas_s.cell(row = orden, column = 1)
 				if n_trasnsaccion.value == None:
@@ -553,7 +554,7 @@ while True:
 				fecha = ventas_s.cell(row = orden, column = 2,value = "")
 				hora = ventas_s.cell(row = orden, column = 3,value = "")
 				tipo_v = ventas_s.cell(row = orden, column = 4,value = tipo)
-				codigo = ventas_s.cell(row = orden, column = 5,value = "")
+				codigo_v = ventas_s.cell(row = orden, column = 5,value = codigo.value)
 				monto = ventas_s.cell(row = orden, column = 6,value = precio)
 				pago_v = ventas_s.cell(row = orden, column = 7,value = pago_tabla)
 				vuelto_v = ventas_s.cell(row = orden, column = 8,value = vuelto_tabla)
