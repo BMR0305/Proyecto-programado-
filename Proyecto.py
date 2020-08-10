@@ -107,7 +107,7 @@ moneda4_5.set_colorkey([0,0,0])
 moneda5_5 = pygame.image.load("Imagenes/Moneda5/Moneda5.png").convert()
 moneda5_5.set_colorkey([0,0,0])
 #Papel
-papel = pygame.image.load("Imagenes/Hoja.png").convert()
+papel = pygame.image.load("Imagenes/Hoja.png")
 papel.set_colorkey([0,0,0])
 #Listas de sprites
 all_sprite_list = pygame.sprite.Group()
@@ -381,8 +381,6 @@ while True:
 	
 	if escenario ==2:
 		screen.blit(fondo,[0,0])
-		if recogido == 	False:
-			screen.blit(papel,[0,0])
 		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
 		#cambio de texto en tipo
@@ -486,6 +484,9 @@ while True:
 				if v.getframe()==0:
 					v.setanimacion(False)
 
+		if recogido == 	False:
+			screen.blit(papel,[100,100])
+	
 
 	if escenario ==3:
 		screen.blit(background, [0,0])
