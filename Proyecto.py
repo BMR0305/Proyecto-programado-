@@ -326,6 +326,8 @@ while True:
 							vuelto = pago - precio
 							vuelto_tabla = vuelto
 							devolver = True
+						if pago == precio:
+							vuelto_tabla = 0
 						cant_monedas = 0
 						pago_tabla = pago
 						pago = 0
@@ -547,6 +549,14 @@ while True:
 					anterior= ventas_s.cell(row = orden-1, column = 1)
 					anterior_valor = anterior.value
 					n_trasnsaccion = ventas_s.cell(row = orden, column = 1, value= anterior_valor+1)
+				
+				fecha = ventas_s.cell(row = orden, column = 2,value = "")
+				hora = ventas_s.cell(row = orden, column = 3,value = "")
+				tipo_v = ventas_s.cell(row = orden, column = 4,value = tipo)
+				codigo = ventas_s.cell(row = orden, column = 5,value = "")
+				monto = ventas_s.cell(row = orden, column = 6,value = precio)
+				pago_v = ventas_s.cell(row = orden, column = 7,value = pago_tabla)
+				vuelto_v = ventas_s.cell(row = orden, column = 8,value = vuelto_tabla)
 
 				
 				mensajes.save(filename = "Mensajes.xlsx")
