@@ -1,4 +1,5 @@
 import pygame, sys, os
+from datetime import datetime
 os.environ['SDL_VIDEO_CENTERED'] = '0' #se centra la ventana de juego
 pygame.init()
 #Crear vnetana
@@ -117,7 +118,7 @@ vuelto_list = pygame.sprite.Group()
 cant_monedas = 0
 agarrar = False
 hit_entrada = pygame.Rect(66,547,68,11)
-monto = 0
+pago = 0
 devolver = False
 vuelto = 0
 recogido =	True
@@ -304,16 +305,16 @@ while True:
 				if hit_enter.collidepoint(mouse):
 					if agarrar == False:
 						beep.play()
-					if monto>=precio and agarrar == False:
+					if pago>=precio and agarrar == False:
 						dispensador.set_animacion()
 						for m in monedas_list:
 							monedas_list.remove(m)
 							all_sprite_list.remove(m)
-						if monto > precio:
-							vuelto = monto - precio
+						if pago > precio:
+							vuelto = pago - precio
 							devolver = True
 						cant_monedas = 0
-						monto = 0
+						pago = 0
 
 				if hit_volver.collidepoint(mouse):
 					if agarrar == False:
@@ -325,7 +326,7 @@ while True:
 							vuelto_list.remove(v)
 							all_sprite_list.remove(v)
 						cant_monedas = 0
-						monto = 0
+						pago = 0
 						agarrar = False
 						escenario = 1
 						devolver = False
@@ -447,7 +448,7 @@ while True:
 					m.setanimacion(False) 
 					monedas_list.remove(m)
 					all_sprite_list.remove(m)
-					monto+=m.getvalor()
+					pago+=m.getvalor()
 		
 		for d in dispenser_list:
 			if dispensador.get_animacion() == True:
@@ -457,6 +458,7 @@ while True:
 				if d.getframe() == 0:
 					d.set_animacion()
 					recogido = False
+					now = datetime.now()
 		
 		if devolver == True:
 			if vuelto == 5:
@@ -475,8 +477,8 @@ while True:
 				vuelto =0
 			else: 
 				pass
-		monto_intro = font_pantalla.render("$"+str(monto), True,[255,255,255])
-		screen.blit(monto_intro, (330,170))
+		pago_intro = font_pantalla.render("$"+str(pago), True,[255,255,255])
+		screen.blit(pago_intro, (330,170))
 		all_sprite_list.draw(screen)
 		for v in vuelto_list:
 			if v.getanimacion()== True:
@@ -486,6 +488,7 @@ while True:
 
 		if recogido == 	False:
 			screen.blit(papel,[100,100])
+			print(now.second)
 	
 
 	if escenario ==3:
