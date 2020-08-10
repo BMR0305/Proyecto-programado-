@@ -1,4 +1,6 @@
 import pygame, sys, os
+from openpyxl import load_workbook
+from openpyxl import Workbook
 os.environ['SDL_VIDEO_CENTERED'] = '0' #se centra la ventana de juego
 pygame.init()
 #Crear vnetana
@@ -8,6 +10,9 @@ pygame.display.set_caption("Advice Machine")
 #Reloj
 clock=pygame.time.Clock()
 tiempo = 15
+#cargar archivo excel
+excel = load_workbook("Mensajes.xlsx")
+excel_s = excel.active
 #Fondos
 background = pygame.image.load("Imagenes/Menu.jpg").convert()
 fondo = pygame.image.load("Imagenes/Fondo.jpg").convert()
@@ -183,7 +188,7 @@ class Dispensador(pygame.sprite.Sprite):
 		self.image = dispensador1
 		self.rect = (450,560)
 		self.frame = 0
-		self.mensaje = [dispensador1,dispensador2,dispensador3,dispensador4,dispensador5,dispensador6,dispensador7,dispensador8]
+		self.sprites = [dispensador1,dispensador2,dispensador3,dispensador4,dispensador5,dispensador6,dispensador7,dispensador8]
 		self.animacion = False 
 
 	def get_animacion(self):
@@ -200,9 +205,9 @@ class Dispensador(pygame.sprite.Sprite):
 			
 	def get_frame(self):
 		self.frame += 1
-		if self.frame > (len(self.mensaje)-1):
+		if self.frame > (len(self.sprites)-1):
 			self.frame = 0
-		return self.mensaje[self.frame]
+		return self.sprites[self.frame]
 
 	def update(self):
 		self.image = self.get_frame()
@@ -212,7 +217,8 @@ dispenser_list = pygame.sprite.Group()
 dispensador = Dispensador()
 dispenser_list.add(dispensador)
 all_sprite_list.add(dispensador)
-
+#Mensaje a enseñar
+mensaje = excel_s.cell(row=4, column=4) 
 while True:
 	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
