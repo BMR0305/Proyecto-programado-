@@ -1,4 +1,4 @@
-import pygame, sys, os
+import pygame, sys, os,random
 from openpyxl import load_workbook
 from openpyxl import Workbook
 from datetime import datetime
@@ -11,9 +11,12 @@ pygame.display.set_caption("Advice Machine")
 #Reloj
 clock=pygame.time.Clock()
 tiempo = 15
-#cargar archivo excel
-excel = load_workbook("Mensajes.xlsx")
-excel_s = excel.active
+#cargar archivos excel
+ventas = load_workbook("Ventas.xlsx")
+ventas_s = ventas.active 
+mensajes = load_workbook("Mensajes.xlsx")
+mensajes_s = mensajes.active
+excel_font = pygame.font.SysFont("Times New Roman", 20)
 #Fondos
 background = pygame.image.load("Imagenes/Menu.jpg").convert()
 fondo = pygame.image.load("Imagenes/Fondo.jpg").convert()
@@ -218,8 +221,11 @@ dispenser_list = pygame.sprite.Group()
 dispensador = Dispensador()
 dispenser_list.add(dispensador)
 all_sprite_list.add(dispensador)
-#Mensaje a enseñar
-mensaje = excel_s.cell(row=4, column=4) 
+
+columna =0
+fila = 0
+mostrar = True
+orden = 2
 while True:
 	mouse= pygame.mouse.get_pos()
 	for event in pygame.event.get():
@@ -318,8 +324,10 @@ while True:
 							all_sprite_list.remove(m)
 						if pago > precio:
 							vuelto = pago - precio
+							vuelto_tabla = vuelto
 							devolver = True
 						cant_monedas = 0
+						pago_tabla = pago
 						pago = 0
 
 				if hit_volver.collidepoint(mouse):
@@ -350,6 +358,7 @@ while True:
 		if escenario == 2 and recogido == False:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				recogido = True
+				mostrar = True
 	if escenario == 1:
 		tiempo =15
 		for m in monedas_list:
@@ -493,8 +502,68 @@ while True:
 					v.setanimacion(False)
 
 		if recogido == 	False:
+			if mostrar == True:
+				if idioma == "español":
+					columna = 3
+				else:
+					columna = 4
+				if tipo == 1:
+					if calidad == 1:
+						fila = random.randint(2,7)
+					if calidad == 2:
+						fila = random.randint(8,13)
+					if calidad == 3:
+						fila = random.randint(14,18)
+				if tipo == 2:
+					if calidad == 1:
+						fila = random.randint(19,24)
+					if calidad == 2:
+						fila = random.randint(25,30)
+					if calidad == 3:
+						fila = random.randint(31,35)
+				if tipo == 3:
+					if calidad == 1:
+						fila = random.randint(36,41)
+					if calidad == 2:
+						fila = random.randint(42,47)
+					if calidad == 3:
+						fila = random.randint(48,51)
+				#Mensaje a enseñar
+				mensaje = mensajes_s.cell(row = fila, column = columna)
+				mensaje_valor = mensaje.value
+				venta_m = mensajes_s.cell(row = fila, column = 6)
+				venta_valor = venta_m.value
+				venta_valor += 1
+				venta_m = mensajes_s.cell(row = fila, column = 6,value = venta_valor)
+				
+				
+				n_trasnsaccion = ventas_s.cell(row = orden, column = 1,value = orden-1)
+				n_trasnsaccion = ventas_s.cell(row = orden, column = 1,value = orden-1)
+				
+
+				mensajes.save(filename = "Mensajes.xlsx")
+				ventas.save(filename = "Ventas.xlsx")
+				mostrar = False
+
 			screen.blit(papel,[100,100])
-			print(now.second)
+			mensajea = ""
+			mensajeb = ""
+			for i in range(len(mensaje_valor)):
+				if mensaje_valor[i] == "/":
+					mensajea = mensaje_valor[:i]
+					mensajeb = mensaje_valor[i+1:]
+					break
+			if mensajeb == "":
+				mensajea = mensaje_valor
+				mensaje_text1 = excel_font.render(mensajea, True, [0,0,0])
+				screen.blit(mensaje_text1,(130,300))
+			else:
+				mensaje_text1 = excel_font.render(mensajea, True, [0,0,0])	
+				mensaje_text2 = excel_font.render(mensajeb, True, [0,0,0])
+				screen.blit(mensaje_text1,(130,300))
+				screen.blit(mensaje_text2,(130,350))
+
+
 	
 
 	if escenario ==3:
