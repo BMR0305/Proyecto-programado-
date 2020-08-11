@@ -20,6 +20,7 @@ excel_font = pygame.font.SysFont("Times New Roman", 20)
 #Fondos
 background = pygame.image.load("Imagenes/Menu.jpg").convert()
 fondo = pygame.image.load("Imagenes/Fondo.jpg").convert()
+fondo_admin = pygame.image.load("Imagenes/fondo_admin.jpg").convert()
 #Botonoes
 start = pygame.image.load("Imagenes/Start.png").convert()
 start.set_colorkey([0,0,0])
@@ -41,6 +42,22 @@ ojo = pygame.image.load("Imagenes/Ojo.png").convert()
 ojo.set_colorkey([0,0,0])
 ojo_c = pygame.image.load("Imagenes/Ojo_c.png").convert()
 ojo_c.set_colorkey([0,0,0])
+reset = pygame.image.load("Imagenes/Reset.png").convert()
+reset.set_colorkey([0,0,0])
+reset_p = pygame.image.load("Imagenes/Reset_p.png").convert()
+reset_p.set_colorkey([0,0,0])
+report = pygame.image.load("Imagenes/Report.png").convert()
+report.set_colorkey([0,0,0])
+report_p = pygame.image.load("Imagenes/Report_p.png").convert()
+report_p.set_colorkey([0,0,0])
+shut_down = pygame.image.load("Imagenes/Shut_down.png").convert()
+shut_down.set_colorkey([0,0,0])
+shut_down_p = pygame.image.load("Imagenes/Shut_down_p.png").convert()
+shut_down_p.set_colorkey([0,0,0])
+volver = pygame.image.load("Imagenes/Volver.png").convert()
+volver.set_colorkey([0,0,0])
+volver_p = pygame.image.load("Imagenes/Volver_p.png").convert()
+volver_p.set_colorkey([0,0,0])
 #Dispensador imagenes
 dispensador1 = pygame.image.load("Imagenes/Dispensador/Dispensador1.JPG").convert()
 dispensador2 = pygame.image.load("Imagenes/Dispensador/Dispensador2.JPG").convert()
@@ -59,9 +76,11 @@ moneda_s = pygame.mixer.Sound("Sonidos/Moneda.wav")
 moneda_s.set_volume(1)
 imprimir = pygame.mixer.Sound("Sonidos/Imprimir.wav")
 imprimir.set_volume(0.3)
-#otros
+#Otros
 equis = pygame.image.load("Imagenes/Equis.png").convert()
 equis.set_colorkey([0,0,0])
+alerta = pygame.image.load("Imagenes/Alerta.png").convert()
+alerta.set_colorkey([0,0,0])
 
 #Hitbox botones menu
 hit_start = pygame.Rect(372, 67, 145, 80)
@@ -76,6 +95,10 @@ hit_enter = pygame.Rect(301,253,97,50)
 tipo = 1
 calidad = 1
 font_pantalla = pygame.font.SysFont("OCR A EXTENDED", 25)
+#hitbox botones admin
+hit_reset = pygame.Rect(207,565, 150, 73)
+hit_shut_down = pygame.Rect(368,67,150,73)
+hit_report = pygame.Rect(315,275,150,73)
 #Volver
 hit_volver = pygame.Rect(615,11, 70,70)
 #Variables de entry
@@ -94,6 +117,10 @@ idioma = "español"
 press_a = False
 press_s = False
 incorrecto= False
+press_rep = False
+press_shut = False
+press_res = False
+press_vol = False
 #Cargar imagenes de moneda
 moneda1_10 = pygame.image.load("Imagenes/Moneda10/Moneda1.png").convert()
 moneda1_10.set_colorkey([0,0,0])
@@ -341,6 +368,7 @@ while True:
 						for v in vuelto_list:
 							vuelto_list.remove(v)
 							all_sprite_list.remove(v)
+						privacidad = True
 						cant_monedas = 0
 						pago = 0
 						agarrar = False
@@ -361,6 +389,91 @@ while True:
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				recogido = True
 				mostrar = True
+		if escenario == 3:
+			if event.type == pygame.MOUSEBUTTONDOWN:	
+				if hit_volver.collidepoint(mouse):
+					beep.play()
+					escenario = 1
+					text = ""
+					codificado = ""
+					incorrecto = False
+					privacidad = True
+				if hit_report.collidepoint(mouse):
+					beep.play()
+					escenario = 4
+				if hit_reset.collidepoint(mouse):
+					beep.play()
+					for i in range(2,52):
+						borrar = mensajes_s.cell(row = i, column = 6, value= 0)
+					i=2
+					borrar_v = ventas_s.cell(row = i, column = 1)
+					while borrar_v.value != None:
+						for j in range(1,9):
+							borrar_v = ventas_s.cell(row = i, column = j)
+							borrar_v.value = None
+						i+=1
+						borrar_v = ventas_s.cell(row = i, column = 1)
+
+
+					mensajes.save(filename = "Mensajes.xlsx")
+					ventas.save(filename = "Ventas.xlsx")
+				if hit_shut_down.collidepoint(mouse):
+					beep.play()
+					sys.exit()
+
+			if event.type == pygame.MOUSEMOTION:
+				if mouse[0]>=315 and mouse[0]<=465 and mouse[1]>=275 and mouse[1]<=348:
+					press_rep = True
+				elif mouse[0]>=207 and mouse[0]<=357 and mouse[1]>=565 and mouse[1]<=638:
+					press_res = True
+				elif mouse[0]>=368 and mouse[0]<=518 and mouse[1]>=67 and mouse[1]<=140:
+					press_shut = True
+				elif mouse[0]>=615 and mouse[0]<=685 and mouse[1]>=11 and mouse[1]<=81:
+					press_vol = True
+				else:
+					press_rep =False
+					press_res =False
+					press_shut =False
+					press_vol =False
+
+
+
+
+
+
+
+
+
+		if escenario == 4:
+			if event.type == pygame.MOUSEMOTION:
+				if mouse[0]>=615 and mouse[0]<=685 and mouse[1]>=11 and mouse[1]<=81:
+					press_vol = True
+				else:
+					press_vol =False
+			if event.type == pygame.MOUSEBUTTONDOWN:	
+				if hit_volver.collidepoint(mouse):
+					beep.play()
+					escenario = 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	if escenario == 1:
 		tiempo =15
 		for m in monedas_list:
@@ -585,11 +698,34 @@ while True:
 				screen.blit(mensaje_text1,(130,300))
 				screen.blit(mensaje_text2,(130,350))
 
+	if escenario ==3:
+		screen.blit(background,[0,0])
+		screen.blit(alerta,[207,420])
+		if press_rep == False:
+			screen.blit(report, [315,275])
+		if press_rep == True:
+			screen.blit(report_p, [315,275])
+		if press_res == False:
+			screen.blit(reset, [207,565])
+		if press_res == True:
+			screen.blit(reset_p, [207,565])
+		if press_shut == False:
+			screen.blit(shut_down, [368,67])
+		if press_shut == True:
+			screen.blit(shut_down_p, [368,67])	
+		if press_vol == False:
+			screen.blit(volver, [615,11])
+		if press_vol == True:
+			screen.blit(volver_p, [615,11])
+
+	if escenario == 4:
+		screen.blit(fondo_admin,[0,0])
+		if press_vol == False:
+			screen.blit(volver, [615,11])
+		if press_vol == True:
+			screen.blit(volver_p, [615,11])
 
 	
-
-	if escenario ==3:
-		screen.blit(background, [0,0])
 	
 	pygame.display.flip()
 	clock.tick(tiempo)
