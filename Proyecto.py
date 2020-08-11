@@ -400,7 +400,35 @@ while True:
 					privacidad = True
 				if hit_report.collidepoint(mouse):
 					beep.play()
+					matriz = [["Tipo","Codigo", "Mensaje", "Msg vendidos","Monto ventas"]]
+					filas = []
+					i =2
+					crear = mensajes_s.cell(row = i, column = 6)
+					while crear.value != None:
+						if crear.value != 0:
+							crear_tipo = mensajes_s.cell(row = i, column = 1)
+							crear_codigo = mensajes_s.cell(row = i, column = 2)
+							crear_msg = mensajes_s.cell(row = i, column = 3)
+							valor_msg = crear_msg.value
+							valor_msg = valor_msg[:20]
+							crear_msg_vendidos = mensajes_s.cell(row = i, column = 6)
+							crear_precio = mensajes_s.cell(row = i, column = 5)
+							crear_monto = crear_msg_vendidos.value * crear_precio.value
+							filas.append(crear_tipo.value)
+							filas.append(crear_codigo.value)
+							filas.append(valor_msg)
+							filas.append(crear_msg_vendidos.value)
+							filas.append(crear_monto)
+							matriz.append(filas)
+							filas = []
+							i+=1
+							crear = mensajes_s.cell(row = i, column = 6)
+						else: 
+							i+=1
+							crear = mensajes_s.cell(row = i, column = 6)
+					
 					escenario = 4
+
 				if hit_reset.collidepoint(mouse):
 					beep.play()
 					for i in range(2,52):
@@ -436,14 +464,6 @@ while True:
 					press_shut =False
 					press_vol =False
 
-
-
-
-
-
-
-
-
 		if escenario == 4:
 			if event.type == pygame.MOUSEMOTION:
 				if mouse[0]>=615 and mouse[0]<=685 and mouse[1]>=11 and mouse[1]<=81:
@@ -454,24 +474,6 @@ while True:
 				if hit_volver.collidepoint(mouse):
 					beep.play()
 					escenario = 3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	if escenario == 1:
@@ -724,6 +726,22 @@ while True:
 			screen.blit(volver, [615,11])
 		if press_vol == True:
 			screen.blit(volver_p, [615,11])
+		x=20
+		y=70
+		for i in range(len(matriz)):
+			for j in range (len(matriz[0])):
+				renderizar = excel_font.render(str(matriz[i][j]), True, [255,255,255])
+				screen.blit(renderizar,(x,y))
+				x += 100
+				if j == 2 and i>0:
+					x+=100
+				if j == 2 and i==0:
+					x+=50
+				if j == 3 and i==0:
+					x+=50
+
+			y+= 50
+			x= 20
 
 	
 	
