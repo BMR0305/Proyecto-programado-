@@ -1,7 +1,11 @@
-import pygame, sys, os,random
-from openpyxl import load_workbook
+import pygame # Libreria principal para la interfaz grafica 
+import sys # Librireria del sistema
+import os # Libreria del sistema operativo
+import random #Libreria de randomizado
+#Libreria que permite interactuar con archivos .xlsx (excel)
+from openpyxl import load_workbook 
 from openpyxl import Workbook
-from datetime import datetime
+from datetime import datetime #Libreria que accede a la fecha y hora del sistema
 os.environ['SDL_VIDEO_CENTERED'] = '0' #se centra la ventana de juego
 pygame.init()
 #Crear vnetana
@@ -81,7 +85,6 @@ equis = pygame.image.load("Imagenes/Equis.png").convert()
 equis.set_colorkey([0,0,0])
 alerta = pygame.image.load("Imagenes/Alerta.png").convert()
 alerta.set_colorkey([0,0,0])
-
 #Hitbox botones menu
 hit_start = pygame.Rect(372, 67, 145, 80)
 hit_español = pygame.Rect(368,200,150,73)
@@ -157,6 +160,29 @@ pago = 0
 devolver = False
 vuelto = 0
 recogido =	True
+"""Clase Moneda
+#Atributos: image: imagen que enseña la instancia 
+			rect: hitbox de la imagen
+			frame: variable para elegir la imagen
+			frames: lista de imagenes para la animacion
+			valor: valor de la moneda 
+			agarrar: boolean que verifica si la moneda esta agarrada o no
+			animacion: boolean que verifica si la animacion esta en proceso
+
+#Funciones
+#change_frame(): obtiene el valor de self.frame
+		#E:lista de imagenes #S:imagen segun el frame #R:-
+#update():actualiza la imagen del sprite
+		#E:instancia #S:muestra la imagen #R:- 
+#getagarrar()
+#setagarrar()
+#getanimacion()
+#setanimacion()
+#getframe()
+#getrect()
+#setrect()
+#getvalor()
+"""
 class Moneda(pygame.sprite.Sprite):
 	def __init__(self, valor, frame):
 		super().__init__()
@@ -194,7 +220,7 @@ class Moneda(pygame.sprite.Sprite):
 	def getvalor(self):
 		return self.valor
 
-	def get_frame(self, accion):
+	def change_frame(self, accion):
 		if accion == "entrar":
 			self.frame += 1
 			if self.frame > (len(self.frames) - 1):
@@ -205,14 +231,25 @@ class Moneda(pygame.sprite.Sprite):
 			self.frame -= 1
 			return self.frames[self.frame]
 
-	
-	def change_image(self, accion):
-		self.image = self.get_frame(accion)
-
 	def update(self, accion):
-		self.change_image(accion)
+		self.image = self.change_frame(accion)
 
+"""Clase Dispensador
+#Atributos: image: imagen que enseña la instancia 
+			rect: hitbox de la imagen
+			frame: variable para elegir la imagen
+			sprites: lista de imagenes para la animacion 
+			animacion: boolean que verifica si la animacion esta en proceso
 
+#Funciones
+#change_frame(): obtiene el valor de self.frame
+		#E:lista de imagenes #S:imagen segun el frame #R:-
+#update():actualiza la imagen del sprite
+		#E:instancia #S:muestra la imagen #R:- 
+#get_animacion()
+#set_animacion()
+#getframe()
+"""
 class Dispensador(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
@@ -234,31 +271,33 @@ class Dispensador(pygame.sprite.Sprite):
 	def getframe(self):
 		return self.frame	
 			
-	def get_frame(self):
+	def change_frame(self):
 		self.frame += 1
 		if self.frame > (len(self.sprites)-1):
 			self.frame = 0
 		return self.sprites[self.frame]
 
 	def update(self):
-		self.image = self.get_frame()
+		self.image = self.change_frame()
 
 #Creación del dispensador
 dispenser_list = pygame.sprite.Group()
 dispensador = Dispensador()
 dispenser_list.add(dispensador)
 all_sprite_list.add(dispensador)
-
+#Variables de tabla
 columna =0
 fila = 0
-mostrar = True
 orden = 2
+#Variable de papel
+mostrar = True
+#main loop
 while True:
 	mouse= pygame.mouse.get_pos()
-	for event in pygame.event.get():
+	for event in pygame.event.get():#Revisa los eventos
 		if event.type == pygame.QUIT:  
 			sys.exit()
-		if escenario == 1:
+		if escenario == 1: #Verifica el escenario
 			if event.type == pygame.MOUSEBUTTONDOWN: 
 				if input_box.collidepoint(mouse): #revisa si se da click en el entry
 					active = True
@@ -266,18 +305,18 @@ while True:
 				else:
 					active = False
 					color = color_inactive
-				if hit_english.collidepoint(mouse):
+				if hit_english.collidepoint(mouse): #revisa si se da click en el boton de ingles
 					beep.play()
 					idioma = "english"
-				if hit_español.collidepoint(mouse):
+				if hit_español.collidepoint(mouse):#revisa si se da click en en el boton de españool
 					beep.play()
 					idioma= "español"
-				if hit_start.collidepoint(mouse):
+				if hit_start.collidepoint(mouse):#revisa si se da click en start
 					beep.play()
 					escenario = 2
 					incorrecto = False
 					codificado=""
-				if hit_admin.collidepoint(mouse):
+				if hit_admin.collidepoint(mouse):#revisa si se da click en admin
 					beep.play()
 					if text == "1234": 
 						escenario = 3
@@ -285,14 +324,14 @@ while True:
 						text = ""
 						codificado = ""
 						incorrecto = True
-				if hit_ojo.collidepoint(mouse):
+				if hit_ojo.collidepoint(mouse): #revisa si se da click en el ojo
 					if privacidad == True:
 						privacidad = False
 					elif privacidad == False:
 						privacidad = True
 
 
-			if event.type == pygame.MOUSEMOTION:
+			if event.type == pygame.MOUSEMOTION: #revisa si el mouse esta encima de los botonos para dar feedback
 				if mouse[0]>=385 and mouse[0]<=506 and mouse[1]>=80 and mouse[1]<=140:
 					press_s = True
 				elif mouse[0]>=207 and mouse[0]<=357 and mouse[1]>=435 and mouse[1]<=507:
@@ -319,13 +358,13 @@ while True:
 							text = ""
 							codificado=""
 							incorrecto =True
-					else:
+					else: 
 						codificado +="*"
 						text += event.unicode
 		
-		if escenario == 2 and recogido == True:
+		if escenario == 2 and recogido == True: #verifica el escenario y estado
 			if event.type == pygame.MOUSEBUTTONDOWN:
-				if hit_tipo.collidepoint(mouse):
+				if hit_tipo.collidepoint(mouse):#revisa si se da click el boton que cambia de tipo
 					if agarrar == False:
 						beep.play()
 						if tipo == 3:
@@ -333,7 +372,7 @@ while True:
 						elif tipo <3:
 							tipo += 1
 				
-				if hit_calidad.collidepoint(mouse):
+				if hit_calidad.collidepoint(mouse):#revisa si se da click el boton que cambia de calidad
 					if agarrar == False:
 						beep.play()
 						if calidad == 3:
@@ -341,7 +380,7 @@ while True:
 						elif calidad <3:
 							calidad += 1
 
-				if hit_enter.collidepoint(mouse):
+				if hit_enter.collidepoint(mouse): #revisa si se da click en el boton de enter
 					if agarrar == False:
 						beep.play()
 					if pago>=precio and agarrar == False:
@@ -359,7 +398,7 @@ while True:
 						pago_tabla = pago
 						pago = 0
 
-				if hit_volver.collidepoint(mouse):
+				if hit_volver.collidepoint(mouse): #revisa si se da click en el boton para volver al menu
 					if agarrar == False:
 						cerradura.play()
 						for m in monedas_list:
@@ -376,34 +415,36 @@ while True:
 						devolver = False
 						
 				for m in monedas_list: 
-					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar and not devolver:
+					if m.getrect().collidepoint(mouse) and not m.getagarrar() and not agarrar and not devolver: #si da click sobre una moneda 
 						m.setagarrar(True)
 						agarrar =True
 				for v in vuelto_list:
-					if v.getrect().collidepoint(mouse):
+					if v.getrect().collidepoint(mouse): #si da click sobre el vuelto
 						devolver = False
 						monedas_list.remove(v)
 						all_sprite_list.remove(v)
 
-		if escenario == 2 and recogido == False:
-			if event.type == pygame.MOUSEBUTTONDOWN:
+		if escenario == 2 and recogido == False: #verifica el escenario y estado
+			if event.type == pygame.MOUSEBUTTONDOWN: #recoge el papel
 				recogido = True
 				mostrar = True
-		if escenario == 3:
+		
+		if escenario == 3: #verifica el escenario
 			if event.type == pygame.MOUSEBUTTONDOWN:	
-				if hit_volver.collidepoint(mouse):
+				if hit_volver.collidepoint(mouse): #revisa si se da click en el boton para volver al menu
 					beep.play()
 					escenario = 1
 					text = ""
 					codificado = ""
 					incorrecto = False
 					privacidad = True
-				if hit_report.collidepoint(mouse):
+				if hit_report.collidepoint(mouse):#revisa si se da click en el boton para dar un reporte
 					beep.play()
 					matriz = [["Tipo","Codigo", "Mensaje", "Msg vendidos","Monto ventas"]]
 					filas = []
 					i =2
 					crear = mensajes_s.cell(row = i, column = 6)
+					#Creacion de matriz para la tabla de reportes
 					while crear.value != None:
 						if crear.value != 0:
 							crear_tipo = mensajes_s.cell(row = i, column = 1)
@@ -429,7 +470,7 @@ while True:
 					
 					escenario = 4
 
-				if hit_reset.collidepoint(mouse):
+				if hit_reset.collidepoint(mouse): #revisa si se da click en el boton reset
 					beep.play()
 					for i in range(2,52):
 						borrar = mensajes_s.cell(row = i, column = 6, value= 0)
@@ -445,11 +486,11 @@ while True:
 
 					mensajes.save(filename = "Mensajes.xlsx")
 					ventas.save(filename = "Ventas.xlsx")
-				if hit_shut_down.collidepoint(mouse):
+				if hit_shut_down.collidepoint(mouse): #revisa si se da click en el boton shut down (apagar)
 					beep.play()
 					sys.exit()
 
-			if event.type == pygame.MOUSEMOTION:
+			if event.type == pygame.MOUSEMOTION:#revisa si el mouse esta encima de los botonos para dar feedback
 				if mouse[0]>=315 and mouse[0]<=465 and mouse[1]>=275 and mouse[1]<=348:
 					press_rep = True
 				elif mouse[0]>=207 and mouse[0]<=357 and mouse[1]>=565 and mouse[1]<=638:
@@ -464,18 +505,17 @@ while True:
 					press_shut =False
 					press_vol =False
 
-		if escenario == 4:
-			if event.type == pygame.MOUSEMOTION:
+		if escenario == 4:#verifica el escenario
+			if event.type == pygame.MOUSEMOTION:#revisa si el mouse esta encima de los botonos para dar feedback
 				if mouse[0]>=615 and mouse[0]<=685 and mouse[1]>=11 and mouse[1]<=81:
 					press_vol = True
 				else:
 					press_vol =False
 			if event.type == pygame.MOUSEBUTTONDOWN:	
-				if hit_volver.collidepoint(mouse):
+				if hit_volver.collidepoint(mouse):#revisa si se da click en el boton para volver al modo administrador
 					beep.play()
 					escenario = 3
-
-
+	#Se muestra en pantalla distintos elementos segun la variable escenario		
 	if escenario == 1:
 		tiempo =15
 		for m in monedas_list:
@@ -516,7 +556,7 @@ while True:
 		screen.blit(fondo,[0,0])
 		tiempo = 10
 		mouse_pos = pygame.mouse.get_pos()
-		#cambio de texto en tipo
+		#cambio de texto en tipo dependiendo idioma
 		if tipo == 1:
 			if idioma == "español": 
 				consejo = font_pantalla.render("Consejo", True,[255,255,255])
@@ -551,7 +591,7 @@ while True:
 			precio = 15
 			calidad_3 = font_pantalla.render("$"+str(precio), True,[255,255,255])
 			screen.blit(calidad_3, (430,80))
-		
+		#Creaciond de monedas
 		if cant_monedas == 0:
 			moneda5 = Moneda(5,0)
 			moneda5.setrect(80,620)
@@ -562,7 +602,7 @@ while True:
 			monedas_list.add(moneda10)
 			all_sprite_list.add(moneda10)
 			cant_monedas+=2
-		
+		#Movimiento y animacion de las monedas
 		for m in monedas_list:
 			if m.getagarrar() == True:
 				m.setrect(mouse_pos[0]-28, mouse_pos[1]-24)
@@ -581,7 +621,7 @@ while True:
 					monedas_list.remove(m)
 					all_sprite_list.remove(m)
 					pago+=m.getvalor()
-		
+		#Animacion del dispensador
 		for d in dispenser_list:
 			if dispensador.get_animacion() == True:
 				if m.getframe() == 0:
@@ -591,7 +631,7 @@ while True:
 					d.set_animacion()
 					recogido = False
 					now = datetime.now()
-		
+		#Verifica si hay que dar vuelto y la cantidad a dar
 		if devolver == True:
 			if vuelto == 5:
 				moneda5 = Moneda(5,4)
@@ -609,21 +649,26 @@ while True:
 				vuelto =0
 			else: 
 				pass
+		#Pago introducido por el usuario
 		pago_intro = font_pantalla.render("$"+str(pago), True,[255,255,255])
 		screen.blit(pago_intro, (330,170))
+		#Dibuja los sprites
 		all_sprite_list.draw(screen)
+		#Animaciond el vuelto
 		for v in vuelto_list:
 			if v.getanimacion()== True:
 				v.update("salir")
 				if v.getframe()==0:
 					v.setanimacion(False)
-
+		#Seleccion de mensaje
 		if recogido == 	False:
 			if mostrar == True:
+				#Eleccion segun idioma
 				if idioma == "español":
 					columna = 3
 				else:
 					columna = 4
+				#Eleccion random de mensaje
 				if tipo == 1:
 					if calidad == 1:
 						fila = random.randint(2,7)
@@ -645,7 +690,7 @@ while True:
 						fila = random.randint(42,47)
 					if calidad == 3:
 						fila = random.randint(48,51)
-				#Mensaje a enseñar
+				#Mensaje a enseñar y suma en numero de ventas
 				mensaje = mensajes_s.cell(row = fila, column = columna)
 				mensaje_valor = mensaje.value
 				venta_m = mensajes_s.cell(row = fila, column = 6)
@@ -653,7 +698,7 @@ while True:
 				venta_valor += 1
 				venta_m = mensajes_s.cell(row = fila, column = 6,value = venta_valor)
 				codigo = mensajes_s.cell(row = fila, column = 2)
-		
+				#Creacion de transaccion en el archivo de ventas
 				n_trasnsaccion = ventas_s.cell(row = orden, column = 1)
 				if n_trasnsaccion.value == None:
 					n_trasnsaccion = ventas_s.cell(row = orden, column = 1, value= 1)
@@ -677,11 +722,11 @@ while True:
 				pago_v = ventas_s.cell(row = orden, column = 7,value = pago_tabla)
 				vuelto_v = ventas_s.cell(row = orden, column = 8,value = vuelto_tabla)
 
-				
+				#Guardado de archivos
 				mensajes.save(filename = "Mensajes.xlsx")
 				ventas.save(filename = "Ventas.xlsx")
 				mostrar = False
-
+			#Mostrar el papel y el mensaje seleccionado
 			screen.blit(papel,[100,100])
 			mensajea = ""
 			mensajeb = ""
@@ -701,8 +746,11 @@ while True:
 				screen.blit(mensaje_text2,(130,350))
 
 	if escenario ==3:
+		#Fondo
 		screen.blit(background,[0,0])
+		#Triangulo de precaucion
 		screen.blit(alerta,[207,420])
+		#Botones
 		if press_rep == False:
 			screen.blit(report, [315,275])
 		if press_rep == True:
@@ -721,13 +769,16 @@ while True:
 			screen.blit(volver_p, [615,11])
 
 	if escenario == 4:
+		#Fondo
 		screen.blit(fondo_admin,[0,0])
+		#Botones
 		if press_vol == False:
 			screen.blit(volver, [615,11])
 		if press_vol == True:
 			screen.blit(volver_p, [615,11])
 		x=20
 		y=70
+		#Renderizado del cuadro de reporte
 		for i in range(len(matriz)):
 			for j in range (len(matriz[0])):
 				renderizar = excel_font.render(str(matriz[i][j]), True, [255,255,255])
@@ -743,7 +794,5 @@ while True:
 			y+= 50
 			x= 20
 
-	
-	
 	pygame.display.flip()
 	clock.tick(tiempo)
